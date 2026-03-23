@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aeon Design System — Richard</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23171717'/><text x='16' y='22' text-anchor='middle' font-size='18' fill='white' font-family='system-ui' font-weight='600'>R</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ════════════════════════════════════════
+   DESIGN SYSTEM TOKENS
+   ════════════════════════════════════════ */
+:root {
+  --n950:#0e121b;--n900:#171717;--n700:#2e2e2e;--n600:#525252;
+  --n500:#6e6e6e;--n400:#a0a0a0;--n300:#d4d4d4;--n200:#e5e5e5;
+  --n100:#f2f5f8;--n50:#f5f7fa;--white:#ffffff;
+  --bg:#f5f5f7;
+  --blue:#335cff;--blue-lt:#6690ff;--blue-bg:rgba(51,92,255,0.07);
+  --red:#fb3748;--red-bg:rgba(251,55,72,0.06);
+  --green:#1fc16b;--green-bg:rgba(31,193,107,0.06);
+  --amber:#f59e0b;--amber-bg:rgba(245,158,11,0.07);
+  --fg:var(--n950);--fg2:var(--n600);--fgm:var(--n400);
+  --br:rgba(14,18,27,0.08);--brs:rgba(14,18,27,0.07);--brm:rgba(14,18,27,0.10);
+  --sh:0 0 0 1px rgba(14,18,27,0.07),0 1px 3px rgba(14,18,27,0.04),0 4px 8px -2px rgba(14,18,27,0.04);
+  --sh-h:0 0 0 1px rgba(14,18,27,0.08),0 4px 12px rgba(14,18,27,0.06),0 16px 32px -4px rgba(14,18,27,0.09);
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --mono:'DM Mono',monospace;
+  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:20px;--s6:24px;--s8:32px;--s10:40px;--s12:48px;--s16:64px;
+  --r:8px;--rm:12px;--rl:16px;--rxl:20px;--rf:9999px;
+  --ease:cubic-bezier(0.16,1,0.3,1);--tf:150ms;--tn:250ms;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-family:var(--sans);color:var(--fg);background:var(--bg);-webkit-font-smoothing:antialiased;}
+body{min-height:100vh;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;}
+img{display:block;max-width:100%;}
+.shell{width:83.333%;max-width:1100px;margin:0 auto;}
+@media(max-width:1024px){.shell{width:90%;}}
+@media(max-width:768px){.shell{width:94%;}}
+
+/* ════════════════════════════════════════
+   CHROME
+   ════════════════════════════════════════ */
+.nav{padding:var(--s3) 0;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--brs);position:sticky;top:0;background:rgba(245,245,247,0.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);z-index:100;}
+.logo{width:32px;height:32px;background:var(--n950);border-radius:var(--r);display:flex;align-items:center;justify-content:center;color:var(--white);font-size:14px;font-weight:600;}
+.back{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:var(--fg2);transition:color var(--tf);}.back:hover{color:var(--fg);}
+.mail{width:32px;height:32px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;color:var(--fgm);transition:color var(--tf);}.mail:hover{color:var(--fg);}
+.sec{margin-bottom:var(--s16);}
+.dl{font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s6);}
+.dl::after{content:'';flex:1;height:1px;background:var(--brs);}
+.ft{padding:var(--s6) 0;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--brs);margin-top:var(--s16);}
+.ftc{font-size:12px;color:var(--fgm);}.ftl{font-size:12px;color:var(--fg2);transition:color var(--tf);}.ftl:hover{color:var(--fg);}
+
+/* ════════════════════════════════════════
+   HERO
+   ════════════════════════════════════════ */
+.hero{padding:0;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(14,18,27,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(14,18,27,0.025) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
+.hero-inner{position:relative;z-index:1;padding:var(--s16) 0 var(--s12);}
+.kick{font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--blue);margin-bottom:var(--s6);display:inline-flex;align-items:center;gap:var(--s2);}
+.kick-dot{width:6px;height:6px;border-radius:50%;background:var(--blue);opacity:0.55;flex-shrink:0;}
+.h1{font-size:clamp(30px,4.5vw,58px);font-weight:500;letter-spacing:-0.56px;line-height:1.04;color:var(--n950);max-width:700px;margin-bottom:var(--s4);}
+.h1 em{font-style:normal;font-weight:300;color:var(--n600);}
+.hero-rule{width:32px;height:2px;background:var(--n300);margin:var(--s5) 0;}
+.sub{font-size:15px;color:var(--n600);line-height:26px;max-width:500px;margin-bottom:var(--s10);}
+.meta{display:flex;gap:var(--s8);flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:2px;padding-top:var(--s6);border-top:1px solid var(--brs);}
+.meta::-webkit-scrollbar{display:none;}
+.mi{display:flex;flex-direction:column;gap:3px;flex-shrink:0;}
+.ml{font-family:var(--mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);}
+.mv{font-size:14px;font-weight:500;color:var(--n950);}
+@media(max-width:768px){.meta{gap:var(--s6);}}
+
+/* ════════════════════════════════════════
+   SLIDEDECK (light variant)
+   Registry: SlideDeck, status: active
+   ════════════════════════════════════════ */
+.deck{border:1px solid var(--brs);border-radius:var(--rxl);overflow:hidden;box-shadow:var(--sh);background:var(--white);}
+.deck__viewport{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--white);}
+.deck__slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateX(40px);transition:opacity 0.4s var(--ease),transform 0.4s var(--ease);pointer-events:none;padding:var(--s8);}
+.deck__slide.active{opacity:1;transform:translateX(0);pointer-events:auto;}
+.deck__slide.prev{opacity:0;transform:translateX(-40px);}
+/* Split layout */
+.slide-content--split{display:grid;grid-template-columns:1fr 1fr;gap:var(--s8);width:100%;height:100%;align-items:center;}
+.slide-content--centered{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;width:100%;height:100%;}
+.slide__label{font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);margin-bottom:var(--s2);}
+.slide__title{font-size:24px;font-weight:500;letter-spacing:-0.12px;line-height:32px;color:var(--n950);margin-bottom:var(--s2);}
+.slide__text{font-size:14px;color:var(--fg2);line-height:20px;max-width:400px;}
+.slide__big-number{font-size:80px;font-weight:500;letter-spacing:-2px;line-height:1;}
+.slide__img{width:100%;height:100%;object-fit:contain;border-radius:var(--r);}
+.slide__img-placeholder{width:100%;height:100%;background:var(--n100);border-radius:var(--r);display:flex;align-items:center;justify-content:center;}
+.slide__img-placeholder span{font-family:var(--mono);font-size:10px;color:var(--fgm);text-align:center;padding:var(--s4);}
+/* Controls */
+.deck__controls{display:flex;align-items:center;justify-content:space-between;padding:var(--s3) var(--s5);border-top:1px solid var(--brs);background:var(--white);}
+.deck__dots{display:flex;gap:4px;align-items:center;}
+.deck__dot{width:6px;height:6px;border-radius:var(--rf);background:var(--n200);cursor:pointer;transition:all var(--tn) var(--ease);}
+.deck__dot.active{width:18px;background:var(--n900);border-radius:var(--rf);}
+.deck__nav{display:flex;gap:2px;}
+.deck__btn{width:28px;height:28px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;color:var(--fgm);transition:background var(--tf),color var(--tf);}
+.deck__btn:hover{background:var(--n100);color:var(--fg);}
+.deck__counter{font-family:var(--mono);font-size:10px;color:var(--fgm);letter-spacing:0.04em;}
+@media(max-width:768px){.slide-content--split{grid-template-columns:1fr;gap:var(--s4);}.deck__slide{padding:var(--s5);}}
+
+/* ════════════════════════════════════════
+   OUTCOMES — flat, no cards
+   ════════════════════════════════════════ */
+.outcome-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s8);padding:var(--s10) 0;}
+.outcome__kicker{font-family:var(--mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);margin-bottom:var(--s3);}
+.outcome__value{font-size:clamp(40px,5vw,56px);font-weight:600;letter-spacing:-1.5px;line-height:0.9;font-variant-numeric:tabular-nums;margin-bottom:var(--s3);}
+.outcome__label{font-size:13px;color:var(--fg2);line-height:20px;max-width:220px;}
+@media(max-width:768px){.outcome-strip{grid-template-columns:1fr;gap:var(--s6);}.outcome__value{font-size:40px;}}
+
+/* ════════════════════════════════════════
+   FIGUREFRAME
+   Registry: FigureFrame, status: reserved
+   ════════════════════════════════════════ */
+.figure-frame{border:1px solid var(--brs);border-radius:var(--rl);overflow:hidden;box-shadow:var(--sh);background:var(--white);transition:box-shadow var(--tn) var(--ease);}
+.figure-frame:hover{box-shadow:var(--sh-h);}
+.figure-frame__browser-bar{display:flex;align-items:center;gap:6px;padding:var(--s3) var(--s4);border-bottom:1px solid var(--brs);background:var(--n50);}
+.figure-frame__dot{width:8px;height:8px;border-radius:50%;opacity:0.5;}
+.figure-frame__dot--red{background:#fb3748;}
+.figure-frame__dot--yellow{background:#f59e0b;}
+.figure-frame__dot--green{background:#1fc16b;}
+.figure-frame__url{font-family:var(--mono);font-size:10px;color:var(--fgm);margin-left:var(--s3);padding:2px 10px;border-radius:var(--rf);border:1px solid var(--brs);background:var(--white);}
+.figure-frame__image{background:var(--n100);min-height:240px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.figure-frame__image img{width:100%;height:100%;object-fit:cover;}
+.figure-frame__image svg{width:100%;height:100%;display:block;}
+.figure-frame__caption{display:flex;align-items:center;justify-content:space-between;padding:var(--s3) var(--s5);border-top:1px solid var(--brs);}
+.figure-frame__caption-text{font-size:14px;color:var(--fg2);}
+.figure-frame__caption-label{font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);}
+.figure-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s5);}
+@media(max-width:640px){.figure-grid{grid-template-columns:1fr;}}
+
+/* ════════════════════════════════════════
+   CONTEXT — Open columns, editorial
+   No borders, no bg. Vertical rule divider.
+   Color lives only in eyebrow dash + stat numbers.
+   ════════════════════════════════════════ */
+.ctx-grid{display:grid;grid-template-columns:1fr 1px 1fr;gap:var(--s8);}
+.ctx-rule{background:var(--brs);align-self:stretch;}
+.ctx-col{padding:0;}
+.ctx-label{font-family:var(--mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:var(--s4);display:flex;align-items:center;gap:var(--s2);}
+.ctx-dash{width:16px;height:2px;flex-shrink:0;}
+.ctx-title{font-size:20px;font-weight:500;color:var(--n950);line-height:1.3;margin-bottom:var(--s3);}
+.ctx-body{font-size:14px;color:var(--fg2);line-height:22px;}
+.ctx-stat{display:flex;gap:var(--s6);margin-top:var(--s6);}
+.ctx-stat-item{display:flex;flex-direction:column;gap:2px;}
+.ctx-stat-v{font-size:24px;font-weight:600;letter-spacing:-0.5px;line-height:1;}
+.ctx-stat-l{font-size:11px;color:var(--fgm);}
+@media(max-width:640px){.ctx-grid{grid-template-columns:1fr;}.ctx-rule{display:none;}}
+
+/* ════════════════════════════════════════
+   TAGGROUP
+   Registry: TagGroup, status: reserved
+   ════════════════════════════════════════ */
+.tag-group{display:flex;flex-wrap:wrap;gap:var(--s2);}
+.tag-item{font-size:12px;color:var(--fg2);padding:var(--s1) var(--s3);border-radius:var(--rf);border:1px solid var(--brs);background:var(--white);display:inline-flex;align-items:center;gap:6px;box-shadow:var(--sh);}
+.tag-item__dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+
+/* ════════════════════════════════════════
+   DEEP-DIVE CARDS
+   ════════════════════════════════════════ */
+.dd-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s5);}
+.dd-card{background:var(--white);border:1px solid var(--brs);border-radius:var(--rm);overflow:hidden;box-shadow:var(--sh);transition:box-shadow var(--tn) var(--ease),transform var(--tn) var(--ease);cursor:pointer;text-decoration:none;color:inherit;display:flex;flex-direction:column;}
+.dd-card:hover{box-shadow:var(--sh-h);transform:translateY(-2px);}
+.dd-card--soon{opacity:0.55;pointer-events:none;cursor:default;}
+.dd-card--soon:hover{box-shadow:var(--sh);transform:none;}
+.dd-soon-badge{display:inline-flex;align-items:center;gap:4px;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);background:var(--n100);padding:3px 8px;border-radius:var(--rf);}
+.dd-thumb{aspect-ratio:16/10;background:var(--n100);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.dd-thumb svg{width:100%;height:100%;display:block;}
+.dd-body{padding:14px 16px;flex:1;display:flex;flex-direction:column;gap:6px;}
+.dd-tag{font-family:var(--mono);font-size:9px;letter-spacing:0.04em;padding:3px 8px;border-radius:var(--rf);width:fit-content;}
+.dd-tag--r{background:var(--red-bg);color:var(--red);}
+.dd-tag--g{background:var(--green-bg);color:var(--green);}
+.dd-tag--a{background:var(--amber-bg);color:var(--amber);}
+.dd-title{font-size:15px;font-weight:500;color:var(--n950);line-height:1.3;}
+.dd-desc{font-size:13px;color:var(--fg2);line-height:19px;flex:1;}
+.dd-cta{font-size:12px;font-weight:500;color:var(--blue);display:inline-flex;align-items:center;gap:4px;margin-top:4px;}
+.dd-cta svg{transition:transform var(--tf);}
+.dd-card:hover .dd-cta svg{transform:translateX(2px);}
+@media(max-width:768px){.dd-grid{grid-template-columns:1fr;}}
+
+/* ════════════════════════════════════════
+   ACCORDION
+   Registry: Accordion, status: reserved
+   ════════════════════════════════════════ */
+.accordion{border:1px solid var(--brs);border-radius:var(--rm);overflow:hidden;box-shadow:var(--sh);background:var(--white);}
+.accordion__item{border-bottom:1px solid var(--brs);}
+.accordion__item:last-child{border-bottom:none;}
+.accordion__trigger{width:100%;display:flex;align-items:center;justify-content:space-between;padding:var(--s4) var(--s5);font-size:14px;font-weight:500;color:var(--n950);background:transparent;transition:background var(--tf);text-align:left;gap:var(--s3);}
+.accordion__trigger:hover{background:var(--n50);}
+.accordion__trigger-left{display:flex;align-items:center;gap:var(--s3);}
+.accordion__trigger-badge{font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;padding:2px 8px;border-radius:4px;background:var(--n100);color:var(--fgm);}
+.accordion__chevron{width:16px;height:16px;color:var(--fgm);transition:transform 0.35s var(--ease);flex-shrink:0;}
+.accordion__item.open .accordion__chevron{transform:rotate(180deg);}
+.accordion__panel{max-height:0;overflow:hidden;transition:max-height 0.35s var(--ease);}
+.accordion__content{padding:0 var(--s5) var(--s6);font-size:13px;color:var(--fg2);line-height:20px;}
+.accordion__content ul{list-style:none;display:flex;flex-direction:column;gap:var(--s3);}
+.accordion__content li{display:flex;align-items:flex-start;gap:var(--s3);}
+.accordion__content .rdot{width:5px;height:5px;border-radius:50%;margin-top:7px;flex-shrink:0;}
+
+/* ════════════════════════════════════════
+   NEXTCASE
+   Registry: NextCase, status: active
+   ════════════════════════════════════════ */
+.next-case{margin-top:var(--s16);}
+.next-case__label{font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);margin-bottom:var(--s3);}
+.next-case__link{display:flex;align-items:center;justify-content:space-between;padding:var(--s6);border:1px solid var(--brs);border-radius:var(--rl);box-shadow:var(--sh);background:var(--white);transition:box-shadow var(--tn) var(--ease);text-decoration:none;color:inherit;}
+.next-case__link:hover{box-shadow:var(--sh-h);}
+.next-case__eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);margin-bottom:var(--s1);}
+.next-case__title{font-size:24px;font-weight:500;letter-spacing:-0.12px;line-height:32px;color:var(--n950);}
+.next-case__arrow{width:24px;height:24px;color:var(--fgm);transition:transform var(--tn) var(--ease);}
+.next-case__link:hover .next-case__arrow{transform:translateX(4px);}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="shell"><nav class="nav">
+  <a href="index.html" class="logo">R</a>
+  <a href="index.html" class="back"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M10 7H4M4 7L7 4M4 7L7 10"/></svg>Work</a>
+  <a href="mailto:chardrizard@gmail.com" class="mail"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
+</nav></div>
+
+<!-- ══════════════════════════════════════
+     HERO
+     ══════════════════════════════════════ -->
+<div class="hero"><div class="shell"><div class="hero-inner">
+  <div class="kick"><span class="kick-dot"></span>Design Systems · Insurance · 2022–2023</div>
+  <h1 class="h1">Aeon Design System<br><em>Unifying 60+ products under one component system</em></h1>
+  <div class="hero-rule"></div>
+  <p class="sub">I audited, redesigned, and documented Aegon's component architecture. One system, six platforms, 22,000+ employees.</p>
+  <div class="meta">
+    <div class="mi"><span class="ml">Role</span><span class="mv">Design System Designer</span></div>
+    <div class="mi"><span class="ml">Company</span><span class="mv">Aegon · $22.4B revenue</span></div>
+    <div class="mi"><span class="ml">Team</span><span class="mv">2 designers + devs + PM</span></div>
+    <div class="mi"><span class="ml">Duration</span><span class="mv">[X months]</span></div>
+  </div>
+</div></div></div>
+
+<div class="shell">
+
+  <!-- ══════════════════════════════════════
+       COMPONENT LIBRARY — SlideDeck (light)
+       Slides: cycle through different component groups
+       Replace SVG placeholders with your actual component screenshots
+       ══════════════════════════════════════ -->
+  <section class="sec">
+    <div class="dl">Component library</div>
+    <div class="deck" data-deck="components">
+      <div class="deck__viewport">
+        <div class="deck__slide active">
+          <div class="slide-content--centered">
+            <div class="slide__img-placeholder"><span>Replace: Fields + Dropdowns component sheet<br>All states — Default, Focus, Hover, Disabled, Error, Active<br>Unfilled and filled variants</span></div>
+          </div>
+        </div>
+        <div class="deck__slide">
+          <div class="slide-content--centered">
+            <div class="slide__img-placeholder"><span>Replace: Badges component exploration<br>"Can current badges work for filters &amp; highlighting data in graphs?"<br>Current version vs. redesigned variants</span></div>
+          </div>
+        </div>
+        <div class="deck__slide">
+          <div class="slide-content--centered">
+            <div class="slide__img-placeholder"><span>Replace: Step Indicator Inverted<br>Visual reference with all states<br>Completed, Current, Upcoming — with real content</span></div>
+          </div>
+        </div>
+        <div class="deck__slide">
+          <div class="slide-content--centered">
+            <div class="slide__img-placeholder"><span>Replace: Color token documentation table<br>Valid, Warning, Error semantic tokens<br>Name, Hex, RGB, swatch</span></div>
+          </div>
+        </div>
+        <div class="deck__slide">
+          <div class="slide-content--centered">
+            <div class="slide__img-placeholder"><span>Replace: Graph + Chart component references<br>Line charts, Aegon-branded graph styles<br>Data visualization component family</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="deck__controls">
+        <div class="deck__dots"></div>
+        <div style="display:flex;align-items:center;gap:var(--s3);">
+          <span class="deck__counter"></span>
+          <div class="deck__nav">
+            <button class="deck__btn" data-dir="prev"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M10 4l-4 4 4 4"/></svg></button>
+            <button class="deck__btn" data-dir="next"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 4l4 4-4 4"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       OUTCOMES — OutcomeStrip
+       ══════════════════════════════════════ -->
+  <section class="sec">
+    <div class="dl">Outcomes</div>
+    <div class="outcome-strip">
+      <div><div class="outcome__kicker">Performance</div><div class="outcome__value" style="color:var(--green);">25%</div><div class="outcome__label">Reduction in average load times across adopting platforms</div></div>
+      <div><div class="outcome__kicker">Efficiency</div><div class="outcome__value" style="color:var(--blue);">40%</div><div class="outcome__label">Less development time for new features using system components</div></div>
+      <div><div class="outcome__kicker">Consistency</div><div class="outcome__value" style="color:var(--amber);">85%</div><div class="outcome__label">Increase in design-code consistency across products</div></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       DEPLOYED — FigureFrame + SlideDeck
+       ══════════════════════════════════════ -->
+  <section class="sec">
+    <div class="dl">Deployed across 60+ projects</div>
+
+    <!-- Aegon.nl + Mobile — FigureFrame with browser chrome -->
+    <div class="figure-grid" style="margin-bottom:var(--s5);">
+      <figure class="figure-frame">
+        <div class="figure-frame__browser-bar">
+          <span class="figure-frame__dot figure-frame__dot--red"></span>
+          <span class="figure-frame__dot figure-frame__dot--yellow"></span>
+          <span class="figure-frame__dot figure-frame__dot--green"></span>
+          <span class="figure-frame__url">aegon.nl</span>
+        </div>
+        <div class="figure-frame__image">
+          <!-- Replace: Aegon.nl desktop homepage screenshot -->
+          <svg viewBox="0 0 550 300" xmlns="http://www.w3.org/2000/svg"><rect width="550" height="300" fill="#f2f5f8"/><text x="275" y="150" font-family="Inter" font-size="11" fill="#a0a0a0" text-anchor="middle">Replace: Aegon.nl homepage</text></svg>
+        </div>
+        <div class="figure-frame__caption">
+          <span class="figure-frame__caption-text">Consumer website</span>
+          <span class="figure-frame__caption-label">Fig 1</span>
+        </div>
+      </figure>
+      <figure class="figure-frame">
+        <div class="figure-frame__browser-bar">
+          <span class="figure-frame__dot figure-frame__dot--red"></span>
+          <span class="figure-frame__dot figure-frame__dot--yellow"></span>
+          <span class="figure-frame__dot figure-frame__dot--green"></span>
+          <span class="figure-frame__url">Aegon App</span>
+        </div>
+        <div class="figure-frame__image">
+          <!-- Replace: Mobile mortgage app screenshot -->
+          <svg viewBox="0 0 550 300" xmlns="http://www.w3.org/2000/svg"><rect width="550" height="300" fill="#f2f5f8"/><text x="275" y="150" font-family="Inter" font-size="11" fill="#a0a0a0" text-anchor="middle">Replace: Aegon mobile app</text></svg>
+        </div>
+        <div class="figure-frame__caption">
+          <span class="figure-frame__caption-text">Mortgage detail screen</span>
+          <span class="figure-frame__caption-label">Fig 2</span>
+        </div>
+      </figure>
+    </div>
+
+    <!-- AIP Portal — SlideDeck (light) showing multiple screens -->
+    <div class="deck" data-deck="aip">
+      <div class="deck__viewport">
+        <div class="deck__slide active">
+          <div class="slide-content--split">
+            <div><div class="slide__label">AIP Portal</div><div class="slide__title">Portfolio Search</div><div class="slide__text">Client portfolio search across six product lines. Dense data tables, customer detail panels, and product badges. The most component-intensive screen in the system.</div></div>
+            <div class="slide__img-placeholder"><span>Replace: AIP Portfolio Search screen</span></div>
+          </div>
+        </div>
+        <div class="deck__slide">
+          <div class="slide-content--split">
+            <div><div class="slide__label">AIP Portal</div><div class="slide__title">Customer Detail</div><div class="slide__text">Full customer view with contract data, payment status, and product overview. Tables, badges, and action buttons all from the shared system.</div></div>
+            <div class="slide__img-placeholder"><span>Replace: AIP Customer Detail screen</span></div>
+          </div>
+        </div>
+        <div class="deck__slide">
+          <div class="slide-content--split">
+            <div><div class="slide__label">AIP Portal</div><div class="slide__title">Advice Opportunities</div><div class="slide__text">Tabs component navigating different advice opportunity types. Each tab shows a filtered contract list. Built from the component brief template I designed.</div></div>
+            <div class="slide__img-placeholder"><span>Replace: AIP Advice Opportunities with Tabs</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="deck__controls">
+        <div class="deck__dots"></div>
+        <div style="display:flex;align-items:center;gap:var(--s3);">
+          <span class="deck__counter"></span>
+          <div class="deck__nav">
+            <button class="deck__btn" data-dir="prev"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M10 4l-4 4 4 4"/></svg></button>
+            <button class="deck__btn" data-dir="next"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 4l4 4-4 4"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       CONTEXT — Problem + Insight cards
+       ══════════════════════════════════════ -->
+  <section class="sec">
+    <div class="dl">Context</div>
+    <div class="ctx-grid">
+      <!-- Problem -->
+      <div class="ctx-col">
+        <div class="ctx-label" style="color:var(--red);"><span class="ctx-dash" style="background:var(--red);"></span>Problem</div>
+        <div class="ctx-title">Six platforms, zero shared components</div>
+        <div class="ctx-body">Every product team built their own components from scratch. No shared system, no documentation, no consistent interaction patterns across platforms.</div>
+        <div class="ctx-stat">
+          <div class="ctx-stat-item"><div class="ctx-stat-v" style="color:var(--red);">47</div><div class="ctx-stat-l">button variants</div></div>
+          <div class="ctx-stat-item"><div class="ctx-stat-v" style="color:var(--red);">6</div><div class="ctx-stat-l">independent teams</div></div>
+          <div class="ctx-stat-item"><div class="ctx-stat-v" style="color:var(--red);">0</div><div class="ctx-stat-l">documented</div></div>
+        </div>
+      </div>
+      <!-- Vertical rule -->
+      <div class="ctx-rule"></div>
+      <!-- Insight -->
+      <div class="ctx-col">
+        <div class="ctx-label" style="color:var(--blue);"><span class="ctx-dash" style="background:var(--blue);"></span>Insight</div>
+        <div class="ctx-title">Teams were building the same thing differently</div>
+        <div class="ctx-body">A structured audit revealed most teams had identical underlying requirements. Nobody had articulated them in a shared format. The fix wasn't picking winners.</div>
+        <div class="ctx-stat">
+          <div class="ctx-stat-item"><div class="ctx-stat-v" style="color:var(--blue);">3</div><div class="ctx-stat-l">audience types</div></div>
+          <div class="ctx-stat-item"><div class="ctx-stat-v" style="color:var(--blue);">[X]</div><div class="ctx-stat-l">shared patterns</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       WHAT I OWNED — TagGroup
+       ══════════════════════════════════════ -->
+  <section class="sec">
+    <div class="dl">What I owned</div>
+    <div class="tag-group">
+      <span class="tag-item"><span class="tag-item__dot" style="background:var(--green);"></span>Component audit</span>
+      <span class="tag-item"><span class="tag-item__dot" style="background:var(--green);"></span>Component architecture</span>
+      <span class="tag-item"><span class="tag-item__dot" style="background:var(--green);"></span>Auto-layout + conditional logic</span>
+      <span class="tag-item"><span class="tag-item__dot" style="background:var(--blue);"></span>Stakeholder alignment</span>
+      <span class="tag-item"><span class="tag-item__dot" style="background:var(--blue);"></span>Component brief template</span>
+      <span class="tag-item"><span class="tag-item__dot" style="background:var(--blue);"></span>Adoption strategy</span>
+      <span class="tag-item"><span class="tag-item__dot" style="background:var(--amber);"></span>Documentation guidelines</span>
+      <span class="tag-item"><span class="tag-item__dot" style="background:var(--amber);"></span>Semantic color tokens</span>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       DEEP DIVES
+       ══════════════════════════════════════ -->
+  <section class="sec">
+    <div class="dl">Deep dives</div>
+    <div class="dd-grid">
+      <div class="dd-card dd-card--soon">
+        <div class="dd-thumb"><svg viewBox="0 0 440 275" xmlns="http://www.w3.org/2000/svg"><rect width="440" height="275" fill="#fff5f5"/><text x="220" y="132" font-family="Inter" font-size="11" fill="#fb3748" opacity="0.45" text-anchor="middle">Replace: component brief card</text><text x="220" y="150" font-family="Inter" font-size="9" fill="#fb3748" opacity="0.3" text-anchor="middle">(AIP Advice opp: Tabs)</text></svg></div>
+        <div class="dd-body">
+          <span class="dd-tag dd-tag--r">Audit + Process</span>
+          <div class="dd-title">Component audit and brief template</div>
+          <div class="dd-desc">How I mapped 47 button variants across 6 platforms and built the intake process that standardized component requests.</div>
+          <span class="dd-soon-badge">Coming soon</span>
+        </div>
+      </div>
+      <div class="dd-card dd-card--soon">
+        <div class="dd-thumb"><svg viewBox="0 0 440 275" xmlns="http://www.w3.org/2000/svg"><rect width="440" height="275" fill="#f0fdf5"/><text x="220" y="132" font-family="Inter" font-size="11" fill="#1fc16b" opacity="0.45" text-anchor="middle">Replace: component states sheet</text><text x="220" y="150" font-family="Inter" font-size="9" fill="#1fc16b" opacity="0.3" text-anchor="middle">(Fields + Dropdowns, all states)</text></svg></div>
+        <div class="dd-body">
+          <span class="dd-tag dd-tag--g">Architecture</span>
+          <div class="dd-title">Conditional component architecture</div>
+          <div class="dd-desc">One Field component with conditional rendering instead of platform-specific variants. The decisions, tradeoffs, and 25% load time result.</div>
+          <span class="dd-soon-badge">Coming soon</span>
+        </div>
+      </div>
+      <div class="dd-card dd-card--soon">
+        <div class="dd-thumb"><svg viewBox="0 0 440 275" xmlns="http://www.w3.org/2000/svg"><rect width="440" height="275" fill="#fffbeb"/><text x="220" y="132" font-family="Inter" font-size="11" fill="#f59e0b" opacity="0.45" text-anchor="middle">Replace: token documentation</text><text x="220" y="150" font-family="Inter" font-size="9" fill="#f59e0b" opacity="0.3" text-anchor="middle">(semantic color tokens table)</text></svg></div>
+        <div class="dd-body">
+          <span class="dd-tag dd-tag--a">Documentation</span>
+          <div class="dd-title">Documentation + token system</div>
+          <div class="dd-desc">Why I wrote the docs myself, how semantic token naming drove developer adoption, and the 89% engagement result.</div>
+          <span class="dd-soon-badge">Coming soon</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       REFLECTION — Accordion
+       ══════════════════════════════════════ -->
+  <section class="sec">
+    <div class="dl">Reflection</div>
+    <div class="accordion" data-accordion="reflection">
+      <div class="accordion__item">
+        <button class="accordion__trigger" aria-expanded="false">
+          <span class="accordion__trigger-left">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="var(--green)" stroke-width="1.5" stroke-linecap="round"><path d="M3 8l3 3 7-7"/></svg>
+            What worked
+            <span class="accordion__trigger-badge">3 items</span>
+          </span>
+          <svg class="accordion__chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 6l4 4 4-4"/></svg>
+        </button>
+        <div class="accordion__panel">
+          <div class="accordion__content">
+            <ul>
+              <li><span class="rdot" style="background:var(--green);"></span>The component brief template forced teams to articulate requirements before design started. Eliminated most "we need something custom" requests.</li>
+              <li><span class="rdot" style="background:var(--green);"></span>Writing docs myself instead of delegating. The 89% adoption team said documentation was the reason they could move 4x faster.</li>
+              <li><span class="rdot" style="background:var(--green);"></span>Framing every improvement in business terms. Load time reduction as retention. Consistency as reduced support costs. That framing kept the team funded.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="accordion__item">
+        <button class="accordion__trigger" aria-expanded="false">
+          <span class="accordion__trigger-left">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="var(--amber)" stroke-width="1.5" stroke-linecap="round"><path d="M8 3v5M8 11v1"/></svg>
+            What I'd do differently
+            <span class="accordion__trigger-badge">2 items</span>
+          </span>
+          <svg class="accordion__chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 6l4 4 4-4"/></svg>
+        </button>
+        <div class="accordion__panel">
+          <div class="accordion__content">
+            <ul>
+              <li><span class="rdot" style="background:var(--amber);"></span>Build the brief template before the audit, not during. The first round had no structured format. Brief first, audit second, would have been faster.</li>
+              <li><span class="rdot" style="background:var(--amber);"></span>Track adoption metrics from day one. We started measuring [X months] in. The 89% number would be stronger with a week-one baseline.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       NEXTCASE
+       ══════════════════════════════════════ -->
+  <div class="next-case">
+    <div class="next-case__label">Next case study</div>
+    <a href="case-study-futuready.html" class="next-case__link">
+      <div>
+        <div class="next-case__eyebrow">Insurtech · B2B2C · 2019</div>
+        <div class="next-case__title">Futuready Motor Insurance</div>
+      </div>
+      <svg class="next-case__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+
+</div>
+
+<footer class="shell ft">
+  <span class="ftc">&copy; 2026 — Richard</span>
+  <a href="mailto:chardrizard@gmail.com" class="ftl">Let's chat &rarr;</a>
+</footer>
+
+<!-- ══════════════════════════════════════
+     SCRIPTS
+     ══════════════════════════════════════ -->
+<script>
+/* SlideDeck — generic, works on all [data-deck] instances */
+document.querySelectorAll('[data-deck]').forEach(deck => {
+  const slides = deck.querySelectorAll('.deck__slide');
+  const dotsWrap = deck.querySelector('.deck__dots');
+  const counter = deck.querySelector('.deck__counter');
+  const n = slides.length;
+  let cur = 0;
+
+  // Build dots
+  for (let i = 0; i < n; i++) {
+    const dot = document.createElement('span');
+    dot.className = 'deck__dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => go(i));
+    dotsWrap.appendChild(dot);
+  }
+  const dots = dotsWrap.querySelectorAll('.deck__dot');
+
+  function go(idx) {
+    if (idx === cur || idx < 0 || idx >= n) return;
+    slides[cur].classList.remove('active');
+    slides[cur].classList.add(idx > cur ? 'prev' : '');
+    dots[cur].classList.remove('active');
+    cur = idx;
+    slides.forEach(s => s.classList.remove('prev'));
+    slides[cur].classList.add('active');
+    dots[cur].classList.add('active');
+    if (counter) counter.textContent = (cur + 1) + ' / ' + n;
+  }
+
+  // Nav buttons
+  deck.querySelectorAll('.deck__btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const dir = btn.dataset.dir;
+      go(dir === 'next' ? (cur + 1) % n : (cur - 1 + n) % n);
+    });
+  });
+
+  // Keyboard
+  deck.setAttribute('tabindex', '0');
+  deck.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') go((cur + 1) % n);
+    if (e.key === 'ArrowLeft') go((cur - 1 + n) % n);
+  });
+
+  // Touch swipe
+  let sx = 0;
+  deck.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
+  deck.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - sx;
+    if (Math.abs(dx) > 50) go(dx < 0 ? (cur + 1) % n : (cur - 1 + n) % n);
+  });
+
+  if (counter) counter.textContent = '1 / ' + n;
+});
+
+/* Accordion */
+document.querySelectorAll('.accordion__trigger').forEach(trigger => {
+  trigger.addEventListener('click', () => {
+    const item = trigger.closest('.accordion__item');
+    const panel = item.querySelector('.accordion__panel');
+    const isOpen = item.classList.contains('open');
+
+    if (isOpen) {
+      panel.style.maxHeight = '0';
+      item.classList.remove('open');
+      trigger.setAttribute('aria-expanded', 'false');
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+      item.classList.add('open');
+      trigger.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+</script>
+</body>
+</html>

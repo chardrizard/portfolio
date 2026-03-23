@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Helian Case Study — Richard.design
+     Passion project · Healthcare · Indonesia · 2018
+     Archetype A (lightweight variant): Context Grid + compact Story Arc -->
+<title>Helian — Richard</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23171717'/><text x='16' y='22' text-anchor='middle' font-size='18' fill='white' font-family='system-ui' font-weight='600'>R</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ════════════════════════════════════════════════════════════════
+   DESIGN SYSTEM TOKENS — Do not modify
+   Source: AlignUI token set, resolved in design-tokens-resolved.json
+   ════════════════════════════════════════════════════════════════ */
+:root {
+  /* Neutral scale */
+  --n950:#0e121b;--n900:#171717;--n700:#2e2e2e;--n600:#525252;
+  --n500:#6e6e6e;--n400:#a0a0a0;--n300:#d4d4d4;--n200:#e5e5e5;
+  --n100:#f2f5f8;--n50:#f5f7fa;--white:#ffffff;
+  /* Page background */
+  --bg:#f5f5f7;
+  /* Semantic colors */
+  --blue:#335cff;--blue-lt:#6690ff;--blue-bg:rgba(51,92,255,0.07);
+  --red:#fb3748;--red-bg:rgba(251,55,72,0.06);
+  --green:#1fc16b;--green-bg:rgba(31,193,107,0.06);
+  --amber:#f59e0b;--amber-bg:rgba(245,158,11,0.07);
+  /* Foreground aliases */
+  --fg:var(--n950);--fg2:var(--n600);--fgm:var(--n400);
+  /* Borders */
+  --br:rgba(14,18,27,0.08);--brs:rgba(14,18,27,0.07);--brm:rgba(14,18,27,0.10);
+  /* Shadows */
+  --sh:0 0 0 1px rgba(14,18,27,0.07),0 1px 3px rgba(14,18,27,0.04),0 4px 8px -2px rgba(14,18,27,0.04);
+  --sh-h:0 0 0 1px rgba(14,18,27,0.08),0 4px 12px rgba(14,18,27,0.06),0 16px 32px -4px rgba(14,18,27,0.09);
+  /* Typography */
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --mono:'DM Mono',monospace;
+  /* Spacing: 4px base unit */
+  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:20px;--s6:24px;--s8:32px;--s10:40px;--s12:48px;--s16:64px;
+  /* Radius */
+  --r:8px;--rm:12px;--rl:16px;--rxl:20px;--rf:9999px;
+  /* Motion */
+  --ease:cubic-bezier(0.16,1,0.3,1);--tf:150ms;--tn:250ms;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-family:var(--sans);color:var(--fg);background:var(--bg);-webkit-font-smoothing:antialiased;}
+body{min-height:100vh;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;}
+img{display:block;max-width:100%;}
+.shell{width:83.333%;max-width:1100px;margin:0 auto;}
+@media(max-width:1024px){.shell{width:90%;}}
+@media(max-width:768px){.shell{width:94%;}}
+
+
+/* ════════════════════════════════════════════════════════════════
+   REQUIRED: Chrome — Nav, section divider, footer
+   ════════════════════════════════════════════════════════════════ */
+.nav{padding:var(--s3) 0;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--brs);position:sticky;top:0;background:rgba(245,245,247,0.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);z-index:100;}
+.logo{width:32px;height:32px;background:var(--n950);border-radius:var(--r);display:flex;align-items:center;justify-content:center;color:var(--white);font-size:14px;font-weight:600;}
+.back{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:var(--fg2);transition:color var(--tf);}.back:hover{color:var(--fg);}
+.mail{width:32px;height:32px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;color:var(--fgm);transition:color var(--tf);}.mail:hover{color:var(--fg);}
+
+/* Section rhythm */
+.sec{margin-bottom:var(--s16);}
+
+/* Section divider label */
+.dl{font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s6);}
+.dl::after{content:'';flex:1;height:1px;background:var(--brs);}
+
+/* Footer */
+.ft{padding:var(--s6) 0;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--brs);margin-top:var(--s16);}
+.ftc{font-size:12px;color:var(--fgm);}
+.ftl{font-size:12px;color:var(--fg2);transition:color var(--tf);}.ftl:hover{color:var(--fg);}
+
+
+/* ════════════════════════════════════════════════════════════════
+   REQUIRED: Hero
+   ════════════════════════════════════════════════════════════════ */
+.hero{padding:0;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(14,18,27,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(14,18,27,0.025) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
+.hero-inner{position:relative;z-index:1;padding:var(--s16) 0 var(--s12);}
+.kick{font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--blue);margin-bottom:var(--s6);display:inline-flex;align-items:center;gap:var(--s2);}
+.kick-dot{width:6px;height:6px;border-radius:50%;background:var(--blue);opacity:0.55;flex-shrink:0;}
+.h1{font-size:clamp(30px,4.5vw,58px);font-weight:500;letter-spacing:-0.56px;line-height:1.04;color:var(--n950);max-width:700px;margin-bottom:var(--s4);}
+.h1 em{font-style:normal;font-weight:300;color:var(--n600);}
+.hero-rule{width:32px;height:2px;background:var(--n300);margin:var(--s5) 0;}
+.sub{font-size:15px;color:var(--n600);line-height:26px;max-width:500px;margin-bottom:var(--s10);}
+.meta{display:flex;gap:var(--s8);flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:2px;padding-top:var(--s6);border-top:1px solid var(--brs);}
+.meta::-webkit-scrollbar{display:none;}
+.mi{display:flex;flex-direction:column;gap:3px;flex-shrink:0;}
+.ml{font-family:var(--mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);}
+.mv{font-size:14px;font-weight:500;color:var(--n950);}
+@media(max-width:768px){.meta{gap:var(--s6);}}
+
+
+/* ════════════════════════════════════════════════════════════════
+   REQUIRED: Outcomes — flat metric strip
+   ════════════════════════════════════════════════════════════════ */
+.outcomes{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s8);padding:var(--s10) 0;}
+.out-kicker{font-family:var(--mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);margin-bottom:var(--s3);}
+.out-num{font-size:clamp(40px,5vw,56px);font-weight:600;letter-spacing:-1.5px;line-height:0.9;margin-bottom:var(--s3);}
+.out-label{font-size:13px;color:var(--fg2);line-height:20px;max-width:220px;}
+@media(max-width:768px){.outcomes{grid-template-columns:1fr;gap:var(--s6);}.out-num{font-size:40px;}}
+
+
+/* ════════════════════════════════════════════════════════════════
+   MODULE: Context Grid
+   ════════════════════════════════════════════════════════════════ */
+.ctx-grid{display:grid;grid-template-columns:1fr 1px 1fr;gap:var(--s8);}
+.ctx-rule{background:var(--brs);align-self:stretch;}
+.ctx-col{padding:0;}
+.ctx-label{font-family:var(--mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:var(--s4);display:flex;align-items:center;gap:var(--s2);}
+.ctx-dash{width:16px;height:2px;flex-shrink:0;}
+.ctx-title{font-size:20px;font-weight:500;color:var(--n950);line-height:1.3;margin-bottom:var(--s3);}
+.ctx-body{font-size:14px;color:var(--fg2);line-height:22px;}
+.ctx-stat{display:flex;gap:var(--s6);margin-top:var(--s6);}
+.ctx-stat-item{display:flex;flex-direction:column;gap:2px;}
+.ctx-stat-v{font-size:24px;font-weight:600;letter-spacing:-0.5px;line-height:1;}
+.ctx-stat-l{font-size:11px;color:var(--fgm);}
+@media(max-width:640px){.ctx-grid{grid-template-columns:1fr;}.ctx-rule{display:none;}}
+
+
+/* ════════════════════════════════════════════════════════════════
+   MODULE: Story Arc — compact 2-section variant
+   ════════════════════════════════════════════════════════════════ */
+.arc-sec{padding-bottom:var(--s12);border-bottom:1px solid var(--brs);margin-bottom:var(--s12);}
+.arc-sec:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+
+.arc-narr{display:flex;align-items:flex-start;gap:12px;margin-bottom:4px;}
+.arc-circle{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:9px;font-weight:500;background:var(--bg);flex-shrink:0;margin-top:2px;}
+.arc-sec--i .arc-circle{border:1.5px solid var(--blue);color:var(--blue);box-shadow:0 0 0 3px var(--bg),0 0 0 4px rgba(51,92,255,0.12);}
+.arc-sec--a .arc-circle{border:1.5px solid var(--green);color:var(--green);box-shadow:0 0 0 3px var(--bg),0 0 0 4px rgba(31,193,107,0.12);}
+.arc-lbl{font-family:var(--mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:4px;}
+.arc-sec--i .arc-lbl{color:var(--blue);}
+.arc-sec--a .arc-lbl{color:var(--green);}
+.arc-ttl{font-size:18px;font-weight:500;letter-spacing:-0.2px;color:var(--n950);line-height:1.2;margin-bottom:6px;}
+.arc-one{font-size:15px;color:var(--fg2);line-height:24px;}
+
+/* Tab system */
+.arc-tw{margin-left:32px;margin-top:var(--s4);}
+.arc-tabs{display:flex;gap:2px;background:var(--n100);border-radius:var(--r);padding:2px;width:fit-content;}
+.arc-tab{font-family:var(--sans);font-size:12px;font-weight:500;padding:6px 14px;border-radius:6px;color:var(--fg2);cursor:pointer;transition:all 150ms;background:transparent;border:none;}
+.arc-tab:hover{color:var(--fg);}
+.arc-tab.active{background:var(--white);color:var(--fg);box-shadow:0 1px 3px rgba(0,0,0,0.06);}
+.arc-pan{padding:var(--s5) 0 0;display:none;}
+.arc-pan.active{display:block;}
+
+/* Decision cards */
+.dec-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.dec-card{background:var(--white);border:1px solid var(--brs);border-radius:var(--rm);padding:14px 16px;box-shadow:var(--sh);display:flex;flex-direction:column;gap:4px;}
+.dec-card--g{border-color:rgba(31,193,107,0.15);}
+.dec-card--r{border-color:rgba(251,55,72,0.12);}
+.dec-status{font-family:var(--mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;display:inline-flex;align-items:center;gap:5px;}
+.dec-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
+.dec-card--g .dec-status{color:var(--green);}.dec-card--g .dec-dot{background:var(--green);}
+.dec-card--r .dec-status{color:var(--red);}.dec-card--r .dec-dot{background:var(--red);}
+.dec-ttl{font-size:14px;font-weight:500;color:var(--n950);line-height:1.25;}
+.dec-desc{font-size:13px;color:var(--fg2);line-height:19px;}
+.dec-trade{font-size:12px;color:var(--fgm);line-height:17px;padding-top:6px;border-top:1px solid var(--brs);margin-top:2px;}
+.dec-trade strong{color:var(--fg2);font-weight:500;}
+@media(max-width:640px){.dec-grid{grid-template-columns:1fr;}}
+
+/* Vertical single-column card stack */
+.dec-stack{display:flex;flex-direction:column;gap:10px;}
+
+/* Evidence data points */
+.ev-pt{flex:1;min-width:130px;background:var(--white);border:1px solid var(--brs);border-radius:var(--rm);padding:12px 14px;box-shadow:var(--sh);}
+.ev-pt-v{font-size:22px;font-weight:600;letter-spacing:-0.5px;line-height:1;margin-bottom:3px;}
+.ev-pt-l{font-size:12px;color:var(--fg2);line-height:16px;}
+.ev-pt-s{font-family:var(--mono);font-size:9px;color:var(--fgm);margin-top:5px;letter-spacing:0.04em;}
+
+/* Quote */
+.quote{padding:12px 16px;border-left:2px solid var(--br);border-radius:0 var(--r) var(--r) 0;background:var(--white);border-top:1px solid var(--brs);border-right:1px solid var(--brs);border-bottom:1px solid var(--brs);box-shadow:var(--sh);max-width:520px;}
+.quote-text{font-size:13px;color:var(--fg2);line-height:20px;font-style:italic;}
+.quote-src{font-family:var(--mono);font-size:10px;color:var(--fgm);margin-top:6px;letter-spacing:0.04em;}
+
+
+/* ════════════════════════════════════════════════════════════════
+   MODULE: FigureFrame + FigureGrid
+   ════════════════════════════════════════════════════════════════ */
+.figure-frame{border:1px solid var(--brs);border-radius:var(--rl);overflow:hidden;box-shadow:var(--sh);background:var(--white);transition:box-shadow var(--tn) var(--ease);}
+.figure-frame:hover{box-shadow:var(--sh-h);}
+.figure-frame__device-bar{display:flex;align-items:center;justify-content:center;gap:6px;padding:var(--s2) var(--s4);border-bottom:1px solid var(--brs);background:var(--n50);}
+.figure-frame__device-label{font-family:var(--mono);font-size:10px;color:var(--fgm);letter-spacing:0.04em;}
+.figure-frame__image{background:var(--n100);min-height:240px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.figure-frame__image img{width:100%;height:100%;object-fit:cover;}
+.figure-frame__image svg{width:100%;height:100%;display:block;}
+.figure-frame__caption{display:flex;align-items:center;justify-content:space-between;padding:var(--s3) var(--s5);border-top:1px solid var(--brs);}
+.figure-frame__caption-text{font-size:14px;color:var(--fg2);}
+.figure-frame__caption-label{font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);}
+.figure-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s5);}
+@media(max-width:640px){.figure-grid{grid-template-columns:1fr;}}
+
+
+/* ════════════════════════════════════════════════════════════════
+   REQUIRED: Reflection — Variant A: Flat 2-column
+   ════════════════════════════════════════════════════════════════ */
+.ref{display:grid;grid-template-columns:1fr 1fr;gap:var(--s12);}
+.rh{display:flex;align-items:center;gap:var(--s2);margin-bottom:var(--s4);}
+.rt{font-size:15px;font-weight:500;color:var(--n950);}
+.rl{list-style:none;display:flex;flex-direction:column;gap:var(--s3);}
+.rl li{display:flex;align-items:flex-start;gap:var(--s3);font-size:13px;color:var(--fg2);line-height:19px;}
+.rdot{width:5px;height:5px;border-radius:50%;margin-top:7px;flex-shrink:0;}
+@media(max-width:768px){.ref{grid-template-columns:1fr;}}
+
+
+/* ════════════════════════════════════════════════════════════════
+   REQUIRED: NextCase
+   ════════════════════════════════════════════════════════════════ */
+.next-case{margin-top:var(--s16);}
+.next-case__label{font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);margin-bottom:var(--s3);}
+.next-case__link{display:flex;align-items:center;justify-content:space-between;padding:var(--s6);border:1px solid var(--brs);border-radius:var(--rl);box-shadow:var(--sh);background:var(--white);transition:box-shadow var(--tn) var(--ease);text-decoration:none;color:inherit;}
+.next-case__link:hover{box-shadow:var(--sh-h);}
+.next-case__eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);margin-bottom:var(--s1);}
+.next-case__title{font-size:24px;font-weight:500;letter-spacing:-0.12px;line-height:32px;color:var(--n950);}
+.next-case__arrow{width:24px;height:24px;color:var(--fgm);transition:transform var(--tn) var(--ease);}
+.next-case__link:hover .next-case__arrow{transform:translateX(4px);}
+
+
+/* ════════════════════════════════════════════════════════════════
+   Published link — inline CTA for the Medium article
+   ════════════════════════════════════════════════════════════════ */
+.pub-link{display:inline-flex;align-items:center;gap:var(--s2);font-size:13px;font-weight:500;color:var(--blue);padding:var(--s2) var(--s4);border-radius:var(--rf);border:1px solid var(--brs);background:var(--white);box-shadow:var(--sh);transition:box-shadow var(--tf),color var(--tf);margin-top:var(--s3);}
+.pub-link:hover{box-shadow:var(--sh-h);color:var(--n950);}
+.pub-link svg{flex-shrink:0;}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════
+     REQUIRED: Nav
+     ══════════════════════════════════════════════════════════════ -->
+<div class="shell"><nav class="nav">
+  <a href="index.html" class="logo">R</a>
+  <a href="index.html" class="back"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M10 7H4M4 7L7 4M4 7L7 10"/></svg>Work</a>
+  <a href="mailto:chardrizard@gmail.com" class="mail"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
+</nav></div>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     REQUIRED: Hero
+     ══════════════════════════════════════════════════════════════ -->
+<div class="hero"><div class="shell"><div class="hero-inner">
+  <div class="kick"><span class="kick-dot"></span>Healthcare · Indonesia · 2018</div>
+  <h1 class="h1">Helian<br><em>A dementia care logbook born from a pivot</em></h1>
+  <div class="hero-rule"></div>
+  <p class="sub">Started as an education app about dementia. After one afternoon with real caregivers, we killed it and built a shareable digital care logbook instead. Featured in 10+ Indonesian media outlets.</p>
+  <div class="meta">
+    <div class="mi"><span class="ml">Role</span><span class="mv">PO & UX Designer</span></div>
+    <div class="mi"><span class="ml">Partner</span><span class="mv">Alzheimer's Indonesia</span></div>
+    <div class="mi"><span class="ml">Team</span><span class="mv">6 (2 design, 4 dev)</span></div>
+    <div class="mi"><span class="ml">Timeline</span><span class="mv">~6 months</span></div>
+  </div>
+</div></div></div>
+
+<div class="shell">
+
+  <!-- ══════════════════════════════════════════════════════════════
+       REQUIRED: Outcomes — "Impact"
+       Qualitative outcomes (no hard metrics available)
+       Blue=recognition, Green=industry validation, Amber=publication
+       ══════════════════════════════════════════════════════════════ -->
+  <section class="sec">
+    <div class="dl">Impact</div>
+    <div class="outcomes">
+      <div>
+        <div class="out-kicker">Recognition</div>
+        <div class="out-num" style="color:var(--blue);">10+</div>
+        <div class="out-label">Indonesian media features including Jakarta Post, Warta Ekonomi, Tribunnews</div>
+      </div>
+      <div>
+        <div class="out-kicker">Validation</div>
+        <div class="out-num" style="color:var(--green);">1 of 2</div>
+        <div class="out-label">Apps highlighted as solving a critical gap in Indonesian healthcare</div>
+      </div>
+      <div>
+        <div class="out-kicker">Publication</div>
+        <div class="out-num" style="color:var(--amber);font-size:clamp(28px,4vw,42px);letter-spacing:-0.5px;">UX Col.</div>
+        <div class="out-label">Full UX case study published in UX Collective on Medium</div>
+        <a href="https://uxdesign.cc/designing-an-elderly-homecare-plan-app-a-ux-case-study-e71986765ed2" target="_blank" rel="noopener" class="pub-link">
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 3H3v10h10v-3M9 2h5v5M14 2L7 9"/></svg>
+          Read on Medium
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       MODULE: Context Grid — "The pivot"
+       Red=assumption we started with, Blue=reality we discovered
+       ══════════════════════════════════════════════════════════════ -->
+  <section class="sec">
+    <div class="dl">The pivot</div>
+    <div class="ctx-grid">
+      <!-- Left column: What we assumed (red) -->
+      <div class="ctx-col">
+        <div class="ctx-label" style="color:var(--red);"><span class="ctx-dash" style="background:var(--red);"></span>What we assumed</div>
+        <div class="ctx-title">Awareness is the biggest challenge</div>
+        <div class="ctx-body">Every report pointed to the same thing: families don't recognize dementia as a disease — they think it's just aging. We validated this with doctors and at nursing homes. Everyone nodded along. Then we went to an Alzheimer's caregiver support meeting and the whole thing fell apart.</div>
+      </div>
+      <!-- Vertical rule -->
+      <div class="ctx-rule"></div>
+      <!-- Right column: What we found (blue) -->
+      <div class="ctx-col">
+        <div class="ctx-label" style="color:var(--blue);"><span class="ctx-dash" style="background:var(--blue);"></span>What we found</div>
+        <div class="ctx-title">Caregivers were drowning in logistics</div>
+        <div class="ctx-body">The caregivers weren't asking for education. They already knew what dementia was — they were living with it every day. The real problem: critical, personalized, constantly changing care data trapped in one person's memory with no reliable way to share it.</div>
+        <div class="ctx-stat">
+          <div class="ctx-stat-item">
+            <div class="ctx-stat-v" style="color:var(--blue);">2 of 3</div>
+            <div class="ctx-stat-l">Elderly with disabilities receiving full-time homecare from family</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       MODULE: Story Arc — 2 sections (Direction + Design)
+       No Problem section — the Context Grid already covers the pivot.
+       Section 01: Direction choice (blue/insight)
+       Section 02: Design decisions (green/action)
+       ══════════════════════════════════════════════════════════════ -->
+  <section class="sec">
+    <div class="dl">Decisions</div>
+
+    <!-- ── 01 DIRECTION (blue) ── -->
+    <div class="arc-sec arc-sec--i">
+      <div class="arc-narr">
+        <div class="arc-circle">01</div>
+        <div>
+          <div class="arc-lbl">Direction</div>
+          <div class="arc-ttl">Why a logbook — not a chat app or calendar</div>
+          <div class="arc-one">We considered three directions. Messaging would bury care info between grocery lists. Calendars center the caregiver's schedule — we needed to center the patient's care plan.</div>
+        </div>
+      </div>
+      <div class="arc-tw">
+        <div class="arc-tabs">
+          <button class="arc-tab active" onclick="aTab(this,'d-killed')">Killed</button>
+          <button class="arc-tab" onclick="aTab(this,'d-shipped')">Shipped</button>
+          <button class="arc-tab" onclick="aTab(this,'d-tradeoff')">The tradeoff</button>
+        </div>
+        <div class="arc-pan active" id="d-killed">
+          <div class="dec-grid">
+            <div class="dec-card dec-card--r">
+              <div class="dec-status"><span class="dec-dot"></span>Killed</div>
+              <div class="dec-ttl">Messaging app</div>
+              <div class="dec-desc">Caregivers already use WhatsApp. Care information gets buried between casual messages, grocery lists, and family group chat noise.</div>
+              <div class="dec-trade"><strong>Why killed:</strong> You can't reliably search "what medication did Dad take at 2pm last Tuesday?" in a chat history.</div>
+            </div>
+            <div class="dec-card dec-card--r">
+              <div class="dec-status"><span class="dec-dot"></span>Killed</div>
+              <div class="dec-ttl">Shared calendar</div>
+              <div class="dec-desc">Calendars add cognitive overhead to people who are already overwhelmed.</div>
+              <div class="dec-trade"><strong>Why killed:</strong> A calendar centers the caregiver's schedule. We needed something that centers the patient's care plan.</div>
+            </div>
+          </div>
+        </div>
+        <div class="arc-pan" id="d-shipped">
+          <div class="dec-card dec-card--g">
+            <div class="dec-status"><span class="dec-dot"></span>Shipped</div>
+            <div class="dec-ttl">Shareable care logbook</div>
+            <div class="dec-desc">A dedicated space where all care information lives in one place — activities, medication schedules, mood changes, medical cautions. Structured enough that a new caregiver can pick it up and immediately know what to do. Shareable so the whole care team sees the same truth.</div>
+          </div>
+        </div>
+        <div class="arc-pan" id="d-tradeoff">
+          <div class="quote">
+            <div class="quote-text">"A dedicated app means one more thing to install and maintain. But the alternative — stuffing care data into tools designed for something else — was exactly what was already failing."</div>
+            <div class="quote-src">Design rationale</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 02 DESIGN (green) ── -->
+    <div class="arc-sec arc-sec--a">
+      <div class="arc-narr">
+        <div class="arc-circle">02</div>
+        <div>
+          <div class="arc-lbl">Design</div>
+          <div class="arc-ttl">Small decisions that prevent daily crises</div>
+          <div class="arc-one">For dementia patients, the small contextual details are what prevent daily crises. A new caregiver walking in doesn't just need to know what to give — they need the behavioral context that changes how care is delivered.</div>
+        </div>
+      </div>
+      <div class="arc-tw">
+        <div class="arc-tabs">
+          <button class="arc-tab active" onclick="aTab(this,'a-patterns')">Key patterns</button>
+          <button class="arc-tab" onclick="aTab(this,'a-validation')">Validation</button>
+        </div>
+        <div class="arc-pan active" id="a-patterns">
+          <div class="dec-stack">
+            <div class="dec-card dec-card--g">
+              <div class="dec-status"><span class="dec-dot"></span>Shipped</div>
+              <div class="dec-ttl">15-minute activity stacking</div>
+              <div class="dec-desc">Activities grouped into 15-minute blocks. Multiple things that happen around the same time stack instead of showing as separate competing items.</div>
+              <div class="dec-trade"><strong>Why:</strong> Caregivers described feeling paralyzed when looking at long to-do lists. Grouping by time window reduces perceived complexity without hiding information.</div>
+            </div>
+            <div class="dec-card dec-card--g">
+              <div class="dec-status"><span class="dec-dot"></span>Shipped</div>
+              <div class="dec-ttl">Cautions feature</div>
+              <div class="dec-desc">Persistent, always-visible alerts pinned to the top of the daily view. "Latex allergy." "Do not tell Dad it's medicine."</div>
+              <div class="dec-trade"><strong>Why:</strong> The cost of missing one is high and the cost of showing it is low. A caregiver should never need to hunt for critical info.</div>
+            </div>
+            <div class="dec-card dec-card--g">
+              <div class="dec-status"><span class="dec-dot"></span>Shipped</div>
+              <div class="dec-ttl">Structured but not rigid</div>
+              <div class="dec-desc">Categories (Health, Personal Care, Meal, Leisure) with structured fields, but every activity supports free-text notes.</div>
+              <div class="dec-trade"><strong>Why:</strong> Caregivers needed structure to make information findable, but flexibility to capture the weird, specific, human details that don't fit in dropdowns.</div>
+            </div>
+          </div>
+        </div>
+        <div class="arc-pan" id="a-validation">
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <div class="ev-pt">
+                <div class="ev-pt-v" style="color:var(--green);">3–4</div>
+                <div class="ev-pt-l">Real caregivers in usability sessions — managing real patients, not proxy testers</div>
+                <div class="ev-pt-s">Usability testing</div>
+              </div>
+              <div class="ev-pt">
+                <div class="ev-pt-v" style="color:var(--green);">Core task</div>
+                <div class="ev-pt-l">"A new caregiver picks up the app and figures out what to do for the next 2 hours"</div>
+                <div class="ev-pt-s">Primary validation scenario</div>
+              </div>
+            </div>
+            <div class="quote">
+              <div class="quote-text">"One of the best ideas for an app I have ever seen."</div>
+              <div class="quote-src">Retired home care nurse, British Columbia — running a seniors program 2+ hours from the nearest hospital</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       MODULE: FigureGrid — "What we shipped"
+       4 iOS app screenshots (2×2 grid)
+       Using device bar instead of browser bar (iOS app, not web)
+       ══════════════════════════════════════════════════════════════ -->
+  <section class="sec">
+    <div class="dl">What we shipped</div>
+    <div class="figure-grid">
+      <figure class="figure-frame">
+        <div class="figure-frame__device-bar">
+          <span class="figure-frame__device-label">Helian · iOS</span>
+        </div>
+        <div class="figure-frame__image">
+          <svg viewBox="0 0 550 380" xmlns="http://www.w3.org/2000/svg"><rect width="550" height="380" fill="#f2f5f8"/><text x="275" y="185" font-family="Inter" font-size="11" fill="#a0a0a0" text-anchor="middle">Replace: Activity creation flow —</text><text x="275" y="202" font-family="Inter" font-size="11" fill="#a0a0a0" text-anchor="middle">category selection, scheduling, dependency level</text></svg>
+        </div>
+        <div class="figure-frame__caption">
+          <span class="figure-frame__caption-text">Activity creation flow</span>
+          <span class="figure-frame__caption-label">Fig 1</span>
+        </div>
+      </figure>
+      <figure class="figure-frame">
+        <div class="figure-frame__device-bar">
+          <span class="figure-frame__device-label">Helian · iOS</span>
+        </div>
+        <div class="figure-frame__image">
+          <svg viewBox="0 0 550 380" xmlns="http://www.w3.org/2000/svg"><rect width="550" height="380" fill="#f2f5f8"/><text x="275" y="185" font-family="Inter" font-size="11" fill="#a0a0a0" text-anchor="middle">Replace: Daily view —</text><text x="275" y="202" font-family="Inter" font-size="11" fill="#a0a0a0" text-anchor="middle">time-based activity cards with expandable details</text></svg>
+        </div>
+        <div class="figure-frame__caption">
+          <span class="figure-frame__caption-text">Daily view with time-based cards</span>
+          <span class="figure-frame__caption-label">Fig 2</span>
+        </div>
+      </figure>
+      <figure class="figure-frame">
+        <div class="figure-frame__device-bar">
+          <span class="figure-frame__device-label">Helian · iOS</span>
+        </div>
+        <div class="figure-frame__image">
+          <svg viewBox="0 0 550 380" xmlns="http://www.w3.org/2000/svg"><rect width="550" height="380" fill="#f2f5f8"/><text x="275" y="185" font-family="Inter" font-size="11" fill="#a0a0a0" text-anchor="middle">Replace: Cautions overlay —</text><text x="275" y="202" font-family="Inter" font-size="11" fill="#a0a0a0" text-anchor="middle">persistent alerts visible from main daily view</text></svg>
+        </div>
+        <div class="figure-frame__caption">
+          <span class="figure-frame__caption-text">Cautions — always-visible alerts</span>
+          <span class="figure-frame__caption-label">Fig 3</span>
+        </div>
+      </figure>
+      <figure class="figure-frame">
+        <div class="figure-frame__device-bar">
+          <span class="figure-frame__device-label">Helian · iOS</span>
+        </div>
+        <div class="figure-frame__image">
+          <svg viewBox="0 0 550 380" xmlns="http://www.w3.org/2000/svg"><rect width="550" height="380" fill="#f2f5f8"/><text x="275" y="185" font-family="Inter" font-size="11" fill="#a0a0a0" text-anchor="middle">Replace: Medication detail card —</text><text x="275" y="202" font-family="Inter" font-size="11" fill="#a0a0a0" text-anchor="middle">dosage, physical description, contextual notes</text></svg>
+        </div>
+        <div class="figure-frame__caption">
+          <span class="figure-frame__caption-text">Medication detail with context</span>
+          <span class="figure-frame__caption-label">Fig 4</span>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       REQUIRED: Reflection — Variant A (flat 2-column)
+       ══════════════════════════════════════════════════════════════ -->
+  <section class="sec">
+    <div class="dl">Reflection</div>
+    <div class="ref">
+      <div>
+        <div class="rh"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="var(--green)" stroke-width="1.5" stroke-linecap="round"><path d="M3 8l3 3 7-7"/></svg><span class="rt" style="margin-left:6px;">What worked</span></div>
+        <ul class="rl">
+          <li><span class="rdot" style="background:var(--green);"></span>Killed a validated prototype when the research said to. We had expert consensus and a working education app — walking away from that wasn't easy.</li>
+          <li><span class="rdot" style="background:var(--green);"></span>Centered the patient's care plan, not the caregiver's schedule. This framing decision shaped every feature choice that followed.</li>
+          <li><span class="rdot" style="background:var(--green);"></span>Made Cautions always visible — not buried in a settings page. The cost of missing one is high; the cost of showing it is low.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="rh"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="var(--amber)" stroke-width="1.5" stroke-linecap="round"><path d="M8 3v5M8 11v1"/></svg><span class="rt" style="margin-left:6px;">What I'd do differently</span></div>
+        <ul class="rl">
+          <li><span class="rdot" style="background:var(--amber);"></span>No usage tracking after launch. No retention data, no measurement of whether information transfer improved. Would build basic analytics into the MVP from day one.</li>
+          <li><span class="rdot" style="background:var(--amber);"></span>Cautions feature deserved structured A/B testing. The signal was qualitative, not quantitative — fine for an MVP, but an honest gap.</li>
+          <li><span class="rdot" style="background:var(--amber);"></span>Small usability sample (3–4 caregivers). The validation story would be stronger with a larger pool and longitudinal follow-up.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       REQUIRED: NextCase
+       ══════════════════════════════════════════════════════════════ -->
+  <div class="next-case">
+    <div class="next-case__label">Next case study</div>
+    <a href="case-study-aip.html" class="next-case__link">
+      <div>
+        <div class="next-case__eyebrow">Enterprise B2B · Insurance · 2021–2022</div>
+        <div class="next-case__title">Aegon Intermediair Portaal</div>
+      </div>
+      <svg class="next-case__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     REQUIRED: Footer
+     ══════════════════════════════════════════════════════════════ -->
+<footer class="shell ft">
+  <span class="ftc">&copy; 2026 — Richard</span>
+  <a href="mailto:chardrizard@gmail.com" class="ftl">Let's chat &rarr;</a>
+</footer>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     SCRIPTS — Tab switching + null-guarded modules
+     ══════════════════════════════════════════════════════════════ -->
+<script>
+/* ── Tab switching (Story Arc module) ── */
+function aTab(btn,id){const w=btn.closest('.arc-tw');if(!w)return;w.querySelectorAll('.arc-tab').forEach(t=>t.classList.remo

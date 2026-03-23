@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Richard</title>
+<meta name="description" content="Richard — Senior UX Designer & Design Systems Specialist based in the Netherlands.">
+<meta name="theme-color" content="#171717">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23171717'/><text x='16' y='22' text-anchor='middle' font-size='18' fill='white' font-family='system-ui' font-weight='600'>R</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --n950:#0e1218;--n900:#171717;--n700:#2e2e2e;--n600:#525252;
+  --n500:#6e6e6e;--n400:#a0a0a0;--n300:#d4d4d4;--n200:#e5e5e5;
+  --n100:#f5f5f5;--n50:#fafafa;--white:#ffffff;
+  --bg:#f5f5f5;
+  --blue:#335cff;--blue-lt:#6690ff;
+  --green:#1fc16b;--amber:#f59e0b;--violet:#8b5cf6;
+  --fg:var(--n950);--fg2:var(--n600);--fgm:var(--n400);
+  --br:rgba(23,23,23,0.08);--brs:rgba(23,23,23,0.05);--brm:rgba(23,23,23,0.14);
+  --sh:0 0 0 1px rgba(23,23,23,0.04),0 1px 2px rgba(23,23,23,0.03),0 4px 8px -2px rgba(23,23,23,0.03);
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --mono:'DM Mono',monospace;
+  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:20px;--s6:24px;--s8:32px;--s10:40px;--s12:48px;--s16:64px;
+  --r:8px;--rm:12px;--rl:16px;--rf:9999px;
+  --ease:cubic-bezier(0.16,1,0.3,1);--tf:150ms;--tn:250ms;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-family:var(--sans);color:var(--fg);background:var(--bg);-webkit-font-smoothing:antialiased;}
+body{min-height:100vh;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;}
+.shell{width:83.333%;max-width:1200px;margin:0 auto;}
+@media(max-width:1024px){.shell{width:90%;}}
+@media(max-width:768px){.shell{width:94%;}}
+
+/* ── Nav ── */
+.nav{padding:var(--s3) 0;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--brs);position:sticky;top:0;background:rgba(245,245,245,0.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);z-index:100;}
+.logo{width:34px;height:34px;background:var(--n950);border-radius:var(--r);display:flex;align-items:center;justify-content:center;color:var(--white);font-size:15px;font-weight:600;transition:transform var(--tf) var(--ease);}
+.logo:hover{transform:scale(1.05);}
+.back{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:var(--fg2);transition:color var(--tf);}
+.back:hover{color:var(--fg);}
+.mail{width:34px;height:34px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;color:var(--fgm);border:1px solid var(--br);background:var(--white);transition:all var(--tf);}
+.mail:hover{border-color:var(--brm);color:var(--fg);}
+
+/* ── Page ── */
+.page{padding:var(--s16) 0 var(--s12);}
+.page-title{font-size:clamp(30px,4.5vw,58px);font-weight:500;letter-spacing:-0.56px;line-height:1.04;color:var(--n950);max-width:700px;margin-bottom:var(--s4);}
+.page-title em{font-style:normal;font-weight:300;color:var(--n600);}
+.rule{width:32px;height:2px;background:var(--n300);margin:var(--s5) 0;}
+
+/* ── Sections ── */
+.sec{margin-bottom:var(--s16);}
+.dl{font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s6);}
+.dl::after{content:'';flex:1;height:1px;background:var(--brs);}
+
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s8);}
+.about-col p{font-size:16px;line-height:26px;letter-spacing:-0.176px;color:var(--fg2);margin-bottom:var(--s5);}
+.about-col p:last-child{margin-bottom:0;}
+.about-col p strong{color:var(--fg);font-weight:600;}
+.about-col p a{color:var(--blue);font-weight:500;text-decoration:underline;text-underline-offset:2px;text-decoration-color:rgba(51,92,255,0.25);transition:text-decoration-color var(--tf);}
+.about-col p a:hover{text-decoration-color:var(--blue);}
+
+/* ── Signal cards ── */
+.signal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s4);}
+.signal{background:var(--white);border-radius:var(--rm);padding:var(--s5);box-shadow:var(--sh);}
+.signal__icon{width:32px;height:32px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;margin-bottom:var(--s3);}
+.signal__title{font-size:14px;font-weight:500;letter-spacing:-0.084px;line-height:20px;color:var(--fg);margin-bottom:var(--s1);}
+.signal__desc{font-size:13px;line-height:18px;color:var(--fg2);}
+
+/* ── Connect ── */
+.connect-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s4);}
+.connect-card{display:flex;align-items:center;gap:var(--s4);padding:var(--s5);background:var(--white);border-radius:var(--rm);box-shadow:var(--sh);transition:box-shadow var(--tn) var(--ease),transform var(--tn) var(--ease);text-decoration:none;color:inherit;}
+.connect-card:hover{box-shadow:0 0 0 1px rgba(23,23,23,0.06),0 4px 8px rgba(23,23,23,0.05),0 16px 32px -4px rgba(23,23,23,0.1);transform:translateY(-2px);}
+.connect-icon{width:40px;height:40px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.connect-label{font-size:14px;font-weight:500;color:var(--fg);}
+.connect-handle{font-size:12px;color:var(--fgm);margin-top:1px;}
+
+/* ── Footer ── */
+.ft{padding:var(--s6) 0;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--brs);margin-top:var(--s10);}
+.ftc{font-size:12px;color:var(--fgm);}
+.ftl{font-size:12px;color:var(--fg2);transition:color var(--tf);}
+.ftl:hover{color:var(--fg);}
+
+/* ── Responsive ── */
+@media(max-width:768px){
+  .about-grid{grid-template-columns:1fr;}
+  .signal-grid{grid-template-columns:1fr;}
+  .connect-grid{grid-template-columns:1fr;}
+  .page-title{font-size:28px;}
+}
+</style>
+</head>
+<body>
+
+<div class="shell"><nav class="nav">
+  <a href="index.html" class="logo">R</a>
+  <a href="index.html" class="back"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M10 7H4M4 7L7 4M4 7L7 10"/></svg>Work</a>
+  <a href="mailto:chardrizard@gmail.com" class="mail"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
+</nav></div>
+
+<div class="shell">
+
+  <!-- Hero -->
+  <div class="page">
+    <h1 class="page-title">Richard<br><em>the person behind the pixels</em></h1>
+    <div class="rule"></div>
+  </div>
+
+  <!-- Who I am -->
+  <section class="sec">
+    <div class="dl">Who I am</div>
+    <div class="about-grid">
+      <div class="about-col">
+        <p><strong>Indonesian-born, Netherlands-based.</strong> I grew up in Indonesia and moved to the Netherlands for my studies. That cross-cultural lens shows up in my work — I'm wired to think about how different people experience the same interface.</p>
+        <p>I'm a Senior UX Designer and Design Systems specialist. I've spent the past several years embedded in complex domains — insurance, healthcare, fintech — designing the systems and flows that most designers avoid. Multi-stakeholder enterprise portals, regulatory-bound workflows, legacy system modernization.</p>
+      </div>
+      <div class="about-col">
+        <p>I don't just design screens. I think in <strong>systems, constraints, and outcomes</strong>. My best work happens when the problem is messy, the stakeholders are many, and the path to clarity isn't obvious.</p>
+        <p>I speak fluent English and Dutch (B2), and I'm comfortable navigating between design, engineering, and product conversations. I care about craft, but I care more about whether the thing I built actually moved the number it was supposed to move.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What drives me -->
+  <section class="sec">
+    <div class="dl">What drives me</div>
+    <div class="signal-grid">
+      <div class="signal">
+        <div class="signal__icon" style="background:rgba(51,92,255,0.07);">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="5" height="5" rx="1" fill="#335cff" opacity="0.5"/><rect x="9" y="2" width="5" height="5" rx="1" fill="#335cff" opacity="0.3"/><rect x="2" y="9" width="5" height="5" rx="1" fill="#335cff" opacity="0.3"/><rect x="9" y="9" width="5" height="5" rx="1" fill="#335cff" opacity="0.15"/></svg>
+        </div>
+        <div class="signal__title">Systems over screens</div>
+        <div class="signal__desc">I think in components, tokens, and patterns — not pages. A well-built system compounds; a well-built page doesn't.</div>
+      </div>
+      <div class="signal">
+        <div class="signal__icon" style="background:rgba(31,193,107,0.07);">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 8l3 3 5-6" stroke="#1fc16b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/></svg>
+        </div>
+        <div class="signal__title">Outcomes over output</div>
+        <div class="signal__desc">Pretty mockups mean nothing if they don't move a metric. I tie every design decision back to a measurable business outcome.</div>
+      </div>
+      <div class="signal">
+        <div class="signal__icon" style="background:rgba(245,158,11,0.07);">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5" fill="none" stroke="#f59e0b" stroke-opacity="0.5" stroke-width="1.5"/><path d="M8 5v3l2 1.5" stroke="#f59e0b" stroke-opacity="0.4" stroke-width="1" stroke-linecap="round"/></svg>
+        </div>
+        <div class="signal__title">Niche problem spaces</div>
+        <div class="signal__desc">I gravitate toward the complex, the regulated, the overlooked. Enterprise workflows, compliance flows, multi-stakeholder systems.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Beyond work -->
+  <section class="sec">
+    <div class="dl">Beyond work</div>
+    <div class="about-grid">
+      <div class="about-col">
+        <p>When I'm not deep in Figma or wrangling design tokens, I'm usually at the gym — I track my lifts obsessively (and yes, I built a PWA for that). I'm into fitness, cooking Indonesian food for friends, and tinkering with side projects that let me explore the edges of what's possible with code and design.</p>
+      </div>
+      <div class="about-col">
+        <p>I'm also a firm believer in building in public and learning by making. This portfolio itself was built with that philosophy — every case study, every component, every interaction is hand-crafted and iterated on with intention.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Connect -->
+  <section class="sec">
+    <div class="dl">Connect</div>
+    <div class="connect-grid">
+      <a href="https://www.linkedin.com/in/richard-andhika-936344129/" class="connect-card" target="_blank" rel="noopener" id="link-linkedin">
+        <div class="connect-icon" style="background:rgba(51,92,255,0.07);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z" fill="#335cff" opacity="0.4"/><rect x="2" y="9" width="4" height="12" fill="#335cff" opacity="0.4"/><circle cx="4" cy="4" r="2" fill="#335cff" opacity="0.4"/></svg>
+        </div>
+        <div>
+          <div class="connect-label">LinkedIn</div>
+          <div class="connect-handle">Let's connect</div>
+        </div>
+      </a>
+      <a href="https://github.com/chardrizard" class="connect-card" target="_blank" rel="noopener" id="link-github">
+        <div class="connect-icon" style="background:rgba(23,23,23,0.05);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--n900)" opacity="0.4"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        </div>
+        <div>
+          <div class="connect-label">GitHub</div>
+          <div class="connect-handle">Side projects</div>
+        </div>
+      </a>
+      <a href="https://www.instagram.com/lichatandhika/" class="connect-card" target="_blank" rel="noopener" id="link-instagram">
+        <div class="connect-icon" style="background:rgba(245,158,11,0.07);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="#f59e0b" stroke="none"/></svg>
+        </div>
+        <div>
+          <div class="connect-label">Instagram</div>
+          <div class="connect-handle">Life stuff</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+</div>
+
+<footer class="shell ft">
+  <span class="ftc">&copy; 2026 — Richard</span>
+  <a href="mailto:chardrizard@gmail.com" class="ftl">Let's chat &rarr;</a>
+</footer>
+
+</body>
+</html>

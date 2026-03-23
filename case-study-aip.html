@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIP Aegon Intermediair Portaal — Richard</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23171717'/><text x='16' y='22' text-anchor='middle' font-size='18' fill='white' font-family='system-ui' font-weight='600'>R</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --n950:#0e1218;--n900:#171717;--n700:#2e2e2e;--n600:#525252;
+  --n500:#6e6e6e;--n400:#a0a0a0;--n300:#d4d4d4;--n200:#e5e5e5;
+  --n100:#f5f5f5;--n50:#fafafa;--white:#ffffff;
+  --bg:#f5f5f5;
+  --blue:#335cff;--blue-lt:#6690ff;--blue-bg:rgba(51,92,255,0.07);
+  --red:#fb3748;--red-bg:rgba(251,55,72,0.06);
+  --green:#1fc16b;--green-bg:rgba(31,193,107,0.06);
+  --amber:#f59e0b;--amber-bg:rgba(245,158,11,0.07);
+  --fg:var(--n950);--fg2:var(--n600);--fgm:var(--n400);
+  --br:rgba(23,23,23,0.08);--brs:rgba(23,23,23,0.05);--brm:rgba(23,23,23,0.14);
+  --sh:0 0 0 1px rgba(23,23,23,0.04),0 1px 2px rgba(23,23,23,0.03),0 4px 8px -2px rgba(23,23,23,0.03);
+  --sh-h:0 0 0 1px rgba(23,23,23,0.06),0 4px 8px rgba(23,23,23,0.05),0 16px 32px -4px rgba(23,23,23,0.1);
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --mono:'DM Mono',monospace;
+  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:20px;--s6:24px;--s8:32px;--s10:40px;--s12:48px;--s16:64px;
+  --r:8px;--rm:12px;--rl:16px;--rf:9999px;
+  --ease:cubic-bezier(0.16,1,0.3,1);--tf:150ms;--tn:250ms;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-family:var(--sans);color:var(--fg);background:var(--bg);-webkit-font-smoothing:antialiased;}
+body{min-height:100vh;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;}
+.shell{width:83.333%;max-width:1200px;margin:0 auto;}
+@media(max-width:1024px){.shell{width:90%;}}
+@media(max-width:768px){.shell{width:94%;}}
+
+/* ── Nav ── */
+.nav{padding:var(--s3) 0;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--brs);position:sticky;top:0;background:rgba(245,245,245,0.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);z-index:100;}
+.logo{width:34px;height:34px;background:var(--n950);border-radius:var(--r);display:flex;align-items:center;justify-content:center;color:var(--white);font-size:15px;font-weight:600;}
+.back{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:var(--fg2);transition:color var(--tf);}
+.back:hover{color:var(--fg);}
+.mail{width:34px;height:34px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;color:var(--fgm);transition:color var(--tf);}
+.mail:hover{color:var(--fg);}
+
+/* ── Section rhythm ── */
+.sec{margin-bottom:var(--s16);}
+.dl{font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s6);}
+.dl::after{content:'';flex:1;height:1px;background:var(--brs);}
+
+/* ── Footer ── */
+.ft{padding:var(--s6) 0;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--brs);margin-top:var(--s16);}
+.ftc{font-size:12px;color:var(--fgm);}.ftl{font-size:12px;color:var(--fg2);transition:color var(--tf);}.ftl:hover{color:var(--fg);}
+
+/* ── Hero ── */
+.hero{padding:0;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(23,23,23,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(23,23,23,0.025) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
+.hero-inner{position:relative;z-index:1;padding:var(--s16) 0 var(--s12);}
+.kick{font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--blue);margin-bottom:var(--s6);display:inline-flex;align-items:center;gap:var(--s2);}
+.kick-dot{width:6px;height:6px;border-radius:50%;background:var(--blue);opacity:0.55;flex-shrink:0;}
+.h1{font-size:clamp(30px,4.5vw,58px);font-weight:500;letter-spacing:-0.56px;line-height:1.04;color:var(--n950);max-width:700px;margin-bottom:var(--s4);}
+.h1 em{font-style:normal;font-weight:300;color:var(--n600);}
+.hero-rule{width:32px;height:2px;background:var(--n300);margin:var(--s5) 0;}
+.sub{font-size:15px;color:var(--n600);line-height:26px;max-width:500px;margin-bottom:var(--s10);}
+/* stat strip removed — meta row carries context, outcomes section carries impact */
+.meta{display:flex;gap:var(--s8);flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:2px;padding-top:var(--s6);border-top:1px solid var(--brs);}
+.meta::-webkit-scrollbar{display:none;}
+.mi{display:flex;flex-direction:column;gap:3px;flex-shrink:0;}
+.ml{font-family:var(--mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);}
+.mv{font-size:14px;font-weight:500;color:var(--n950);}
+@media(max-width:768px){.meta{gap:var(--s6);}}
+
+/* ── Outcomes ── */
+.outcomes{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s8);padding:var(--s10) 0;}
+.out-kicker{font-family:var(--mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);margin-bottom:var(--s3);}
+.out-num{font-size:clamp(40px,5vw,56px);font-weight:600;letter-spacing:-1.5px;line-height:0.9;margin-bottom:var(--s3);}
+.out-label{font-size:13px;color:var(--fg2);line-height:20px;max-width:220px;}
+@media(max-width:768px){.outcomes{grid-template-columns:1fr;gap:var(--s6);}.out-num{font-size:40px;}}
+
+/* ════════════════════════════
+   STORY ARC — Slot System
+   ════════════════════════════ */
+.arc-sec{padding-bottom:var(--s12);border-bottom:1px solid var(--brs);margin-bottom:var(--s12);}
+.arc-sec:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+
+/* Full-width visual */
+.arc-vis{margin-bottom:var(--s5);}
+.arc-vis-inner{border-radius:var(--rm);overflow:hidden;background:var(--white);border:1px solid var(--brs);width:100%;aspect-ratio:16/7;display:flex;align-items:center;justify-content:center;cursor:zoom-in;box-shadow:var(--sh);transition:box-shadow var(--tn) var(--ease),transform var(--tn) var(--ease);}
+.arc-vis-inner:hover{box-shadow:var(--sh-h);transform:scale(1.005);}
+.arc-vis-inner svg{width:100%;height:100%;display:block;}
+.arc-vis-cap{font-family:var(--mono);font-size:10px;letter-spacing:0.04em;color:var(--fgm);margin-top:var(--s2);text-align:center;}
+
+/* Compact layout — text + sidebar vis */
+.arc-sec--compact{display:grid;grid-template-columns:1fr 280px;gap:var(--s8);align-items:start;}
+.arc-compact-text{min-width:0;}
+.arc-compact-vis{position:sticky;top:80px;}
+.arc-compact-vis .arc-vis-inner{aspect-ratio:4/3;width:100%;}
+.arc-compact-vis .arc-vis-cap{text-align:center;}
+@media(max-width:900px){.arc-sec--compact{grid-template-columns:1fr;gap:var(--s5);}.arc-compact-vis{position:static;max-width:320px;}}
+
+/* Narrative slot */
+.arc-narr{display:flex;align-items:flex-start;gap:12px;margin-bottom:4px;}
+.arc-circle{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:9px;font-weight:500;background:var(--bg);flex-shrink:0;margin-top:2px;}
+.arc-sec--p .arc-circle{border:1.5px solid var(--red);color:var(--red);box-shadow:0 0 0 3px var(--bg),0 0 0 4px rgba(251,55,72,0.12);}
+.arc-sec--i .arc-circle{border:1.5px solid var(--blue);color:var(--blue);box-shadow:0 0 0 3px var(--bg),0 0 0 4px rgba(51,92,255,0.12);}
+.arc-sec--a .arc-circle{border:1.5px solid var(--green);color:var(--green);box-shadow:0 0 0 3px var(--bg),0 0 0 4px rgba(31,193,107,0.12);}
+.arc-lbl{font-family:var(--mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:4px;}
+.arc-sec--p .arc-lbl{color:var(--red);}.arc-sec--i .arc-lbl{color:var(--blue);}.arc-sec--a .arc-lbl{color:var(--green);}
+.arc-ttl{font-size:18px;font-weight:500;letter-spacing:-0.2px;color:var(--n950);line-height:1.2;margin-bottom:6px;}
+.arc-one{font-size:15px;color:var(--fg2);line-height:24px;}
+
+/* Tabs — aligned with text */
+.arc-tw{margin-left:32px;margin-top:var(--s4);}
+.arc-tabs{display:flex;gap:2px;background:var(--n100);border-radius:var(--r);padding:2px;width:fit-content;}
+.arc-tab{font-family:var(--sans);font-size:12px;font-weight:500;padding:6px 14px;border-radius:6px;color:var(--fg2);cursor:pointer;transition:all 150ms;background:transparent;border:none;}
+.arc-tab:hover{color:var(--fg);}
+.arc-tab.active{background:var(--white);color:var(--fg);box-shadow:0 1px 3px rgba(0,0,0,0.06);}
+.arc-pan{padding:var(--s5) 0 0;display:none;}
+.arc-pan.active{display:block;}
+
+/* ── Slot: Scope ── */
+.scope-constraints{display:flex;flex-wrap:wrap;gap:6px;}
+.scope-inline{display:flex;flex-wrap:wrap;gap:16px;align-items:center;}
+.scope-inline-item{display:flex;align-items:center;gap:6px;}
+.scope-inline-item .sk{font-family:var(--mono);font-size:9px;letter-spacing:0.04em;text-transform:uppercase;color:var(--fgm);}
+.scope-inline-item .sv{font-size:13px;font-weight:500;color:var(--n950);}
+.scope-sep{width:1px;height:14px;background:var(--brs);}
+.scope-methods{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;}
+.scope-method{font-size:12px;color:var(--fg2);padding:5px 12px;border-radius:var(--rf);background:var(--white);border:1px solid var(--brs);box-shadow:var(--sh);display:inline-flex;align-items:center;gap:6px;}
+.scope-method svg{flex-shrink:0;color:var(--fgm);}
+
+/* ── Slot: Evidence ── */
+.ev-data{display:flex;gap:10px;flex-wrap:wrap;}
+.ev-pt{flex:1;min-width:130px;background:var(--white);border:1px solid var(--brs);border-radius:var(--rm);padding:12px 14px;box-shadow:var(--sh);}
+.ev-pt-v{font-size:22px;font-weight:600;letter-spacing:-0.5px;line-height:1;margin-bottom:3px;}
+.ev-pt-l{font-size:12px;color:var(--fg2);line-height:16px;}
+.ev-pt-s{font-family:var(--mono);font-size:9px;color:var(--fgm);margin-top:5px;letter-spacing:0.04em;}
+.quote{padding:12px 16px;border-left:2px solid var(--br);border-radius:0 var(--r) var(--r) 0;background:var(--white);border-top:1px solid var(--brs);border-right:1px solid var(--brs);border-bottom:1px solid var(--brs);box-shadow:var(--sh);max-width:520px;}
+.quote-text{font-size:13px;color:var(--fg2);line-height:20px;font-style:italic;}
+.quote-src{font-family:var(--mono);font-size:10px;color:var(--fgm);margin-top:6px;letter-spacing:0.04em;}
+.ev-horiz{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start;}
+.ev-horiz .ev-col{display:flex;flex-direction:column;gap:10px;}
+@media(max-width:640px){.ev-horiz{grid-template-columns:1fr;}}
+
+/* ── Slot: Decisions ── */
+.dec-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.dec-card{background:var(--white);border:1px solid var(--brs);border-radius:var(--rm);padding:14px 16px;box-shadow:var(--sh);display:flex;flex-direction:column;gap:4px;}
+.dec-card--g{border-color:rgba(31,193,107,0.15);}
+.dec-card--r{border-color:rgba(251,55,72,0.12);}
+.dec-status{font-family:var(--mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;display:inline-flex;align-items:center;gap:5px;}
+.dec-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
+.dec-card--g .dec-status{color:var(--green);}.dec-card--g .dec-dot{background:var(--green);}
+.dec-card--r .dec-status{color:var(--red);}.dec-card--r .dec-dot{background:var(--red);}
+.dec-ttl{font-size:14px;font-weight:500;color:var(--n950);line-height:1.25;}
+.dec-desc{font-size:13px;color:var(--fg2);line-height:19px;}
+.dec-trade{font-size:12px;color:var(--fgm);line-height:17px;padding-top:6px;border-top:1px solid var(--brs);margin-top:2px;}
+.dec-trade strong{color:var(--fg2);font-weight:500;}
+@media(max-width:640px){.dec-grid{grid-template-columns:1fr;}}
+
+/* Tags */
+.tag{font-family:var(--mono);font-size:10px;letter-spacing:0.02em;padding:3px 8px;border-radius:var(--rf);}
+.tag--r{background:var(--red-bg);color:var(--red);}
+.tag--b{background:var(--blue-bg);color:var(--blue);}
+.tag--g{background:var(--green-bg);color:var(--green);}
+.tag--a{background:var(--amber-bg);color:var(--amber);}
+
+/* ── Slider ── */
+.slw{position:relative;border-radius:var(--rl);overflow:hidden;user-select:none;cursor:col-resize;background:var(--white);border:1px solid var(--brs);box-shadow:var(--sh);height:310px;transition:box-shadow var(--tn) var(--ease);}
+.slw:hover{box-shadow:var(--sh-h);}
+.slb,.sla{position:absolute;inset:0;}.sla{clip-path:inset(0 50% 0 0);}
+.sld{position:absolute;top:0;bottom:0;width:2px;background:var(--white);left:50%;transform:translateX(-50%);z-index:10;pointer-events:none;}
+.slh{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:30px;height:30px;background:var(--white);border-radius:var(--rf);box-shadow:0 2px 8px rgba(0,0,0,0.12),0 0 0 1px rgba(0,0,0,0.05);display:flex;align-items:center;justify-content:center;z-index:11;pointer-events:none;}
+.sll{position:absolute;bottom:var(--s3);font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;padding:3px 9px;border-radius:var(--rf);z-index:12;pointer-events:none;background:rgba(0,0,0,0.4);color:rgba(255,255,255,0.85);}
+.sll-b{left:var(--s3);}.sll-a{right:var(--s3);}
+
+/* ── Reflection ── */
+.ref{display:grid;grid-template-columns:1fr 1fr;gap:var(--s12);}
+.rh{display:flex;align-items:center;gap:var(--s2);margin-bottom:var(--s4);}
+.rt{font-size:15px;font-weight:500;color:var(--n950);}
+.rl{list-style:none;display:flex;flex-direction:column;gap:var(--s3);}
+.rl li{display:flex;align-items:flex-start;gap:var(--s3);font-size:13px;color:var(--fg2);line-height:19px;}
+.rdot{width:5px;height:5px;border-radius:50%;margin-top:7px;flex-shrink:0;}
+@media(max-width:768px){.ref{grid-template-columns:1fr;}}
+
+/* ── Zoom overlay ── */
+.vis-ov{position:fixed;inset:0;background:rgba(23,23,23,0.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 220ms var(--ease);}
+.vis-ov.is-open{opacity:1;pointer-events:all;}
+.vis-ov-card{width:min(80vw,1000px);background:var(--white);border-radius:var(--rl);box-shadow:0 0 0 1px rgba(23,23,23,0.05),0 24px 64px -8px rgba(23,23,23,0.25);overflow:hidden;transform:scale(0.94) translateY(8px);transition:transform 240ms var(--ease);}
+.vis-ov.is-open .vis-ov-card{transform:scale(1) translateY(0);}
+.vis-ov-svg{width:100%;display:block;background:var(--bg);}
+.vis-ov-ft{display:flex;align-items:center;justify-content:space-between;padding:var(--s3) var(--s5);border-top:1px solid var(--brs);background:var(--white);}
+.vis-ov-cap{font-family:var(--mono);font-size:10px;letter-spacing:0.04em;color:var(--fgm);}
+.vis-ov-x{width:28px;height:28px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;color:var(--fgm);transition:background var(--tf),color var(--tf);}
+.vis-ov-x:hover{background:var(--n100);color:var(--fg);}
+</style>
+</head>
+<body>
+
+<!-- ── Nav ── -->
+<div class="shell"><nav class="nav">
+  <a href="index.html" class="logo">R</a>
+  <a href="index.html" class="back"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M10 7H4M4 7L7 4M4 7L7 10"/></svg>Work</a>
+  <a href="mailto:chardrizard@gmail.com" class="mail"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
+</nav></div>
+
+<!-- ── Hero ── -->
+<div class="hero"><div class="shell"><div class="hero-inner">
+  <div class="kick"><span class="kick-dot"></span>Enterprise B2B · Insurance · 2021–2022</div>
+  <h1 class="h1">Aegon Intermediair Portaal<br><em>from legacy to role-based system</em></h1>
+  <div class="hero-rule"></div>
+  <p class="sub">Redesigned a multi-business-unit portal serving 22,000+ advisors. Role-based personalization, persistent workflow context, 90%+ design system adoption — inside a regulated insurance environment.</p>
+  <div class="meta">
+    <div class="mi"><span class="ml">Role</span><span class="mv">Lead Product Designer</span></div>
+    <div class="mi"><span class="ml">Users</span><span class="mv">22,000+ advisors</span></div>
+    <div class="mi"><span class="ml">Team</span><span class="mv">Scrum of 8 + 7 BUs</span></div>
+    <div class="mi"><span class="ml">Duration</span><span class="mv">12 months</span></div>
+  </div>
+</div></div></div>
+
+<div class="shell">
+
+  <!-- ── Outcomes ── -->
+  <section class="sec">
+    <div class="dl">Outcomes</div>
+    <div class="outcomes">
+      <div><div class="out-kicker">Page load</div><div class="out-num" style="color:var(--blue);">−46%</div><div class="out-label">Faster page load time after legacy architecture rebuild</div></div>
+      <div><div class="out-kicker">Navigation</div><div class="out-num" style="color:var(--green);">−30%</div><div class="out-label">Fewer page views needed — advisors found tasks without browsing</div></div>
+      <div><div class="out-kicker">Task engagement</div><div class="out-num" style="color:var(--amber);">+122%</div><div class="out-label">More time on core tasks after persistent search implementation</div></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       STORY ARC — Slot Component System
+       ══════════════════════════════════ -->
+  <section class="sec">
+    <div class="dl">Story arc</div>
+
+    <!-- ── 01 PROBLEM (full-width visual) ── -->
+    <div class="arc-sec arc-sec--p">
+      <div class="arc-vis">
+        <div class="arc-vis-inner" data-caption="Navigation interaction cost — AIP 2.0 audit">
+          <svg viewBox="0 0 1100 480" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="1100" height="480" fill="#fff5f5"/>
+            <rect x="40" y="30" width="1020" height="44" rx="6" fill="#2d5fa6" opacity="0.12"/>
+            <rect x="56" y="42" width="56" height="20" rx="3" fill="#2d5fa6" opacity="0.35"/>
+            <rect x="124" y="42" width="44" height="20" rx="3" fill="#2d5fa6" opacity="0.2"/>
+            <rect x="178" y="42" width="48" height="20" rx="3" fill="#2d5fa6" opacity="0.2"/>
+            <rect x="236" y="42" width="40" height="20" rx="3" fill="#2d5fa6" opacity="0.2"/>
+            <rect x="286" y="42" width="52" height="20" rx="3" fill="#2d5fa6" opacity="0.2"/>
+            <rect x="348" y="42" width="36" height="20" rx="3" fill="#2d5fa6" opacity="0.15"/>
+            <rect x="394" y="42" width="44" height="20" rx="3" fill="#2d5fa6" opacity="0.15"/>
+            <rect x="448" y="42" width="40" height="20" rx="3" fill="#2d5fa6" opacity="0.12"/>
+            <rect x="56" y="90" width="56" height="140" rx="6" fill="#fb3748" opacity="0.08" stroke="#fb3748" stroke-opacity="0.2" stroke-width="1.5"/>
+            <text x="84" y="166" font-family="Inter" font-size="14" fill="#fb3748" opacity="0.6" text-anchor="middle" font-weight="600">5%</text>
+            <rect x="124" y="90" width="44" height="140" rx="6" fill="#171717" opacity="0.025"/>
+            <rect x="178" y="90" width="48" height="140" rx="6" fill="#171717" opacity="0.025"/>
+            <rect x="236" y="90" width="40" height="140" rx="6" fill="#171717" opacity="0.025"/>
+            <rect x="286" y="90" width="52" height="140" rx="6" fill="#171717" opacity="0.025"/>
+            <rect x="348" y="90" width="36" height="140" rx="6" fill="#171717" opacity="0.025"/>
+            <line x1="84" y1="240" x2="84" y2="280" stroke="#fb3748" stroke-opacity="0.3" stroke-width="1" stroke-dasharray="4 3"/>
+            <text x="84" y="300" font-family="Inter" font-size="13" fill="#fb3748" opacity="0.5" text-anchor="middle" font-weight="500">85% of all clicks</text>
+            <text x="280" y="300" font-family="Inter" font-size="13" fill="#171717" opacity="0.2" text-anchor="middle">← 95% of links created noise →</text>
+            <rect x="40" y="340" width="250" height="100" rx="10" fill="white" stroke="#fb3748" stroke-opacity="0.1" stroke-width="1"/>
+            <text x="60" y="370" font-family="DM Mono" font-size="10" fill="#fb3748" opacity="0.6" letter-spacing="0.04em">SEARCH COST</text>
+            <text x="60" y="396" font-family="Inter" font-size="26" fill="#fb3748" font-weight="600" opacity="0.8">3 clicks</text>
+            <text x="60" y="418" font-family="Inter" font-size="12" fill="#a0a0a0">to find a new client mid-session</text>
+            <rect x="310" y="340" width="250" height="100" rx="10" fill="white" stroke="#fb3748" stroke-opacity="0.1" stroke-width="1"/>
+            <text x="330" y="370" font-family="DM Mono" font-size="10" fill="#fb3748" opacity="0.6" letter-spacing="0.04em">JOURNEY START</text>
+            <text x="330" y="396" font-family="Inter" font-size="26" fill="#fb3748" font-weight="600" opacity="0.8">80%+</text>
+            <text x="330" y="418" font-family="Inter" font-size="12" fill="#a0a0a0">started from Customer Search</text>
+            <rect x="580" y="340" width="250" height="100" rx="10" fill="white" stroke="#fb3748" stroke-opacity="0.1" stroke-width="1"/>
+            <text x="600" y="370" font-family="DM Mono" font-size="10" fill="#fb3748" opacity="0.6" letter-spacing="0.04em">DAILY VOLUME</text>
+            <text x="600" y="396" font-family="Inter" font-size="26" fill="#fb3748" font-weight="600" opacity="0.8">40+</text>
+            <text x="600" y="418" font-family="Inter" font-size="12" fill="#a0a0a0">clients handled per advisor daily</text>
+            <rect x="850" y="340" width="210" height="100" rx="10" fill="white" stroke="#fb3748" stroke-opacity="0.1" stroke-width="1"/>
+            <text x="870" y="370" font-family="DM Mono" font-size="10" fill="#fb3748" opacity="0.6" letter-spacing="0.04em">CONTEXT LOSS</text>
+            <text x="870" y="396" font-family="Inter" font-size="26" fill="#fb3748" font-weight="600" opacity="0.8">Every</text>
+            <text x="870" y="418" font-family="Inter" font-size="12" fill="#a0a0a0">navigation change reset state</text>
+          </svg>
+        </div>
+        <div class="arc-vis-cap">Navigation interaction cost — AIP 2.0 audit</div>
+      </div>
+
+      <div class="arc-narr">
+        <div class="arc-circle">01</div>
+        <div>
+          <div class="arc-lbl">Problem</div>
+          <div class="arc-ttl">A powerful portal trapped in legacy complexity</div>
+          <div class="arc-one">85% of interactions on 5% of links. 22,000+ advisors drowning in irrelevant navigation across seven business units — no role-based scoping, no persistent workflow context.</div>
+        </div>
+      </div>
+
+      <div class="arc-tw">
+        <div class="arc-tabs">
+          <button class="arc-tab active" onclick="aTab(this,'p-scope')">Scope</button>
+          <button class="arc-tab" onclick="aTab(this,'p-evidence')">Evidence</button>
+        </div>
+        <div class="arc-pan active" id="p-scope">
+          <div class="scope-inline">
+            <div class="scope-inline-item"><span class="sk">Users</span><span class="sv">22,000+</span></div><div class="scope-sep"></div>
+            <div class="scope-inline-item"><span class="sk">BUs</span><span class="sv">7</span></div><div class="scope-sep"></div>
+            <div class="scope-inline-item"><span class="sk">Company</span><span class="sv">Aegon ($22.5B)</span></div><div class="scope-sep"></div>
+            <div class="scope-inline-item"><span class="sk">Industry</span><span class="sv">Insurance</span></div>
+          </div>
+          <div class="scope-constraints" style="margin-top:12px;">
+            <span class="tag tag--a">Regulated industry</span>
+            <span class="tag tag--a">7 BU alignment required</span>
+            <span class="tag tag--a">Legacy architecture</span>
+            <span class="tag tag--a">WFT compliance</span>
+            <span class="tag tag--a">12-month deadline</span>
+          </div>
+        </div>
+        <div class="arc-pan" id="p-evidence">
+          <div class="ev-data" style="margin-bottom:14px;">
+            <div class="ev-pt"><div class="ev-pt-v" style="color:var(--red);">85%</div><div class="ev-pt-l">of interactions on 5% of nav links</div><div class="ev-pt-s">GA360 — Q3 2021</div></div>
+            <div class="ev-pt"><div class="ev-pt-v" style="color:var(--red);">3</div><div class="ev-pt-l">clicks to search for a new client</div><div class="ev-pt-s">Hotjar recordings</div></div>
+            <div class="ev-pt"><div class="ev-pt-v" style="color:var(--red);">40+</div><div class="ev-pt-l">clients per advisor daily</div><div class="ev-pt-s">Advisor interviews</div></div>
+          </div>
+          <div class="quote">
+            <div class="quote-text">"80%+ of customer journeys started from Customer Search — advisors handled 40+ clients daily, making search the critical entry point."</div>
+            <div class="quote-src">GA360 + Hotjar analysis — AIP 2.0, Q3 2021</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 02 INSIGHT (compact sidebar) ── -->
+    <div class="arc-sec arc-sec--i arc-sec--compact">
+      <div class="arc-compact-text">
+        <div class="arc-narr" style="margin-bottom:var(--s3);">
+          <div class="arc-circle">02</div>
+          <div>
+            <div class="arc-lbl">Insight</div>
+            <div class="arc-ttl">The problem wasn't missing features — it was absent role scoping</div>
+            <div class="arc-one">The portal treated all advisors identically. A single interface showed everything regardless of WFT licensing, active business units, or task context. The interface wasn't too simple — it was relentlessly complete.</div>
+          </div>
+        </div>
+        <div class="arc-tw">
+          <div class="arc-tabs">
+            <button class="arc-tab active" onclick="aTab(this,'i-methods')">Methods</button>
+            <button class="arc-tab" onclick="aTab(this,'i-research')">Research</button>
+          </div>
+          <div class="arc-pan active" id="i-methods">
+            <div class="scope-methods">
+              <span class="scope-method"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 12l4-8 3 4 2-2 3 6"/></svg>GA360 analytics</span>
+              <span class="scope-method"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3"/><path d="M8 2v2M8 12v2M2 8h2M12 8h2"/></svg>Hotjar recordings</span>
+              <span class="scope-method"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="5" r="3"/><path d="M2 14c0-3 2.5-5 6-5s6 2 6 5"/></svg>Advisor near-interviews</span>
+              <span class="scope-method"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M6 2v12M2 6h12"/></svg>Bi-weekly stakeholder sessions</span>
+              <span class="scope-method"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 8h12M5 4l-3 4 3 4M11 4l3 4-3 4"/></svg>Cross-platform journey mapping</span>
+            </div>
+          </div>
+          <div class="arc-pan" id="i-research">
+            <div class="ev-horiz">
+              <div class="quote">
+                <div class="quote-text">"85% of navigation was irrelevant to any given session. The interface wasn't too simple — it was relentlessly complete."</div>
+                <div class="quote-src">Research synthesis — Q4 2021</div>
+              </div>
+              <div class="ev-col">
+                <div class="ev-pt"><div class="ev-pt-v" style="color:var(--blue);">3</div><div class="ev-pt-l">distinct advisor personas identified</div><div class="ev-pt-s">UX Research — Q4 2021</div></div>
+                <div class="ev-pt"><div class="ev-pt-v" style="color:var(--blue);">7</div><div class="ev-pt-l">BUs with competing priorities</div><div class="ev-pt-s">Stakeholder sessions</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="arc-compact-vis">
+        <div class="arc-vis-inner" data-caption="Three personas, one undifferentiated portal">
+          <svg viewBox="0 0 220 165" width="220" height="165" xmlns="http://www.w3.org/2000/svg">
+            <rect width="220" height="165" fill="#f0f4ff" rx="12"/>
+            <rect x="14" y="14" width="28" height="28" rx="14" fill="#335cff" opacity="0.15"/>
+            <text x="28" y="32" font-family="Inter" font-size="11" fill="#335cff" opacity="0.7" text-anchor="middle" font-weight="600">J</text>
+            <text x="48" y="24" font-family="DM Mono" font-size="7" fill="#335cff" opacity="0.5" letter-spacing="0.04em">MULTI-BU ADVISOR</text>
+            <text x="48" y="35" font-family="Inter" font-size="8" fill="#171717" opacity="0.5">Hypotheek · Leven · Pensioen</text>
+            <rect x="14" y="56" width="28" height="28" rx="14" fill="#335cff" opacity="0.10"/>
+            <text x="28" y="74" font-family="Inter" font-size="11" fill="#335cff" opacity="0.6" text-anchor="middle" font-weight="600">M</text>
+            <text x="48" y="66" font-family="DM Mono" font-size="7" fill="#335cff" opacity="0.5" letter-spacing="0.04em">SINGLE-BU SPECIALIST</text>
+            <text x="48" y="77" font-family="Inter" font-size="8" fill="#171717" opacity="0.5">Focused · noise-free interface</text>
+            <rect x="14" y="98" width="28" height="28" rx="14" fill="#335cff" opacity="0.07"/>
+            <text x="28" y="116" font-family="Inter" font-size="11" fill="#335cff" opacity="0.5" text-anchor="middle" font-weight="600">T</text>
+            <text x="48" y="108" font-family="DM Mono" font-size="7" fill="#335cff" opacity="0.5" letter-spacing="0.04em">CONTENT MANAGER</text>
+            <text x="48" y="119" font-family="Inter" font-size="8" fill="#171717" opacity="0.5">Cross-platform consistency</text>
+            <line x1="14" y1="140" x2="206" y2="140" stroke="#335cff" stroke-opacity="0.08" stroke-width="1"/>
+            <text x="110" y="154" font-family="Inter" font-size="9" fill="#335cff" opacity="0.45" text-anchor="middle">One portal · three realities</text>
+          </svg>
+        </div>
+        <div class="arc-vis-cap">Three personas, one undifferentiated portal</div>
+      </div>
+    </div>
+
+    <!-- ── 03 ACTION (full-width visual) ── -->
+    <div class="arc-sec arc-sec--a">
+      <div class="arc-vis">
+        <div class="arc-vis-inner" data-caption="AIP 3.0 — three-layer architecture">
+          <svg viewBox="0 0 1100 480" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="1100" height="480" fill="#f0fdf5"/>
+            <text x="40" y="40" font-family="DM Mono" font-size="11" fill="#1fc16b" opacity="0.6" letter-spacing="0.06em">01 — PERSISTENT SEARCH</text>
+            <rect x="40" y="54" width="1020" height="48" rx="8" fill="#1fc16b" opacity="0.08" stroke="#1fc16b" stroke-opacity="0.15" stroke-width="1.5"/>
+            <rect x="56" y="66" width="24" height="24" rx="6" fill="#1fc16b" opacity="0.15"/>
+            <rect x="92" y="70" width="400" height="16" rx="8" fill="white" stroke="#1fc16b" stroke-opacity="0.15" stroke-width="1"/>
+            <rect x="104" y="75" width="10" height="6" rx="3" fill="#1fc16b" opacity="0.3"/>
+            <rect x="120" y="76" width="120" height="4" rx="2" fill="#a0a0a0" opacity="0.25"/>
+            <text x="520" y="82" font-family="Inter" font-size="11" fill="#1fc16b" opacity="0.5">Always accessible — no context loss</text>
+            <text x="40" y="134" font-family="DM Mono" font-size="11" fill="#1fc16b" opacity="0.6" letter-spacing="0.06em">02 — WFT-SCOPED NAVIGATION</text>
+            <rect x="40" y="148" width="160" height="32" rx="8" fill="#1fc16b" opacity="0.15"/>
+            <text x="120" y="169" font-family="Inter" font-size="12" fill="#1fc16b" opacity="0.7" text-anchor="middle" font-weight="500">Hypotheek</text>
+            <rect x="210" y="148" width="160" height="32" rx="8" fill="#1fc16b" opacity="0.15"/>
+            <text x="290" y="169" font-family="Inter" font-size="12" fill="#1fc16b" opacity="0.7" text-anchor="middle" font-weight="500">Pensioen</text>
+            <rect x="380" y="148" width="160" height="32" rx="8" fill="#171717" opacity="0.03"/>
+            <text x="460" y="169" font-family="Inter" font-size="12" fill="#171717" opacity="0.15" text-anchor="middle">Leven</text>
+            <rect x="550" y="148" width="120" height="32" rx="8" fill="#171717" opacity="0.03"/>
+            <text x="610" y="169" font-family="Inter" font-size="12" fill="#171717" opacity="0.15" text-anchor="middle">Inkomen</text>
+            <text x="840" y="169" font-family="Inter" font-size="11" fill="#1fc16b" opacity="0.5">← Only active WFT rights shown</text>
+            <text x="40" y="220" font-family="DM Mono" font-size="11" fill="#1fc16b" opacity="0.6" letter-spacing="0.06em">03 — VALUE STREAM DASHBOARD</text>
+            <rect x="40" y="234" width="340" height="210" rx="12" fill="white" stroke="#1fc16b" stroke-opacity="0.08" stroke-width="1"/>
+            <rect x="60" y="254" width="100" height="8" rx="3" fill="#1fc16b" opacity="0.2"/>
+            <rect x="60" y="274" width="280" height="1" fill="#171717" opacity="0.04"/>
+            <rect x="60" y="290" width="200" height="6" rx="2" fill="#171717" opacity="0.08"/>
+            <rect x="60" y="304" width="160" height="5" rx="2" fill="#171717" opacity="0.05"/>
+            <rect x="280" y="286" width="60" height="20" rx="6" fill="#1fc16b" opacity="0.12"/>
+            <rect x="60" y="324" width="200" height="6" rx="2" fill="#171717" opacity="0.08"/>
+            <rect x="60" y="338" width="180" height="5" rx="2" fill="#171717" opacity="0.05"/>
+            <rect x="280" y="320" width="60" height="20" rx="6" fill="#171717" opacity="0.04"/>
+            <rect x="400" y="234" width="300" height="210" rx="12" fill="white" stroke="#1fc16b" stroke-opacity="0.08" stroke-width="1"/>
+            <rect x="420" y="254" width="80" height="8" rx="3" fill="#1fc16b" opacity="0.15"/>
+            <rect x="420" y="274" width="260" height="1" fill="#171717" opacity="0.04"/>
+            <rect x="420" y="290" width="180" height="6" rx="2" fill="#171717" opacity="0.06"/>
+            <rect x="420" y="304" width="140" height="5" rx="2" fill="#171717" opacity="0.04"/>
+            <rect x="720" y="234" width="340" height="210" rx="12" fill="white" stroke="#1fc16b" stroke-opacity="0.08" stroke-width="1"/>
+            <rect x="740" y="254" width="100" height="8" rx="3" fill="#1fc16b" opacity="0.15"/>
+            <rect x="740" y="274" width="300" height="1" fill="#171717" opacity="0.04"/>
+            <rect x="740" y="290" width="120" height="50" rx="6" fill="#1fc16b" opacity="0.06"/>
+            <text x="800" y="312" font-family="Inter" font-size="20" fill="#1fc16b" opacity="0.5" text-anchor="middle" font-weight="600">−30%</text>
+            <text x="800" y="330" font-family="Inter" font-size="10" fill="#a0a0a0" text-anchor="middle">page views</text>
+            <rect x="880" y="290" width="120" height="50" rx="6" fill="#1fc16b" opacity="0.06"/>
+            <text x="940" y="312" font-family="Inter" font-size="20" fill="#1fc16b" opacity="0.5" text-anchor="middle" font-weight="600">+122%</text>
+            <text x="940" y="330" font-family="Inter" font-size="10" fill="#a0a0a0" text-anchor="middle">time on task</text>
+            <text x="550" y="470" font-family="Inter" font-size="13" fill="#1fc16b" opacity="0.5" text-anchor="middle" font-weight="500">Three layers · one persistent experience · 90%+ design system reuse</text>
+          </svg>
+        </div>
+        <div class="arc-vis-cap">AIP 3.0 — three-layer architecture: persistent search, WFT-scoped navigation, Value Stream Dashboard</div>
+      </div>
+
+      <div class="arc-narr">
+        <div class="arc-circle">03</div>
+        <div>
+          <div class="arc-lbl">Action</div>
+          <div class="arc-ttl">Three principles: role-based disclosure, persistent context, system-first design</div>
+          <div class="arc-one">Proposed a fundamental restructuring — not a cosmetic refresh. WFT-scoped navigation eliminated 95% of irrelevant noise. Persistent search addressed the #1 pain point. 90%+ DS adoption compressed the timeline from 18+ to 12 months.</div>
+        </div>
+      </div>
+
+      <div class="arc-tw">
+        <div class="arc-tabs">
+          <button class="arc-tab active" onclick="aTab(this,'a-decisions')">Key decisions</button>
+          <button class="arc-tab" onclick="aTab(this,'a-killed')">What we killed</button>
+        </div>
+        <div class="arc-pan active" id="a-decisions">
+          <div class="dec-grid">
+            <div class="dec-card dec-card--g"><div class="dec-status"><span class="dec-dot"></span>Shipped</div><div class="dec-ttl">Persistent customer search bar</div><div class="dec-desc">Always visible at top of every view. No context loss when switching clients.</div><div class="dec-trade"><strong>Tradeoff:</strong> 48px vertical cost on every screen — justified by 80%+ workflow starting from search.</div></div>
+            <div class="dec-card dec-card--g"><div class="dec-status"><span class="dec-dot"></span>Shipped</div><div class="dec-ttl">WFT-rights-based navigation</div><div class="dec-desc">Only active BUs visible per advisor's financial services license.</div><div class="dec-trade"><strong>Tradeoff:</strong> +3 weeks for backend WFT integration — eliminated 95% of nav noise.</div></div>
+            <div class="dec-card dec-card--g"><div class="dec-status"><span class="dec-dot"></span>Shipped</div><div class="dec-ttl">Value Stream Dashboard</div><div class="dec-desc">Personalized landing: active portfolio, pending actions, BU metrics.</div><div class="dec-trade"><strong>Tradeoff:</strong> Killed generic landing page — reduced page views by 30%.</div></div>
+            <div class="dec-card dec-card--g"><div class="dec-status"><span class="dec-dot"></span>Shipped</div><div class="dec-ttl">90%+ design system adoption</div><div class="dec-desc">Built on existing DS. New patterns contributed back for other teams.</div><div class="dec-trade"><strong>Tradeoff:</strong> Constrained visual exploration — gained 6 months on timeline.</div></div>
+          </div>
+        </div>
+        <div class="arc-pan" id="a-killed">
+          <div class="dec-grid">
+            <div class="dec-card dec-card--r"><div class="dec-status"><span class="dec-dot"></span>Eliminated by user testing</div><div class="dec-ttl">Full-page search bar</div><div class="dec-desc">Internally popular — looked clean and modern.</div><div class="dec-trade"><strong>Why killed:</strong> Destroyed navigation context. Advisors lost all contextual nav when searching.</div></div>
+            <div class="dec-card dec-card--r"><div class="dec-status"><span class="dec-dot"></span>Validated out — moved to public site</div><div class="dec-ttl">Content pages within AIP</div><div class="dec-desc">Stakeholders assumed heavy advisor reliance on content pages.</div><div class="dec-trade"><strong>Why killed:</strong> Cross-platform testing showed they rarely needed them. Moved to Aegon.nl.</div></div>
+          </div>
+          <div class="quote" style="margin-top:14px;">
+            <div class="quote-text">"Killing darlings early: two promising concepts were validated out before any engineering investment — exactly as designed."</div>
+            <div class="quote-src">Design strategy — exploration & validation phase, Q1 2022</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ── Slider ── -->
+  <section class="sec">
+    <div class="dl">Artifact — AIP 2.0 vs AIP 3.0</div>
+    <div class="slw" id="sl">
+      <div class="slb" style="background:#f0f0ee;"><svg viewBox="0 0 1100 310" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><rect width="1100" height="310" fill="#f0f0ee"/><rect width="1100" height="48" fill="#2d5fa6"/><rect x="14" y="12" width="58" height="24" rx="2" fill="white" opacity="0.18"/><rect x="88" y="17" width="48" height="14" rx="2" fill="white" opacity="0.25"/><rect x="142" y="17" width="56" height="14" rx="2" fill="white" opacity="0.22"/><rect x="204" y="17" width="48" height="14" rx="2" fill="white" opacity="0.22"/><rect x="258" y="17" width="44" height="14" rx="2" fill="white" opacity="0.20"/><rect x="308" y="17" width="52" height="14" rx="2" fill="white" opacity="0.20"/><rect x="366" y="17" width="40" height="14" rx="2" fill="white" opacity="0.18"/><rect x="412" y="17" width="44" height="14" rx="2" fill="white" opacity="0.18"/><rect x="462" y="17" width="48" height="14" rx="2" fill="white" opacity="0.15"/><rect x="88" y="48" width="220" height="130" rx="2" fill="white" stroke="#ccc" stroke-width="1"/><rect x="98" y="60" width="80" height="8" rx="1" fill="#2d5fa6" opacity="0.2"/><rect x="98" y="74" width="130" height="6" rx="1" fill="#171717" opacity="0.08"/><rect x="98" y="84" width="110" height="6" rx="1" fill="#171717" opacity="0.07"/><rect x="98" y="94" width="120" height="6" rx="1" fill="#171717" opacity="0.06"/><rect x="14" y="190" width="320" height="90" rx="3" fill="white" stroke="#ddd" stroke-width="1"/><rect x="24" y="202" width="60" height="6" rx="1" fill="#2d5fa6" opacity="0.2"/><rect x="24" y="214" width="280" height="5" rx="1" fill="#171717" opacity="0.07"/><rect x="24" y="250" width="120" height="18" rx="2" fill="#e8a020" opacity="0.7"/><rect x="350" y="190" width="320" height="90" rx="3" fill="white" stroke="#ddd" stroke-width="1"/><rect x="360" y="202" width="60" height="6" rx="1" fill="#2d5fa6" opacity="0.2"/><rect x="360" y="214" width="280" height="5" rx="1" fill="#171717" opacity="0.07"/><rect x="360" y="250" width="120" height="18" rx="2" fill="#e8a020" opacity="0.7"/><text x="550" y="298" font-family="Inter" font-size="11" fill="#a0a0a0" text-anchor="middle">All 7 BUs always visible · No role-based scoping · 3-click search cost</text></svg></div>
+      <div class="sla" id="sla"><svg viewBox="0 0 1100 310" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><rect width="1100" height="310" fill="#f5f5f5"/><rect width="1100" height="50" fill="#f5f5f5" stroke="#e8e8ea" stroke-width="1"/><rect x="14" y="13" width="30" height="22" rx="6" fill="#171717"/><rect x="60" y="14" width="380" height="22" rx="6" fill="white" stroke="#e0e0e2" stroke-width="1"/><rect x="70" y="20" width="10" height="10" rx="5" fill="#a0a0a0" opacity="0.5"/><rect x="86" y="22" width="110" height="6" rx="3" fill="#a0a0a0" opacity="0.25"/><rect x="460" y="17" width="60" height="14" rx="7" fill="#171717" opacity="0.06"/><rect x="526" y="17" width="64" height="14" rx="7" fill="#171717" opacity="0.05"/><rect x="596" y="17" width="56" height="14" rx="7" fill="#171717" opacity="0.04"/><rect x="14" y="70" width="120" height="76" rx="10" fill="white" stroke="#171717" stroke-opacity="0.05" stroke-width="1"/><rect x="26" y="82" width="22" height="22" rx="6" fill="#335cff" opacity="0.1"/><rect x="26" y="110" width="68" height="6" rx="3" fill="#171717" opacity="0.12"/><rect x="26" y="120" width="50" height="5" rx="2" fill="#171717" opacity="0.06"/><rect x="144" y="70" width="120" height="76" rx="10" fill="white" stroke="#171717" stroke-opacity="0.05" stroke-width="1"/><rect x="156" y="82" width="22" height="22" rx="6" fill="#1fc16b" opacity="0.1"/><rect x="156" y="110" width="68" height="6" rx="3" fill="#171717" opacity="0.12"/><rect x="156" y="120" width="50" height="5" rx="2" fill="#171717" opacity="0.06"/><rect x="274" y="70" width="120" height="76" rx="10" fill="white" stroke="#171717" stroke-opacity="0.05" stroke-width="1"/><rect x="286" y="82" width="22" height="22" rx="6" fill="#f59e0b" opacity="0.1"/><rect x="286" y="110" width="68" height="6" rx="3" fill="#171717" opacity="0.12"/><rect x="286" y="120" width="50" height="5" rx="2" fill="#171717" opacity="0.06"/><rect x="404" y="70" width="120" height="76" rx="10" fill="white" stroke="#171717" stroke-opacity="0.05" stroke-width="1"/><rect x="416" y="82" width="22" height="22" rx="6" fill="#fb3748" opacity="0.08"/><rect x="416" y="110" width="68" height="6" rx="3" fill="#171717" opacity="0.12"/><rect x="416" y="120" width="50" height="5" rx="2" fill="#171717" opacity="0.06"/><rect x="560" y="66" width="526" height="210" rx="12" fill="white" stroke="#171717" stroke-opacity="0.04" stroke-width="1"/><rect x="576" y="82" width="100" height="6" rx="3" fill="#171717" opacity="0.12"/><rect x="576" y="100" width="494" height="1" fill="#171717" opacity="0.04"/><rect x="576" y="112" width="200" height="6" rx="3" fill="#171717" opacity="0.08"/><rect x="576" y="124" width="160" height="5" rx="2" fill="#171717" opacity="0.05"/><rect x="960" y="108" width="52" height="18" rx="6" fill="#335cff" opacity="0.15"/><rect x="576" y="142" width="200" height="6" rx="3" fill="#171717" opacity="0.08"/><rect x="576" y="154" width="180" height="5" rx="2" fill="#171717" opacity="0.05"/><rect x="14" y="158" width="260" height="118" rx="10" fill="white" stroke="#171717" stroke-opacity="0.05" stroke-width="1"/><rect x="26" y="170" width="90" height="6" rx="3" fill="#171717" opacity="0.12"/><rect x="26" y="186" width="220" height="5" rx="2" fill="#171717" opacity="0.06"/><rect x="26" y="244" width="78" height="20" rx="6" fill="#171717" opacity="0.07"/><rect x="282" y="158" width="260" height="118" rx="10" fill="white" stroke="#171717" stroke-opacity="0.05" stroke-width="1"/><rect x="294" y="170" width="90" height="6" rx="3" fill="#171717" opacity="0.12"/><rect x="294" y="186" width="220" height="5" rx="2" fill="#171717" opacity="0.06"/><rect x="294" y="244" width="78" height="20" rx="6" fill="#335cff" opacity="0.12"/><text x="550" y="298" font-family="Inter" font-size="11" fill="#a0a0a0" text-anchor="middle">Persistent search · WFT-scoped nav · Value Stream Dashboard · 90%+ DS reuse</text></svg></div>
+      <span class="sll sll-b">AIP 2.0</span><span class="sll sll-a">AIP 3.0</span>
+      <div class="sld" id="sld"></div>
+      <div class="slh" id="slh"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 4l-3 4 3 4M11 4l3 4-3 4"/></svg></div>
+    </div>
+  </section>
+
+  <!-- ── Reflection ── -->
+  <section class="sec">
+    <div class="dl">Reflection</div>
+    <div class="ref">
+      <div>
+        <div class="rh"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="var(--green)" stroke-width="1.5" stroke-linecap="round"><path d="M3 8l3 3 7-7"/></svg><span class="rt" style="margin-left:6px;">What worked</span></div>
+        <ul class="rl">
+          <li><span class="rdot" style="background:var(--green);"></span>Killing darlings early — eliminating the full-page search bar before any engineering spend validated the rapid prototyping approach.</li>
+          <li><span class="rdot" style="background:var(--green);"></span>Framing design decisions in business language: load time became "user retention impact," personalization became "advisor efficiency metrics."</li>
+          <li><span class="rdot" style="background:var(--green);"></span>90%+ DS adoption baked into architecture from day one — previous estimate without DS reuse was 18+ months. We shipped in 12.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="rh"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="var(--amber)" stroke-width="1.5" stroke-linecap="round"><path d="M8 3v5M8 11v1"/></svg><span class="rt" style="margin-left:6px;">What I'd do differently</span></div>
+        <ul class="rl">
+          <li><span class="rdot" style="background:var(--amber);"></span>Involve content managers in co-design from Phase 1 — content migration became a mid-project bottleneck that an earlier audit would have prevented.</li>
+          <li><span class="rdot" style="background:var(--amber);"></span>Establish shared terminology with engineers upfront — documentation investment would have compressed the development cycle further.</li>
+          <li><span class="rdot" style="background:var(--amber);"></span>Structured 30/60/90 day post-launch check-ins to catch advisor workflow drift before it compounds into backlog debt.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Next case study -->
+  <div style="margin-top:var(--s16);">
+    <div class="dl">Next case study</div>
+    <a href="case-study-adoption.html" style="display:flex;align-items:center;justify-content:space-between;padding:var(--s6);border:1px solid var(--brs);border-radius:var(--rl);box-shadow:var(--sh);background:var(--white);transition:box-shadow var(--tn) var(--ease);text-decoration:none;color:inherit;" onmouseover="this.style.boxShadow='0 0 0 1px rgba(23,23,23,0.06),0 4px 8px rgba(23,23,23,0.05),0 16px 32px -4px rgba(23,23,23,0.1)'" onmouseout="this.style.boxShadow='0 0 0 1px rgba(23,23,23,0.04),0 1px 2px rgba(23,23,23,0.03),0 4px 8px -2px rgba(23,23,23,0.03)'">
+      <div>
+        <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);margin-bottom:var(--s1);">Design Systems · 2022–2023</div>
+        <div style="font-size:24px;font-weight:500;letter-spacing:-0.12px;line-height:32px;color:var(--n950);">Aeon Design System</div>
+      </div>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="color:var(--fgm);flex-shrink:0;"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+
+</div>
+
+<footer class="shell ft">
+  <span class="ftc">© 2026 — Richard</span>
+  <a href="mailto:chardrizard@gmail.com" class="ftl">Let's chat →</a>
+</footer>
+
+<script>
+function aTab(btn,id){const w=btn.closest('.arc-tw');w.querySelectorAll('.arc-tab').forEach(t=>t.classList.remove('active'));w.querySelectorAll('.arc-pan').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById(id).classList.add('active');}
+(function(){const w=document.getElementById('sl'),a=document.getElementById('sla'),d=document.getElementById('sld'),h=document.getElementById('slh');let dr=false;const set=p=>{p=Math.max(4,Math.min(96,p));a.style.clipPath=`inset(0 ${(100-p).toFixed(1)}% 0 0)`;d.style.left=h.style.left=`${p}%`;};set(50);const gx=e=>e.touches?e.touches[0].clientX:e.clientX;const mv=e=>{if(!dr)return;e.preventDefault();const r=w.getBoundingClientRect();set(((gx(e)-r.left)/r.width)*100);};w.addEventListener('mousedown',e=>{dr=true;mv(e);});w.addEventListener('touchstart',e=>{dr=true;mv(e);},{passive:false});document.addEventListener('mousemove',mv);document.addEventListener('touchmove',mv,{passive:false});document.addEventListener('mouseup',()=>dr=false);document.addEventListener('touchend',()=>dr=false);})();
+(function(){const ov=document.createElement('div');ov.className='vis-ov';ov.innerHTML=`<div class="vis-ov-card"><div id="vc"></div><div class="vis-ov-ft"><span class="vis-ov-cap" id="vcp"></span><button class="vis-ov-x" id="vx"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 3l10 10M13 3L3 13"/></svg></button></div></div>`;document.body.appendChild(ov);const vc=document.getElementById('vc'),vcp=document.getElementById('vcp'),vx=document.getElementById('vx');function open(el){const svg=el.querySelector('svg');if(!svg)return;const c=svg.cloneNode(true);c.removeAttribute('width');c.removeAttribute('height');c.classList.add('vis-ov-svg');vc.innerHTML='';vc.appendChild(c);vcp.textContent=el.getAttribute('data-caption')||'';ov.classList.add('is-open');document.body.style.overflow='hidden';}function close(){ov.classList.remove('is-open');document.body.style.overflow='';}document.querySelectorAll('.arc-vis-inner').forEach(el=>{el.setAttribute('role','button');el.setAttribute('tabindex','0');el.addEventListener('click',()=>open(el));el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')open(el);});});vx.addEventListener('click',close);ov.addEventListener('click',e=>{if(e.target===ov)close();});document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});})();
+</script>
+</body>
+</html>

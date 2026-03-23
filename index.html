@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Richard — Senior UX Designer</title>
+<meta name="description" content="Senior UX Designer specializing in design systems, complex B2B workflows, and measurable outcomes.">
+<meta name="theme-color" content="#171717">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23171717'/><text x='16' y='22' text-anchor='middle' font-size='18' fill='white' font-family='system-ui' font-weight='600'>R</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   DESIGN TOKENS — AlignUI
+   ═══════════════════════════════════════════ */
+:root {
+  /* ── Neutrals ── */
+  --neutral-950: #0e1218;
+  --neutral-900: #171717;
+  --neutral-800: #1e1e1e;
+  --neutral-700: #2e2e2e;
+  --neutral-600: #525252;
+  --neutral-500: #6e6e6e;
+  --neutral-400: #a0a0a0;
+  --neutral-300: #d4d4d4;
+  --neutral-200: #e5e5e5;
+  --neutral-100: #f5f5f5;
+  --neutral-50: #fafafa;
+  --white: #ffffff;
+  --black: #171717;
+
+  /* ── Brand & semantic colors ── */
+  --primary-500: #335cff;
+  --primary-400: #6690ff;
+  --primary-100: #eef2ff;
+  --primary-50:  #f5f7ff;   /* added */
+  --error-500:   #fb3748;
+  --error-100:   #fef2f2;   /* added */
+  --success-500: #1fc16b;
+  --success-100: #f0fdf4;   /* added */
+  --warning-500: #f59e0b;
+  --warning-100: #fffbeb;   /* added */
+  --violet-500:  #8b5cf6;
+
+  /* ── Semantic bg / fg / border ── */
+  --bg-base: var(--neutral-100);
+  --bg-card: var(--white);
+  --fg-primary: var(--neutral-900);
+  --fg-secondary: var(--neutral-600);
+  --fg-muted: var(--neutral-400);
+  --fg-on-dark: var(--white);                        /* added */
+  --fg-on-dark-secondary: rgba(255,255,255,0.64);    /* added */
+  --fg-on-dark-muted: rgba(255,255,255,0.4);         /* added */
+  --border-default: rgba(23,23,23,0.08);
+  --border-subtle: rgba(23,23,23,0.05);
+  --border-strong: rgba(23,23,23,0.14);
+
+  /* ── Typography ── */
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --font-mono: 'DM Mono', monospace;
+
+  --h5-size: 24px; --h5-lh: 32px; --h5-ls: -0.12px; --h5-weight: 500;
+  --h6-size: 20px; --h6-lh: 28px; --h6-ls: -0.12px;
+
+  --label-md: 16px; --label-md-lh: 24px; --label-md-ls: -0.176px;
+  --label-sm: 14px; --label-sm-lh: 20px; --label-sm-ls: -0.084px;
+  --label-xs: 12px; --label-xs-lh: 16px; --label-xs-ls: 0px;
+
+  --para-md: 16px; --para-md-lh: 24px; --para-md-ls: -0.176px;
+  --para-sm: 14px; --para-sm-lh: 20px; --para-sm-ls: -0.084px;
+  --para-xs: 12px; --para-xs-lh: 16px;
+  --sub-xs-ls: 0.48px;
+
+  /* ── Shadows — canonical names from component registry ── */
+  --shadow-xs:       0 1px 2px rgba(10,13,20,0.03);                                                                                                                          /* added */
+  --shadow-card-sm:  0 1px 3px -1.5px rgba(51,51,51,0.16), 0 5px 5px -2.5px rgba(51,51,51,0.08), 0 0 0 1px rgba(51,51,51,0.04);                                             /* added */
+  --shadow-card-lg:  inset 0 -1px 1px -0.5px rgba(23,23,23,0.06), 0 0 0 1px rgba(23,23,23,0.08), 0 3px 3px -1.5px rgba(23,23,23,0.04), 0 6px 6px -3px rgba(23,23,23,0.04), 0 10px 10px -5px rgba(23,23,23,0.04), 0 20px 20px -10px rgba(23,23,23,0.04); /* added */
+  --shadow-dropdown: 0 4px 12px rgba(23,23,23,0.08), 0 16px 40px rgba(23,23,23,0.12), 0 0 0 1px rgba(23,23,23,0.06);
+  /* Aliases — keep old names so existing index styles don't break */
+  --shadow-card:       var(--shadow-card-sm);
+  --shadow-card-hover: var(--shadow-card-lg);
+
+  /* ── Spacing ── */
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px;
+  --space-12: 48px; --space-16: 64px; --space-20: 80px; --space-24: 96px; /* added */
+
+  /* ── Radii ── */
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+  --radius-xl: 20px; --radius-full: 9999px;
+
+  /* ── Motion ── */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 500ms;
+
+  --gap: 16px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-family: var(--font-sans); color: var(--fg-primary); background: var(--bg-base); -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+body { overflow-x: hidden; min-height: 100vh; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+/* ═══════════════════════════════════════════
+   SHELL — 10/12 grid centering
+   ═══════════════════════════════════════════ */
+.shell {
+  width: 83.333%; /* 10/12 */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════════
+   NAV
+   ═══════════════════════════════════════════ */
+.nav {
+  position: sticky; top: 0; z-index: 200;
+  padding: var(--space-3) 0;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--border-subtle);
+  background: rgba(245,245,245,0.88);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+}
+
+.nav__logo {
+  width: 34px; height: 34px; background: var(--neutral-900); border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white); font-size: 15px; font-weight: 600;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+.nav__logo:hover { transform: scale(1.05); }
+
+/* ─── Dropdown trigger ─── */
+.nav__select {
+  position: relative;
+}
+
+.nav__trigger {
+  display: flex; align-items: center; gap: var(--space-2);
+  padding: 5px 10px 5px 12px;
+  border: 1px solid var(--border-default); border-radius: var(--radius-full);
+  font-size: var(--label-sm); font-weight: 500; letter-spacing: var(--label-sm-ls);
+  color: var(--fg-secondary); background: var(--bg-card);
+  transition: all var(--duration-fast) var(--ease-out);
+  cursor: pointer;
+  user-select: none;
+}
+.nav__trigger:hover, .nav__trigger[aria-expanded="true"] {
+  border-color: var(--border-strong); color: var(--fg-primary);
+}
+
+.nav__trigger-icon {
+  width: 14px; height: 14px; opacity: 0.4;
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+.nav__trigger[aria-expanded="true"] .nav__trigger-icon {
+  transform: rotate(180deg);
+}
+
+.nav__trigger-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--success-500);
+  flex-shrink: 0;
+}
+
+/* ─── Dropdown panel ─── */
+.nav__dropdown {
+  position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+  width: 280px; background: var(--bg-card); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-dropdown); padding: var(--space-2);
+  opacity: 0; visibility: hidden;
+  transform: translateX(-50%) translateY(-6px) scale(0.97);
+  transition: all var(--duration-normal) var(--ease-out);
+  z-index: 300;
+}
+.nav__dropdown.open {
+  opacity: 1; visibility: visible;
+  transform: translateX(-50%) translateY(0) scale(1);
+}
+
+.nav__dropdown-label {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: var(--sub-xs-ls);
+  text-transform: uppercase; color: var(--fg-muted);
+  padding: var(--space-2) var(--space-3) var(--space-1);
+}
+
+.nav__dropdown-item {
+  display: flex; align-items: center; gap: var(--space-3);
+  padding: var(--space-2) var(--space-3); border-radius: var(--radius-sm);
+  transition: background var(--duration-fast) var(--ease-out);
+  cursor: pointer; text-decoration: none;
+}
+.nav__dropdown-item:hover { background: var(--neutral-50); }
+
+.nav__dropdown-swatch {
+  width: 32px; height: 32px; border-radius: var(--radius-sm);
+  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+}
+
+.nav__dropdown-text {
+  flex: 1; min-width: 0;
+}
+
+.nav__dropdown-title {
+  font-size: var(--label-sm); font-weight: 500; line-height: var(--label-sm-lh);
+  letter-spacing: var(--label-sm-ls); color: var(--fg-primary);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.nav__dropdown-meta {
+  font-size: 11px; color: var(--fg-muted); letter-spacing: 0;
+}
+
+.nav__dropdown-arrow {
+  width: 16px; height: 16px; color: var(--fg-muted);
+  opacity: 0; transition: opacity var(--duration-fast) var(--ease-out);
+}
+.nav__dropdown-item:hover .nav__dropdown-arrow { opacity: 1; }
+
+.nav__dropdown-divider {
+  height: 1px; background: var(--border-subtle); margin: var(--space-1) var(--space-3);
+}
+
+.nav__mail {
+  width: 34px; height: 34px; border-radius: var(--radius-sm);
+  border: 1px solid var(--border-default); display: flex; align-items: center; justify-content: center;
+  color: var(--fg-secondary); background: var(--bg-card);
+  transition: all var(--duration-fast) var(--ease-out);
+}
+.nav__mail:hover { border-color: var(--border-strong); color: var(--fg-primary); }
+
+/* Backdrop for closing dropdown */
+.nav__backdrop {
+  position: fixed; inset: 0; z-index: 199;
+  display: none;
+}
+.nav__backdrop.open { display: block; }
+
+/* ═══════════════════════════════════════════
+   BENTO — 6-col square-unit grid
+   ═══════════════════════════════════════════ */
+.bento {
+  padding-bottom: var(--space-6);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gap);
+}
+
+/* ═══════════════════════════════════════════
+   CARD
+   ═══════════════════════════════════════════ */
+.c {
+  background: var(--bg-card); border-radius: var(--radius-lg); overflow: hidden;
+  position: relative; box-shadow: var(--shadow-card);
+  opacity: 0; transform: translateY(12px);
+  animation: cIn 0.45s var(--ease-out) forwards;
+}
+@keyframes cIn { to { opacity: 1; transform: translateY(0); } }
+
+/* Stagger */
+.c:nth-child(1){animation-delay:.04s} .c:nth-child(2){animation-delay:.08s}
+.c:nth-child(3){animation-delay:.12s} .c:nth-child(4){animation-delay:.16s}
+.c:nth-child(5){animation-delay:.2s}  .c:nth-child(6){animation-delay:.24s}
+.c:nth-child(7){animation-delay:.28s} .c:nth-child(8){animation-delay:.32s}
+.c:nth-child(9){animation-delay:.36s} .c:nth-child(10){animation-delay:.4s}
+.c:nth-child(11){animation-delay:.44s} .c:nth-child(12){animation-delay:.48s}
+
+/* Span system — 4-col grid, 2 content columns */
+.c--1x1 { grid-column: span 1; grid-row: span 1; }
+.c--2x1 { grid-column: span 2; grid-row: span 1; }
+.c--1x2 { grid-column: span 2; grid-row: span 2; }
+
+/* Force square aspect on 1x1 */
+.c--1x1 { aspect-ratio: 1; }
+.c--1x1 > * { height: 100%; }
+
+/* Inner padding */
+.c__in { padding: var(--space-5); height: 100%; display: flex; flex-direction: column; }
+.c__in--tight { padding: var(--space-4); }
+
+/* ═══════════════════════════════════════════
+   BIO
+   ═══════════════════════════════════════════ */
+.bio__name { font-size: var(--h5-size); line-height: var(--h5-lh); letter-spacing: var(--h5-ls); font-weight: 500; margin-bottom: var(--space-5); }
+.bio__name span { color: var(--fg-secondary); font-weight: 400; }
+.bio__text { font-size: var(--para-md); line-height: 26px; letter-spacing: var(--para-md-ls); color: var(--fg-secondary); margin-bottom: var(--space-3); }
+.bio__text:last-of-type { margin-bottom: 0; }
+.bio__text strong { color: var(--fg-primary); font-weight: 600; }
+.bio__text a { font-weight: 500; text-decoration: underline; text-underline-offset: 2px; transition: text-decoration-color var(--duration-fast); }
+.bio__text a.l--b { color: var(--primary-500); text-decoration-color: rgba(51,92,255,0.25); }
+.bio__text a.l--b:hover { text-decoration-color: var(--primary-500); }
+.bio__text a.l--g { color: var(--success-500); text-decoration-color: rgba(31,193,107,0.25); }
+.bio__text a.l--g:hover { text-decoration-color: var(--success-500); }
+.bio__text a.l--a { color: var(--warning-500); text-decoration-color: rgba(245,158,11,0.25); }
+.bio__text a.l--a:hover { text-decoration-color: var(--warning-500); }
+.bio__text .s { text-decoration: line-through; text-decoration-color: var(--fg-muted); }
+.bio__emoji { font-size: 24px; display: inline-block; margin-top: auto; padding-top: var(--space-4); }
+
+/* ═══════════════════════════════════════════
+   PROJECT TILE
+   ═══════════════════════════════════════════ */
+.tile {
+  display: block; position: relative; overflow: hidden; cursor: pointer;
+  transition: box-shadow var(--duration-normal) var(--ease-out), transform var(--duration-normal) var(--ease-out);
+  min-height: 200px;
+}
+.tile:hover { box-shadow: var(--shadow-card-hover); transform: translateY(-2px); }
+
+.tile--sys { background: linear-gradient(145deg, #f5f0ff 0%, #ece4ff 60%, #e0d4f8 100%); }
+.tile--kyc { background: linear-gradient(145deg, #f0f4ff 0%, #e8ecf8 60%, #dae2f8 100%); }
+.tile--hnd { background: linear-gradient(145deg, #eefaf2 0%, #e2f5e8 60%, #d4eed8 100%); }
+.tile--log { background: linear-gradient(145deg, #fef7ed 0%, #fcefd8 60%, #fae5c0 100%); }
+
+/* Stage */
+.tile__s {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  padding: var(--space-6);
+}
+
+/* Floating layers */
+.ly { position: absolute; transition: all var(--duration-slow) var(--ease-out); will-change: transform, opacity; }
+.ly--1 { z-index: 3; }
+.ly--2 { z-index: 2; opacity: 0.5; }
+.ly--3 { z-index: 1; opacity: 0.2; }
+
+.tile:hover .ly--1 { transform: var(--h1); }
+.tile:hover .ly--2 { opacity: 1; transform: var(--h2); }
+.tile:hover .ly--3 { opacity: 0.65; transform: var(--h3); }
+
+/* Title overlay */
+.tile__info {
+  position: absolute; bottom: 0; left: 0; right: 0; z-index: 10;
+  padding: var(--space-4) var(--space-5);
+  display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-3);
+  background: linear-gradient(to top, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.88) 50%, rgba(255,255,255,0) 100%);
+  opacity: 0; transform: translateY(6px);
+  transition: all var(--duration-normal) var(--ease-out);
+  pointer-events: none;
+}
+.tile:hover .tile__info { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+.tile__dom { font-family: var(--font-mono); font-size: 10px; letter-spacing: var(--sub-xs-ls); text-transform: uppercase; color: var(--fg-muted); margin-bottom: 1px; }
+.tile__ttl { font-size: var(--label-sm); line-height: var(--label-sm-lh); letter-spacing: var(--label-sm-ls); font-weight: 500; color: var(--fg-primary); }
+
+/* On wide tiles and tall tiles, slightly larger title */
+.c--2x1 .tile__ttl, .c--1x2 .tile__ttl { font-size: var(--label-md); line-height: var(--label-md-lh); }
+
+.tile__arr {
+  width: 28px; height: 28px; border-radius: var(--radius-full);
+  background: var(--fg-primary); color: var(--white);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  transform: scale(0.6) rotate(10deg); opacity: 0;
+  transition: all var(--duration-normal) var(--ease-spring);
+}
+.tile:hover .tile__arr { transform: scale(1) rotate(0deg); opacity: 1; }
+
+/* ═══════════════════════════════════════════
+   FRAME COMPONENTS
+   ═══════════════════════════════════════════ */
+.fr { background: var(--white); border-radius: var(--radius-sm); box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 6px 16px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.03); overflow: hidden; }
+.fr--ph { background: var(--neutral-900); border-radius: 18px; padding: 5px; box-shadow: 0 2px 8px rgba(0,0,0,0.1), 0 12px 32px rgba(0,0,0,0.1), inset 0 0 0 1px rgba(255,255,255,0.06); }
+.fr--ph-in { border-radius: 14px; overflow: hidden; background: var(--white); }
+.fr__bar { display: flex; align-items: center; gap: 3px; padding: 6px 8px; background: var(--neutral-50); border-bottom: 1px solid var(--border-subtle); }
+.fr__dot { width: 5px; height: 5px; border-radius: 50%; background: var(--neutral-200); }
+.fr__url { flex: 1; height: 14px; background: var(--white); border-radius: var(--radius-full); margin-left: 6px; border: 1px solid var(--border-subtle); }
+.wf { width: 100%; display: block; }
+
+/* Swatch grid */
+.sw-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; padding: 8px; }
+.sw { border-radius: 4px; aspect-ratio: 1; transition: transform var(--duration-slow) var(--ease-out); }
+.tile:hover .sw:nth-child(odd) { transform: scale(1.06) rotate(-1.5deg); }
+.tile:hover .sw:nth-child(even) { transform: scale(0.94) rotate(1.5deg); }
+
+/* ═══════════════════════════════════════════
+   SMALL CARDS: Social, Metric, Icon
+   ═══════════════════════════════════════════ */
+.social__av {
+  width: 36px; height: 36px; background: var(--neutral-900); border-radius: var(--radius-full);
+  display: flex; align-items: center; justify-content: center; color: var(--white);
+  font-size: 14px; font-weight: 600; position: relative; margin-bottom: var(--space-3);
+}
+.social__av::after { content:''; position:absolute; bottom:-1px; right:-1px; width:12px; height:12px; background:var(--primary-500); border-radius:50%; border:2px solid var(--white); }
+.social__handle { font-size: var(--para-xs); color: var(--fg-muted); margin-bottom: var(--space-2); }
+.social__bio { font-size: var(--para-xs); line-height: 16px; color: var(--fg-secondary); margin-bottom: var(--space-3); }
+.social__cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 12px; border: 1px solid var(--border-strong);
+  border-radius: var(--radius-full); font-size: var(--label-xs); font-weight: 500;
+  color: var(--fg-primary); width: fit-content; margin-top: auto;
+  transition: all var(--duration-fast);
+}
+.social__cta:hover { background: var(--fg-primary); color: var(--white); border-color: var(--fg-primary); }
+
+.met__val { font-size: 36px; font-weight: 600; letter-spacing: -0.5px; line-height: 1; }
+.met__lab { font-size: var(--para-xs); line-height: 16px; margin-top: var(--space-2); }
+
+/* Icon-only card */
+.ico { display: flex; align-items: center; justify-content: center; height: 100%; }
+.ico svg { opacity: 0.1; transition: opacity var(--duration-normal); }
+.c:hover .ico svg { opacity: 0.2; }
+
+/* ═══════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════ */
+.footer { padding: var(--space-6) 0; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-subtle); margin-top: var(--space-10); }
+.footer__copy { font-size: var(--para-xs); color: var(--fg-muted); }
+.footer__link { font-size: var(--para-xs); color: var(--fg-secondary); transition: color var(--duration-fast); }
+.footer__link:hover { color: var(--fg-primary); }
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .shell { width: 90%; }
+}
+
+@media (max-width: 768px) {
+  :root { --gap: 10px; }
+  .shell { width: 94%; }
+  .c--bio-m { grid-column: span 4; }
+  .tile__info { opacity: 1; transform: translateY(0); }
+  .tile__arr { transform: scale(1) rotate(0); opacity: 1; }
+  .bio__name { font-size: var(--h6-size); line-height: var(--h6-lh); }
+  .c--hide-m { display: none; }
+  .met__val { font-size: 28px; }
+}
+
+@media (max-width: 480px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .c--2x1, .c--1x2 { grid-column: span 2; grid-row: span 1; }
+  .c--1x1 { grid-column: span 1; }
+  .tile.c--1x2 { min-height: 220px; }
+  .bio__text { font-size: var(--para-sm); line-height: var(--para-sm-lh); }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="shell">
+<nav class="nav">
+  <a href="index.html" class="nav__logo">R</a>
+
+  <!-- Dropdown trigger -->
+  <div class="nav__select">
+    <button class="nav__trigger" id="navTrigger" aria-expanded="false" aria-haspopup="true">
+      <span class="nav__trigger-dot"></span>
+      Selected work
+      <svg class="nav__trigger-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+
+    <div class="nav__dropdown" id="navDropdown" role="menu">
+      <div class="nav__dropdown-label">Case studies</div>
+
+      <a href="case-study-adoption.html" class="nav__dropdown-item" role="menuitem">
+        <div class="nav__dropdown-swatch" style="background: rgba(139,92,246,0.08);">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="5" height="5" rx="1" fill="#8b5cf6" opacity="0.5"/><rect x="9" y="2" width="5" height="5" rx="1" fill="#8b5cf6" opacity="0.3"/><rect x="2" y="9" width="5" height="5" rx="1" fill="#8b5cf6" opacity="0.3"/><rect x="9" y="9" width="5" height="5" rx="1" fill="#8b5cf6" opacity="0.15"/></svg>
+        </div>
+        <div class="nav__dropdown-text">
+          <div class="nav__dropdown-title">Aeon Design System</div>
+          <div class="nav__dropdown-meta">Design Systems · 2022–2023</div>
+        </div>
+        <svg class="nav__dropdown-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 12l4-4-4-4"/></svg>
+      </a>
+
+      <a href="case-study-aip.html" class="nav__dropdown-item" role="menuitem">
+        <div class="nav__dropdown-swatch" style="background: rgba(31,193,107,0.08);">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="4" width="3" height="3" rx="0.5" fill="#1fc16b" opacity="0.5"/><rect x="7" y="4" width="7" height="1" rx="0.5" fill="#1fc16b" opacity="0.2"/><rect x="2" y="9" width="3" height="3" rx="0.5" fill="#1fc16b" opacity="0.3"/><rect x="7" y="9" width="7" height="1" rx="0.5" fill="#1fc16b" opacity="0.2"/></svg>
+        </div>
+        <div class="nav__dropdown-text">
+          <div class="nav__dropdown-title">Aegon Intermediair Portaal</div>
+          <div class="nav__dropdown-meta">Enterprise B2B · 2021–2022</div>
+        </div>
+        <svg class="nav__dropdown-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 12l4-4-4-4"/></svg>
+      </a>
+
+      <div class="nav__dropdown-divider"></div>
+      <div class="nav__dropdown-label">More work</div>
+
+      <a href="case-study-futuready.html" class="nav__dropdown-item" role="menuitem">
+        <div class="nav__dropdown-swatch" style="background: rgba(51,92,255,0.08);">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5" fill="none" stroke="#335cff" stroke-opacity="0.5" stroke-width="1.5"/><path d="M8 5v3l2 1.5" stroke="#335cff" stroke-opacity="0.4" stroke-width="1" stroke-linecap="round"/></svg>
+        </div>
+        <div class="nav__dropdown-text">
+          <div class="nav__dropdown-title">Futuready Motor Insurance</div>
+          <div class="nav__dropdown-meta">Insurtech · B2B2C · 2019</div>
+        </div>
+        <svg class="nav__dropdown-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 12l4-4-4-4"/></svg>
+      </a>
+
+      <a href="case-study-helian.html" class="nav__dropdown-item" role="menuitem">
+        <div class="nav__dropdown-swatch" style="background: rgba(245,158,11,0.08);">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6" cy="7" r="2" fill="#f59e0b" opacity="0.4"/><circle cx="11" cy="5" r="2" fill="#f59e0b" opacity="0.3"/><circle cx="8" cy="11" r="2" fill="#f59e0b" opacity="0.2"/><line x1="6" y1="7" x2="11" y2="5" stroke="#f59e0b" stroke-opacity="0.15" stroke-width="0.75"/></svg>
+        </div>
+        <div class="nav__dropdown-text">
+          <div class="nav__dropdown-title">Helian Care Logbook</div>
+          <div class="nav__dropdown-meta">Healthcare · 2018</div>
+        </div>
+        <svg class="nav__dropdown-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 12l4-4-4-4"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <a href="mailto:chardrizard@gmail.com" class="nav__mail" aria-label="Email">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+  </a>
+</nav>
+</div>
+
+<!-- Backdrop to close dropdown -->
+<div class="nav__backdrop" id="navBackdrop"></div>
+
+<!-- BENTO -->
+<main class="shell bento">
+<div class="grid">
+
+  <!-- ═══════════════════════════════════════
+       ROW 1–2 left: Bio (2x1) then LinkedIn (1x1) + Metric (1x1)
+       ROW 1–2 right: Design System (1x2 tall)
+       ═══════════════════════════════════════ -->
+
+  <!-- Bio -->
+  <div class="c c--2x1 c--bio-m">
+    <div class="c__in">
+      <h1 class="bio__name">Richard — <span>Senior UX Designer & design systems specialist</span></h1>
+      <p class="bio__text">I design <strong>systems that move metrics</strong> in complex domains — <a href="case-study-futuready.html" class="l--b">insurtech</a>, <a href="case-study-helian.html" class="l--g">healthcare</a>, and <a href="case-study-aip.html" class="l--a">enterprise B2B</a>.</p>
+      <p class="bio__text">Deep <span class="s">passion</span> obsession for niche problem spaces. I solve the flows nobody else wants to touch. <a href="about.html" style="font-weight:500;text-decoration:underline;text-underline-offset:2px;text-decoration-color:var(--neutral-300);transition:text-decoration-color var(--duration-fast);">More about me →</a></p>
+      <span class="bio__emoji">🌞</span>
+    </div>
+  </div>
+
+  <!-- Design System Adoption (1x2 tall) -->
+  <a class="c c--1x2 tile tile--sys" href="case-study-adoption.html"
+     style="--h1:translateY(-14px) scale(1.02); --h2:translate(20px,-8px) rotate(-1.5deg) scale(1.01); --h3:translate(-8px,6px) rotate(2deg);">
+    <div class="tile__s">
+      <div class="ly ly--1" style="top:8%;left:5%;width:58%;">
+        <div class="fr"><div class="fr__bar"><div class="fr__dot"></div><div class="fr__dot"></div><div class="fr__dot"></div><div class="fr__url"></div></div>
+          <svg viewBox="0 0 400 250" class="wf">
+            <rect width="88" height="250" fill="#8b5cf6" opacity="0.04"/>
+            <rect x="12" y="14" width="64" height="10" rx="2" fill="#8b5cf6" opacity="0.15"/>
+            <rect x="12" y="32" width="64" height="6" rx="2" fill="#171717" opacity="0.04"/>
+            <rect x="12" y="44" width="64" height="6" rx="2" fill="#8b5cf6" opacity="0.08"/>
+            <rect x="12" y="56" width="64" height="6" rx="2" fill="#171717" opacity="0.04"/>
+            <rect x="104" y="14" width="130" height="96" rx="6" fill="#fff" stroke="#8b5cf6" stroke-opacity="0.1"/>
+            <rect x="116" y="26" width="80" height="8" rx="2" fill="#8b5cf6" opacity="0.12"/>
+            <rect x="116" y="42" width="106" height="6" rx="2" fill="#171717" opacity="0.05"/>
+            <rect x="116" y="56" width="80" height="6" rx="2" fill="#171717" opacity="0.04"/>
+            <rect x="116" y="76" width="50" height="18" rx="4" fill="#8b5cf6" opacity="0.1"/>
+            <rect x="172" y="76" width="50" height="18" rx="4" fill="#171717" opacity="0.04"/>
+            <rect x="250" y="14" width="130" height="96" rx="6" fill="#fff" stroke="#8b5cf6" stroke-opacity="0.1"/>
+            <rect x="262" y="26" width="80" height="8" rx="2" fill="#8b5cf6" opacity="0.12"/>
+            <rect x="262" y="42" width="106" height="6" rx="2" fill="#171717" opacity="0.05"/>
+            <rect x="262" y="76" width="50" height="18" rx="4" fill="#22c55e" opacity="0.1"/>
+            <rect x="104" y="126" width="276" height="50" rx="6" fill="#fff" stroke="#8b5cf6" stroke-opacity="0.06"/>
+            <rect x="116" y="138" width="120" height="8" rx="2" fill="#171717" opacity="0.06"/>
+            <rect x="116" y="154" width="200" height="6" rx="2" fill="#171717" opacity="0.03"/>
+            <rect x="104" y="192" width="276" height="22" rx="4" fill="#8b5cf6" opacity="0.03"/>
+            <rect x="112" y="200" width="210" height="6" rx="2" fill="#8b5cf6" opacity="0.06"/>
+            <rect x="112" y="200" width="168" height="6" rx="2" fill="#8b5cf6" opacity="0.14"/>
+          </svg>
+        </div>
+      </div>
+      <div class="ly ly--2" style="bottom:6%;right:3%;width:30%;">
+        <div class="fr">
+          <div class="sw-grid">
+            <div class="sw" style="background:#8b5cf6;opacity:.12"></div><div class="sw" style="background:#8b5cf6;opacity:.22"></div><div class="sw" style="background:#8b5cf6;opacity:.35"></div>
+            <div class="sw" style="background:#8b5cf6;opacity:.5"></div><div class="sw" style="background:#8b5cf6;opacity:.65"></div><div class="sw" style="background:#8b5cf6;opacity:.8"></div>
+            <div class="sw" style="background:#335cff;opacity:.15"></div><div class="sw" style="background:#335cff;opacity:.3"></div><div class="sw" style="background:#335cff;opacity:.5"></div>
+          </div>
+          <div style="padding:0 8px 8px;"><svg viewBox="0 0 200 20" style="width:100%"><rect width="200" height="8" rx="2" fill="#171717" opacity="0.06"/><rect y="12" width="140" height="6" rx="2" fill="#171717" opacity="0.04"/></svg></div>
+        </div>
+      </div>
+      <div class="ly ly--3" style="top:5%;right:8%;width:14%;">
+        <div class="fr"><div style="padding:8px;"><svg viewBox="0 0 100 60"><rect width="100" height="24" rx="5" fill="#8b5cf6" opacity="0.14"/><rect y="30" width="100" height="24" rx="5" fill="#171717" opacity="0.06"/></svg></div></div>
+      </div>
+    </div>
+    <div class="tile__info"><div><div class="tile__dom">Design Systems · 2022–2023</div><div class="tile__ttl">Aeon Design System — unifying 60+ products under one component system</div></div><div class="tile__arr"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 10L10 4M10 4H5M10 4v5"/></svg></div></div>
+  </a>
+
+  <!-- LinkedIn (1x1) -->
+  <div class="c c--1x1">
+    <div class="c__in c__in--tight">
+      <div class="social__av">R</div>
+      <div class="social__handle">@richard.design</div>
+      <div class="social__bio">design systems / complex workflows / measurable UX</div>
+      <a href="https://www.linkedin.com/in/richard-andhika-936344129/" target="_blank" rel="noopener" class="social__cta">LinkedIn <svg width="10" height="10" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 10L10 4M10 4H5M10 4v5"/></svg></a>
+    </div>
+  </div>
+
+  <!-- Metric 37% (1x1) -->
+  <div class="c c--1x1">
+    <div class="c__in c__in--tight" style="justify-content:flex-end;">
+      <div class="met__val" style="color:var(--primary-500);">37%</div>
+      <div class="met__lab" style="color:var(--fg-secondary);">Avg task completion improvement</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       ROW 3–4 left: Nurse Handover (1x2 tall)
+       ROW 3–4 right: KYC (2x1) then Route Exception (2x1)
+       ═══════════════════════════════════════ -->
+
+  <!-- AIP (1x2 tall) -->
+  <a class="c c--1x2 tile tile--hnd" href="case-study-aip.html"
+     style="--h1:translateY(-8px) scale(1.02); --h2:translate(8px,6px) rotate(1.5deg);">
+    <div class="tile__s">
+      <div class="ly ly--1" style="top:8%;left:8%;width:80%;">
+        <div class="fr"><div style="padding:10px;">
+          <svg viewBox="0 0 220 200" class="wf">
+            <rect width="100" height="10" rx="2" fill="#22c55e" opacity="0.15"/>
+            <rect y="18" width="220" height="1" fill="#171717" opacity="0.06"/>
+            <rect y="28" width="12" height="12" rx="2" fill="#22c55e" opacity="0.14"/><rect x="20" y="30" width="100" height="8" rx="2" fill="#171717" opacity="0.06"/><rect x="180" y="28" width="40" height="12" rx="3" fill="#22c55e" opacity="0.1"/>
+            <rect y="50" width="12" height="12" rx="2" fill="#22c55e" opacity="0.14"/><rect x="20" y="52" width="120" height="8" rx="2" fill="#171717" opacity="0.06"/><rect x="180" y="50" width="40" height="12" rx="3" fill="#22c55e" opacity="0.1"/>
+            <rect y="72" width="12" height="12" rx="2" fill="#171717" opacity="0.06"/><rect x="20" y="74" width="80" height="8" rx="2" fill="#171717" opacity="0.04"/><rect x="180" y="72" width="40" height="12" rx="3" fill="#fb3748" opacity="0.1"/>
+            <rect y="94" width="12" height="12" rx="2" fill="#22c55e" opacity="0.14"/><rect x="20" y="96" width="110" height="8" rx="2" fill="#171717" opacity="0.06"/><rect x="180" y="94" width="40" height="12" rx="3" fill="#22c55e" opacity="0.1"/>
+            <rect y="120" width="220" height="1" fill="#171717" opacity="0.06"/>
+            <rect y="132" width="80" height="8" rx="2" fill="#fb3748" opacity="0.12"/>
+            <rect y="148" width="220" height="40" rx="4" fill="#fb3748" opacity="0.02" stroke="#fb3748" stroke-opacity="0.08"/>
+            <rect x="10" y="160" width="140" height="6" rx="2" fill="#171717" opacity="0.04"/>
+            <rect x="10" y="172" width="100" height="6" rx="2" fill="#171717" opacity="0.03"/>
+          </svg>
+        </div></div>
+      </div>
+      <div class="ly ly--2" style="bottom:10%;right:2%;width:40%;">
+        <div class="fr"><div style="padding:8px;"><svg viewBox="0 0 120 50"><rect width="60" height="6" rx="2" fill="#22c55e" opacity="0.14"/><text y="26" font-family="Inter" font-size="20" fill="#22c55e" opacity="0.35" font-weight="600">−71%</text><rect y="38" width="90" height="4" rx="1" fill="#171717" opacity="0.04"/><rect y="46" width="60" height="4" rx="1" fill="#171717" opacity="0.03"/></svg></div></div>
+      </div>
+    </div>
+    <div class="tile__info"><div><div class="tile__dom">Enterprise B2B · Insurance · 2021–2022</div><div class="tile__ttl">Aegon Intermediair Portaal — from legacy to role-based system</div></div><div class="tile__arr"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 10L10 4M10 4H5M10 4v5"/></svg></div></div>
+  </a>
+
+  <!-- Futuready (2x1) -->
+  <a class="c c--2x1 tile tile--kyc" href="case-study-futuready.html"
+     style="--h1:translateX(8px) translateY(-12px) rotate(-1deg); --h2:translate(-12px,8px) rotate(2deg); --h3:translate(6px,-16px) scale(1.04);">
+    <div class="tile__s">
+      <div class="ly ly--1" style="top:6%;left:6%;width:56%;">
+        <div class="fr"><div class="fr__bar"><div class="fr__dot"></div><div class="fr__dot"></div><div class="fr__dot"></div><div class="fr__url"></div></div>
+          <svg viewBox="0 0 400 260" class="wf">
+            <rect x="16" y="12" width="120" height="12" rx="3" fill="#335cff" opacity="0.14"/>
+            <rect x="280" y="10" width="100" height="18" rx="4" fill="#335cff" opacity="0.08"/>
+            <rect x="16" y="38" width="368" height="1" fill="#171717" opacity="0.06"/>
+            <circle cx="56" cy="56" r="10" fill="#335cff" opacity="0.12"/>
+            <line x1="66" y1="56" x2="130" y2="56" stroke="#335cff" stroke-opacity="0.12" stroke-width="1.5"/>
+            <circle cx="140" cy="56" r="10" fill="#335cff" opacity="0.08"/>
+            <line x1="150" y1="56" x2="220" y2="56" stroke="#171717" stroke-opacity="0.06" stroke-width="1.5"/>
+            <circle cx="230" cy="56" r="10" fill="#171717" opacity="0.04"/>
+            <line x1="240" y1="56" x2="310" y2="56" stroke="#171717" stroke-opacity="0.06" stroke-width="1.5"/>
+            <circle cx="320" cy="56" r="10" fill="#171717" opacity="0.04"/>
+            <rect x="16" y="82" width="180" height="32" rx="4" fill="#fff" stroke="#335cff" stroke-opacity="0.12"/>
+            <rect x="28" y="94" width="80" height="8" rx="2" fill="#171717" opacity="0.06"/>
+            <rect x="208" y="82" width="176" height="32" rx="4" fill="#fff" stroke="#171717" stroke-opacity="0.06"/>
+            <rect x="220" y="94" width="100" height="8" rx="2" fill="#171717" opacity="0.04"/>
+            <rect x="16" y="130" width="368" height="76" rx="6" fill="#335cff" opacity="0.02" stroke="#335cff" stroke-opacity="0.08" stroke-dasharray="4 3"/>
+            <rect x="152" y="152" width="96" height="10" rx="2" fill="#335cff" opacity="0.1"/>
+            <rect x="136" y="168" width="128" height="8" rx="2" fill="#171717" opacity="0.04"/>
+            <rect x="16" y="222" width="120" height="26" rx="6" fill="#335cff" opacity="0.14"/>
+            <rect x="148" y="222" width="100" height="26" rx="6" fill="#171717" opacity="0.04"/>
+          </svg>
+        </div>
+      </div>
+      <div class="ly ly--2" style="bottom:4%;right:5%;width:20%;">
+        <div class="fr--ph"><div class="fr--ph-in">
+          <svg viewBox="0 0 130 250" class="wf">
+            <rect x="10" y="14" width="60" height="8" rx="2" fill="#335cff" opacity="0.14"/>
+            <rect x="10" y="30" width="110" height="1" fill="#171717" opacity="0.06"/>
+            <rect x="12" y="38" width="106" height="100" rx="6" fill="#335cff" opacity="0.03" stroke="#335cff" stroke-opacity="0.1"/>
+            <rect x="32" y="72" width="66" height="36" rx="3" fill="#335cff" opacity="0.05" stroke="#335cff" stroke-opacity="0.1" stroke-dasharray="3 2"/>
+            <rect x="38" y="154" width="54" height="8" rx="2" fill="#171717" opacity="0.06"/>
+            <circle cx="65" cy="198" r="20" fill="none" stroke="#335cff" stroke-opacity="0.15" stroke-width="2"/>
+            <circle cx="65" cy="198" r="14" fill="#335cff" opacity="0.08"/>
+            <rect x="28" y="230" width="74" height="6" rx="2" fill="#171717" opacity="0.04"/>
+          </svg>
+        </div></div>
+      </div>
+      <div class="ly ly--3" style="top:4%;right:8%;width:12%;">
+        <div class="fr"><div style="padding:8px;text-align:center;">
+          <svg viewBox="0 0 80 76">
+            <circle cx="40" cy="32" r="22" fill="none" stroke="#335cff" stroke-opacity="0.08" stroke-width="3.5"/>
+            <circle cx="40" cy="32" r="22" fill="none" stroke="#335cff" stroke-opacity="0.25" stroke-width="3.5" stroke-dasharray="95 43" stroke-linecap="round" transform="rotate(-90 40 32)"/>
+            <text x="40" y="36" text-anchor="middle" font-family="Inter" font-size="10" fill="#335cff" opacity="0.5" font-weight="600">67%</text>
+            <rect x="16" y="62" width="48" height="4" rx="1" fill="#171717" opacity="0.05"/>
+            <rect x="22" y="70" width="36" height="4" rx="1" fill="#171717" opacity="0.03"/>
+          </svg>
+        </div></div>
+      </div>
+    </div>
+    <div class="tile__info"><div><div class="tile__dom">Insurtech · B2B2C · 2019</div><div class="tile__ttl">Futuready Motor Insurance — +230% conversion</div></div><div class="tile__arr"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 10L10 4M10 4H5M10 4v5"/></svg></div></div>
+  </a>
+
+  <!-- Helian (2x1) -->
+  <a class="c c--2x1 tile tile--log" href="case-study-helian.html"
+     style="--h1:translateY(-10px) rotate(-1deg); --h2:translate(-4px,8px) rotate(2deg);">
+    <div class="tile__s">
+      <div class="ly ly--1" style="top:5%;left:50%;transform:translateX(-50%);width:50%;">
+        <div class="fr--ph" style="margin:0 auto;">
+          <div class="fr--ph-in">
+            <svg viewBox="0 0 130 260" class="wf">
+              <rect x="8" y="14" width="60" height="7" rx="2" fill="#f59e0b" opacity="0.2"/>
+              <rect x="8" y="28" width="114" height="1" fill="#171717" opacity="0.06"/>
+              <rect x="8" y="36" width="114" height="80" rx="5" fill="#f59e0b" opacity="0.03"/>
+              <circle cx="36" cy="60" r="3.5" fill="#f59e0b" opacity="0.35"/><circle cx="72" cy="52" r="3.5" fill="#f59e0b" opacity="0.35"/><circle cx="56" cy="88" r="3.5" fill="#fb3748" opacity="0.35"/>
+              <line x1="36" y1="60" x2="72" y2="52" stroke="#f59e0b" stroke-opacity="0.2" stroke-width="1"/>
+              <line x1="72" y1="52" x2="56" y2="88" stroke="#fb3748" stroke-opacity="0.2" stroke-width="1" stroke-dasharray="3 2"/>
+              <rect x="8" y="126" width="114" height="28" rx="4" fill="#fff" stroke="#fb3748" stroke-opacity="0.1"/>
+              <rect x="14" y="134" width="44" height="5" rx="1" fill="#fb3748" opacity="0.12"/><rect x="14" y="143" width="70" height="4" rx="1" fill="#171717" opacity="0.04"/>
+              <rect x="8" y="160" width="114" height="28" rx="4" fill="#fff" stroke="#f59e0b" stroke-opacity="0.08"/>
+              <rect x="14" y="168" width="36" height="5" rx="1" fill="#f59e0b" opacity="0.12"/><rect x="14" y="177" width="60" height="4" rx="1" fill="#171717" opacity="0.04"/>
+              <rect x="8" y="194" width="114" height="28" rx="4" fill="#fff" stroke="#22c55e" stroke-opacity="0.08"/>
+              <rect x="14" y="202" width="40" height="5" rx="1" fill="#22c55e" opacity="0.12"/><rect x="14" y="211" width="52" height="4" rx="1" fill="#171717" opacity="0.04"/>
+              <rect x="8" y="234" width="114" height="12" rx="3" fill="#f59e0b" opacity="0.08"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="ly ly--2" style="bottom:8%;right:2%;width:38%;">
+        <div class="fr"><div style="padding:8px;"><svg viewBox="0 0 120 50"><rect width="50" height="5" rx="1" fill="#f59e0b" opacity="0.14"/><text y="24" font-family="Inter" font-size="18" fill="#f59e0b" opacity="0.35" font-weight="600">42%</text><text x="50" y="24" font-family="Inter" font-size="8" fill="#22c55e" opacity="0.4" font-weight="500">faster</text><rect y="36" width="80" height="4" rx="1" fill="#171717" opacity="0.04"/><rect y="44" width="56" height="4" rx="1" fill="#171717" opacity="0.03"/></svg></div></div>
+      </div>
+    </div>
+    <div class="tile__info"><div><div class="tile__dom">Healthcare · Indonesia · 2018</div><div class="tile__ttl">Helian — a dementia care logbook born from a pivot</div></div><div class="tile__arr"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 10L10 4M10 4H5M10 4v5"/></svg></div></div>
+  </a>
+
+</div>
+</main>
+
+<!-- FOOTER -->
+<footer class="shell footer">
+  <span class="footer__copy">© 2026 — Richard</span>
+  <a href="mailto:chardrizard@gmail.com" class="footer__link">Let's chat →</a>
+</footer>
+
+<!-- DROPDOWN SCRIPT -->
+<script>
+const trigger = document.getElementById('navTrigger');
+const dropdown = document.getElementById('navDropdown');
+const backdrop = document.getElementById('navBackdrop');
+
+function toggle(open) {
+  const isOpen = open ?? !dropdown.classList.contains('open');
+  dropdown.classList.toggle('open', isOpen);
+  backdrop.classList.toggle('open', isOpen);
+  trigger.setAttribute('aria-expanded', isOpen);
+}
+
+trigger.addEventListener('click', () => toggle());
+backdrop.addEventListener('click', () => toggle(false));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') toggle(false); });
+</script>
+</body>
+</html>
