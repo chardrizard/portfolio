@@ -3,43 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Futuready Motor Insurance — Richard.design
+     Insurtech · B2B2C · 2019
+     Template: template_case-study-clean.html -->
 <title>Futuready Motor Insurance — Richard</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23171717'/><text x='16' y='22' text-anchor='middle' font-size='18' fill='white' font-family='system-ui' font-weight='600'>R</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* ════════════════════════════════════════════════════════════════
-   DESIGN SYSTEM TOKENS — Do not modify
-   Source: AlignUI token set, resolved in design-tokens-resolved.json
-   ════════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════
+   TOKENS — AlignUI token set
+   ═══════════════════════════════════════ */
 :root {
-  /* Neutral scale */
-  --n950:#0e121b;--n900:#171717;--n700:#2e2e2e;--n600:#525252;
+  /* neutral */
+  --n950:#0e1218;--n900:#171717;--n700:#2e2e2e;--n600:#525252;
   --n500:#6e6e6e;--n400:#a0a0a0;--n300:#d4d4d4;--n200:#e5e5e5;
-  --n100:#f2f5f8;--n50:#f5f7fa;--white:#ffffff;
-  /* Page background */
+  --n100:#f5f5f5;--n50:#fafafa;--white:#ffffff;
+  /* page surface */
   --bg:#f5f5f7;
-  /* Semantic colors */
-  --blue:#335cff;--blue-lt:#6690ff;--blue-bg:rgba(51,92,255,0.07);
-  --red:#fb3748;--red-bg:rgba(251,55,72,0.06);
-  --green:#1fc16b;--green-bg:rgba(31,193,107,0.06);
-  --amber:#f59e0b;--amber-bg:rgba(245,158,11,0.07);
-  /* Foreground aliases */
+  /* semantic colors */
+  --blue:#335cff;--blue-lt:#6690ff;--blue-bg:#eef2ff;
+  --red:#fb3748;--red-bg:#fef2f2;
+  --green:#1fc16b;--green-bg:#f0fdf4;
+  --amber:#f59e0b;--amber-bg:#fffbeb;
+  /* fg */
   --fg:var(--n950);--fg2:var(--n600);--fgm:var(--n400);
-  /* Borders */
-  --br:rgba(14,18,27,0.08);--brs:rgba(14,18,27,0.07);--brm:rgba(14,18,27,0.10);
-  /* Shadows */
-  --sh:0 0 0 1px rgba(14,18,27,0.07),0 1px 3px rgba(14,18,27,0.04),0 4px 8px -2px rgba(14,18,27,0.04);
-  --sh-h:0 0 0 1px rgba(14,18,27,0.08),0 4px 12px rgba(14,18,27,0.06),0 16px 32px -4px rgba(14,18,27,0.09);
-  /* Typography */
+  /* border / shadow */
+  --brs:rgba(23,23,23,0.07);
+  --sh:0 0 0 1px rgba(23,23,23,0.07),0 1px 3px rgba(23,23,23,0.04),0 4px 8px -2px rgba(23,23,23,0.04);
+  --sh-h:0 0 0 1px rgba(23,23,23,0.08),0 4px 12px rgba(23,23,23,0.06),0 16px 32px -4px rgba(23,23,23,0.09);
+  /* type */
   --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
   --mono:'DM Mono',monospace;
-  /* Spacing: 4px base unit */
-  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:20px;--s6:24px;--s8:32px;--s10:40px;--s12:48px;--s16:64px;
-  /* Radius */
+  /* spacing */
+  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:20px;--s6:24px;
+  --s8:32px;--s10:40px;--s12:48px;--s16:64px;--s20:80px;
+  /* radius */
   --r:8px;--rm:12px;--rl:16px;--rxl:20px;--rf:9999px;
-  /* Motion */
+  /* motion */
   --ease:cubic-bezier(0.16,1,0.3,1);--tf:150ms;--tn:250ms;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -48,385 +50,469 @@ body{min-height:100vh;}
 a{color:inherit;text-decoration:none;}
 button{font-family:inherit;cursor:pointer;border:none;background:none;}
 img{display:block;max-width:100%;}
+
+/* ═══════════════════════════════════════
+   SHELL
+   ═══════════════════════════════════════ */
 .shell{width:83.333%;max-width:1100px;margin:0 auto;}
 @media(max-width:1024px){.shell{width:90%;}}
 @media(max-width:768px){.shell{width:94%;}}
 
+/* ═══════════════════════════════════════
+   NAV
+   ═══════════════════════════════════════ */
+.nav{
+  padding:var(--s3) 0;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--brs);
+  position:sticky;top:0;
+  background:rgba(245,245,247,0.88);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  z-index:100;
+}
+.back{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:var(--fg2);transition:color var(--tf);}
+.back:hover{color:var(--fg);}
+.mail{width:32px;height:32px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;color:var(--fgm);transition:color var(--tf);}
+.mail:hover{color:var(--fg);}
 
-/* ════════════════════════════════════════════════════════════════
-   REQUIRED: Chrome — Nav, section divider, footer
-   ════════════════════════════════════════════════════════════════ */
-.nav{padding:var(--s3) 0;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--brs);position:sticky;top:0;background:rgba(245,245,247,0.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);z-index:100;}
-.logo{width:32px;height:32px;background:var(--n950);border-radius:var(--r);display:flex;align-items:center;justify-content:center;color:var(--white);font-size:14px;font-weight:600;}
-.back{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:var(--fg2);transition:color var(--tf);}.back:hover{color:var(--fg);}
-.mail{width:32px;height:32px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;color:var(--fgm);transition:color var(--tf);}.mail:hover{color:var(--fg);}
+/* ═══════════════════════════════════════
+   HERO
+   ═══════════════════════════════════════ */
+.hero{padding:var(--s20) 0 var(--s16);}
+.hero__eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);margin-bottom:var(--s5);}
+.hero__title{font-size:clamp(32px,5vw,64px);font-weight:500;letter-spacing:-1.2px;line-height:1.04;color:var(--n950);margin-bottom:var(--s6);max-width:780px;}
+.hero__title em{font-style:normal;font-weight:300;color:var(--n600);}
+.hero__body{font-size:16px;color:var(--fg2);line-height:26px;max-width:560px;margin-bottom:var(--s10);}
+.hero__meta{display:flex;gap:var(--s8);flex-wrap:wrap;padding-top:var(--s6);border-top:1px solid var(--brs);}
+.mi{display:flex;flex-direction:column;gap:3px;}
+.ml{font-family:var(--mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);}
+.mv{font-size:13px;font-weight:500;color:var(--n950);}
 
-/* Section rhythm */
-.sec{margin-bottom:var(--s16);}
+/* ═══════════════════════════════════════
+   SECTION GAP
+   ═══════════════════════════════════════ */
+.sec{margin-bottom:var(--s20);}
 
-/* Section divider label */
-.dl{font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s6);}
+/* ═══════════════════════════════════════
+   SECTION DIVIDER
+   ═══════════════════════════════════════ */
+.dl{font-family:var(--mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s6);}
 .dl::after{content:'';flex:1;height:1px;background:var(--brs);}
 
-/* Footer */
-.ft{padding:var(--s6) 0;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--brs);margin-top:var(--s16);}
-.ftc{font-size:12px;color:var(--fgm);}
-.ftl{font-size:12px;color:var(--fg2);transition:color var(--tf);}.ftl:hover{color:var(--fg);}
+/* ═══════════════════════════════════════
+   OUTCOMES — flat stat strip, border-left between cols only
+   ═══════════════════════════════════════ */
+.outcomes{display:grid;grid-template-columns:repeat(3,1fr);gap:0;padding-top:var(--s6);}
+.outcome{padding-right:var(--s8);}
+.outcome + .outcome{padding-left:var(--s8);padding-right:var(--s8);border-left:1px solid var(--brs);}
+.outcome:last-child{padding-right:0;}
+.outcome__kicker{font-family:var(--mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);margin-bottom:var(--s3);}
+.outcome__value{font-size:clamp(40px,5vw,56px);font-weight:600;letter-spacing:-1.5px;line-height:0.9;font-variant-numeric:tabular-nums;margin-bottom:var(--s3);}
+.outcome__label{font-size:13px;color:var(--fg2);line-height:20px;max-width:220px;}
+@media(max-width:640px){
+  .outcomes{grid-template-columns:1fr;gap:var(--s6);}
+  .outcome{padding:0 0 var(--s6);}
+  .outcome + .outcome{border-left:none;padding-left:0;border-top:1px solid var(--brs);padding-top:var(--s6);}
+}
 
+/* ═══════════════════════════════════════
+   CONTEXT
+   ═══════════════════════════════════════ */
+.ctx{display:grid;grid-template-columns:200px 1fr 1fr;gap:var(--s8);padding:var(--s6) 0 0;border-top:1px solid var(--brs);}
+.ctx__label-col{font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);padding-top:2px;}
+.ctx__col p{font-size:14px;color:var(--fg2);line-height:22px;margin-bottom:var(--s3);}
+.ctx__col p:last-child{margin-bottom:0;}
+.ctx__col strong{color:var(--fg);font-weight:500;}
+.ctx__link{color:var(--blue);font-weight:500;text-decoration:none;border-bottom:1px solid rgba(51,92,255,0.3);transition:border-color var(--tf);padding-bottom:1px;}
+.ctx__link:hover{border-color:var(--blue);}
+.ctx__owned-label{font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);padding-top:var(--s2);}
+.ctx__owned-tags{grid-column:2 / -1;padding-top:var(--s6);}
+@media(max-width:768px){.ctx{grid-template-columns:1fr;gap:var(--s5);}.ctx__label-col,.ctx__owned-label{display:none;}.ctx__owned-tags{grid-column:1;}}
 
-/* ════════════════════════════════════════════════════════════════
-   REQUIRED: Hero
-   ════════════════════════════════════════════════════════════════ */
-.hero{padding:0;position:relative;overflow:hidden;}
-.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(14,18,27,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(14,18,27,0.025) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
-.hero-inner{position:relative;z-index:1;padding:var(--s16) 0 var(--s12);}
-.kick{font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--blue);margin-bottom:var(--s6);display:inline-flex;align-items:center;gap:var(--s2);}
-.kick-dot{width:6px;height:6px;border-radius:50%;background:var(--blue);opacity:0.55;flex-shrink:0;}
-.h1{font-size:clamp(30px,4.5vw,58px);font-weight:500;letter-spacing:-0.56px;line-height:1.04;color:var(--n950);max-width:700px;margin-bottom:var(--s4);}
-.h1 em{font-style:normal;font-weight:300;color:var(--n600);}
-.hero-rule{width:32px;height:2px;background:var(--n300);margin:var(--s5) 0;}
-.sub{font-size:15px;color:var(--n600);line-height:26px;max-width:500px;margin-bottom:var(--s10);}
-.meta{display:flex;gap:var(--s8);flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:2px;padding-top:var(--s6);border-top:1px solid var(--brs);}
-.meta::-webkit-scrollbar{display:none;}
-.mi{display:flex;flex-direction:column;gap:3px;flex-shrink:0;}
-.ml{font-family:var(--mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);}
-.mv{font-size:14px;font-weight:500;color:var(--n950);}
-@media(max-width:768px){.meta{gap:var(--s6);}}
+/* ═══════════════════════════════════════
+   TAG GROUP
+   ═══════════════════════════════════════ */
+.tag-group{display:flex;flex-wrap:wrap;gap:var(--s2);}
+.tag-item{font-size:12px;color:var(--fg2);padding:var(--s1) var(--s3);border-radius:var(--rf);border:1px solid var(--brs);background:var(--white);display:inline-flex;align-items:center;gap:6px;box-shadow:var(--sh);}
+.tag-item__dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
 
+/* ═══════════════════════════════════════
+   SCREENSHOTS
+   ═══════════════════════════════════════ */
+.shot{margin-bottom:var(--s4);}
+.shot-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s4);margin-bottom:var(--s4);}
+.shot__frame{border-radius:var(--rl);overflow:hidden;border:1px solid var(--brs);box-shadow:var(--sh);background:var(--white);}
+.shot__frame img,.shot__frame svg{display:block;width:100%;}
+.shot__placeholder{background:var(--n100);display:flex;align-items:center;justify-content:center;min-height:380px;}
+.shot__placeholder span{font-family:var(--mono);font-size:11px;color:var(--n400);text-align:center;padding:var(--s6);max-width:380px;line-height:18px;}
+.shot__caption{display:flex;align-items:baseline;justify-content:space-between;padding:var(--s3) var(--s1) 0;gap:var(--s4);}
+.shot__caption-text{font-size:13px;color:var(--fg2);line-height:19px;max-width:640px;}
+.shot__caption-label{font-family:var(--mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);white-space:nowrap;flex-shrink:0;}
+@media(max-width:640px){.shot-grid{grid-template-columns:1fr;}}
 
-/* ════════════════════════════════════════════════════════════════
-   REQUIRED: Outcomes
-   ════════════════════════════════════════════════════════════════ */
-.outcomes{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s8);padding:var(--s10) 0;}
-.out-kicker{font-family:var(--mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);margin-bottom:var(--s3);}
-.out-num{font-size:clamp(40px,5vw,56px);font-weight:600;letter-spacing:-1.5px;line-height:0.9;margin-bottom:var(--s3);}
-.out-label{font-size:13px;color:var(--fg2);line-height:20px;max-width:220px;}
-@media(max-width:768px){.outcomes{grid-template-columns:1fr;gap:var(--s6);}.out-num{font-size:40px;}}
+/* ═══════════════════════════════════════
+   SLIDEDECK
+   ═══════════════════════════════════════ */
+.deck{border:1px solid var(--brs);border-radius:var(--rxl);overflow:hidden;box-shadow:var(--sh);background:var(--white);}
+.deck__viewport{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--white);}
+.deck__slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateX(40px);transition:opacity 0.4s var(--ease),transform 0.4s var(--ease);pointer-events:none;}
+.deck__slide.active{opacity:1;transform:translateX(0);pointer-events:auto;}
+.deck__slide-inner{width:100%;height:100%;background:var(--n100);display:flex;align-items:center;justify-content:center;}
+.deck__slide-inner img{width:100%;height:100%;object-fit:contain;}
+.deck__slide-inner span{font-family:var(--mono);font-size:11px;color:var(--n400);text-align:center;padding:var(--s6);max-width:420px;line-height:18px;}
+.deck__controls{display:flex;align-items:center;justify-content:space-between;padding:var(--s3) var(--s5);border-top:1px solid var(--brs);}
+.deck__dots{display:flex;gap:4px;align-items:center;}
+.deck__dot{width:6px;height:6px;border-radius:var(--rf);background:var(--n200);cursor:pointer;transition:all var(--tn) var(--ease);}
+.deck__dot.active{width:18px;background:var(--n900);}
+.deck__nav{display:flex;gap:2px;}
+.deck__btn{width:28px;height:28px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;color:var(--fgm);transition:background var(--tf),color var(--tf);}
+.deck__btn:hover{background:var(--n100);color:var(--fg);}
+.deck__counter{font-family:var(--mono);font-size:10px;color:var(--fgm);letter-spacing:0.04em;}
 
-
-/* ════════════════════════════════════════════════════════════════
-   MODULE: Story Arc — Problem / Key Decisions / Impact
-   ════════════════════════════════════════════════════════════════ */
-
-/* Section container */
-.arc-sec{padding-bottom:var(--s12);border-bottom:1px solid var(--brs);margin-bottom:var(--s12);}
-.arc-sec:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
-
-/* Full-width visual */
-.arc-vis{margin-bottom:var(--s5);}
-.arc-vis-inner{border-radius:var(--rm);overflow:hidden;background:var(--white);border:1px solid var(--brs);width:100%;aspect-ratio:16/7;display:flex;align-items:center;justify-content:center;cursor:zoom-in;box-shadow:var(--sh);transition:box-shadow var(--tn) var(--ease),transform var(--tn) var(--ease);}
-.arc-vis-inner:hover{box-shadow:var(--sh-h);transform:scale(1.005);}
-.arc-vis-inner svg{width:100%;height:100%;display:block;}
-.arc-vis-cap{font-family:var(--mono);font-size:10px;letter-spacing:0.04em;color:var(--fgm);margin-top:var(--s2);text-align:center;}
-
-/* Compact sidebar layout */
-.arc-sec--compact{display:grid;grid-template-columns:1fr 280px;gap:var(--s8);align-items:start;}
-.arc-compact-text{min-width:0;}
-.arc-compact-vis{position:sticky;top:80px;}
-.arc-compact-vis .arc-vis-inner{aspect-ratio:4/3;width:100%;}
-.arc-compact-vis .arc-vis-cap{text-align:center;}
-@media(max-width:900px){.arc-sec--compact{grid-template-columns:1fr;gap:var(--s5);}.arc-compact-vis{position:static;max-width:320px;}}
-
-/* Narrative slot */
-.arc-narr{display:flex;align-items:flex-start;gap:12px;margin-bottom:4px;}
-.arc-circle{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:9px;font-weight:500;background:var(--bg);flex-shrink:0;margin-top:2px;}
-.arc-sec--p .arc-circle{border:1.5px solid var(--red);color:var(--red);box-shadow:0 0 0 3px var(--bg),0 0 0 4px rgba(251,55,72,0.12);}
-.arc-sec--i .arc-circle{border:1.5px solid var(--blue);color:var(--blue);box-shadow:0 0 0 3px var(--bg),0 0 0 4px rgba(51,92,255,0.12);}
-.arc-sec--a .arc-circle{border:1.5px solid var(--green);color:var(--green);box-shadow:0 0 0 3px var(--bg),0 0 0 4px rgba(31,193,107,0.12);}
-.arc-lbl{font-family:var(--mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:4px;}
-.arc-sec--p .arc-lbl{color:var(--red);}.arc-sec--i .arc-lbl{color:var(--blue);}.arc-sec--a .arc-lbl{color:var(--green);}
-.arc-ttl{font-size:18px;font-weight:500;letter-spacing:-0.2px;color:var(--n950);line-height:1.2;margin-bottom:6px;}
-.arc-one{font-size:15px;color:var(--fg2);line-height:24px;}
-
-/* Tab system */
-.arc-tw{margin-left:32px;margin-top:var(--s4);}
-.arc-tabs{display:flex;gap:2px;background:var(--n100);border-radius:var(--r);padding:2px;width:fit-content;}
-.arc-tab{font-family:var(--sans);font-size:12px;font-weight:500;padding:6px 14px;border-radius:6px;color:var(--fg2);cursor:pointer;transition:all 150ms;background:transparent;border:none;}
-.arc-tab:hover{color:var(--fg);}
-.arc-tab.active{background:var(--white);color:var(--fg);box-shadow:0 1px 3px rgba(0,0,0,0.06);}
-.arc-pan{padding:var(--s5) 0 0;display:none;}
-.arc-pan.active{display:block;}
-
-/* Scope constraints */
-.scope-constraints{display:flex;flex-wrap:wrap;gap:6px;}
-
-/* Evidence data points */
-.ev-data{display:flex;gap:10px;flex-wrap:wrap;}
-.ev-pt{flex:1;min-width:130px;background:var(--white);border:1px solid var(--brs);border-radius:var(--rm);padding:12px 14px;box-shadow:var(--sh);}
-.ev-pt-v{font-size:22px;font-weight:600;letter-spacing:-0.5px;line-height:1;margin-bottom:3px;}
-.ev-pt-l{font-size:12px;color:var(--fg2);line-height:16px;}
-.ev-pt-s{font-family:var(--mono);font-size:9px;color:var(--fgm);margin-top:5px;letter-spacing:0.04em;}
-
-/* Decisions grid */
-.dec-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.dec-card{background:var(--white);border:1px solid var(--brs);border-radius:var(--rm);padding:14px 16px;box-shadow:var(--sh);display:flex;flex-direction:column;gap:4px;}
-.dec-card--g{border-color:rgba(31,193,107,0.15);}
-.dec-card--r{border-color:rgba(251,55,72,0.12);}
-.dec-card--a{border-color:rgba(245,158,11,0.12);}
-.dec-status{font-family:var(--mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;display:inline-flex;align-items:center;gap:5px;}
-.dec-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
-.dec-card--g .dec-status{color:var(--green);}.dec-card--g .dec-dot{background:var(--green);}
-.dec-card--r .dec-status{color:var(--red);}.dec-card--r .dec-dot{background:var(--red);}
-.dec-card--a .dec-status{color:var(--amber);}.dec-card--a .dec-dot{background:var(--amber);}
-.dec-ttl{font-size:14px;font-weight:500;color:var(--n950);line-height:1.25;}
-.dec-desc{font-size:13px;color:var(--fg2);line-height:19px;}
-.dec-trade{font-size:12px;color:var(--fgm);line-height:17px;padding-top:6px;border-top:1px solid var(--brs);margin-top:2px;}
-.dec-trade strong{color:var(--fg2);font-weight:500;}
-@media(max-width:640px){.dec-grid{grid-template-columns:1fr;}}
-
-/* Semantic tags */
-.tag{font-family:var(--mono);font-size:10px;letter-spacing:0.02em;padding:3px 8px;border-radius:var(--rf);}
-.tag--r{background:var(--red-bg);color:var(--red);}
-.tag--b{background:var(--blue-bg);color:var(--blue);}
-.tag--g{background:var(--green-bg);color:var(--green);}
-.tag--a{background:var(--amber-bg);color:var(--amber);}
-
-
-/* ════════════════════════════════════════════════════════════════
-   MODULE: Before/After Slider
-   ════════════════════════════════════════════════════════════════ */
-.slw{position:relative;border-radius:var(--rl);overflow:hidden;user-select:none;cursor:col-resize;background:var(--white);border:1px solid var(--brs);box-shadow:var(--sh);height:310px;transition:box-shadow var(--tn) var(--ease);}
-.slw:hover{box-shadow:var(--sh-h);}
-.slb,.sla{position:absolute;inset:0;}.sla{clip-path:inset(0 50% 0 0);}
-.sld{position:absolute;top:0;bottom:0;width:2px;background:var(--white);left:50%;transform:translateX(-50%);z-index:10;pointer-events:none;}
-.slh{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:30px;height:30px;background:var(--white);border-radius:var(--rf);box-shadow:0 2px 8px rgba(0,0,0,0.12),0 0 0 1px rgba(0,0,0,0.05);display:flex;align-items:center;justify-content:center;z-index:11;pointer-events:none;}
-.sll{position:absolute;bottom:var(--s3);font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;padding:3px 9px;border-radius:var(--rf);z-index:12;pointer-events:none;background:rgba(0,0,0,0.4);color:rgba(255,255,255,0.85);}
-.sll-b{left:var(--s3);}.sll-a{right:var(--s3);}
-
-
-/* ════════════════════════════════════════════════════════════════
-   REQUIRED: NextCase
-   ════════════════════════════════════════════════════════════════ */
-.next-case{margin-top:var(--s16);}
-.next-case__label{font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);margin-bottom:var(--s3);}
-.next-case__link{display:flex;align-items:center;justify-content:space-between;padding:var(--s6);border:1px solid var(--brs);border-radius:var(--rl);box-shadow:var(--sh);background:var(--white);transition:box-shadow var(--tn) var(--ease);text-decoration:none;color:inherit;}
-.next-case__link:hover{box-shadow:var(--sh-h);}
-.next-case__eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);margin-bottom:var(--s1);}
-.next-case__title{font-size:24px;font-weight:500;letter-spacing:-0.12px;line-height:32px;color:var(--n950);}
-.next-case__arrow{width:24px;height:24px;color:var(--fgm);transition:transform var(--tn) var(--ease);}
+/* ═══════════════════════════════════════
+   NEXT CASE
+   ═══════════════════════════════════════ */
+.next-case__label{font-family:var(--mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);margin-bottom:var(--s3);}
+.next-case__link{display:grid;grid-template-columns:80px 1fr auto;align-items:center;border-radius:var(--rl);overflow:hidden;background:#f5f0e8;text-decoration:none;color:inherit;transition:filter var(--tn) var(--ease);}
+.next-case__link:hover{filter:brightness(0.97);}
+.next-case__num{padding:var(--s6);font-size:28px;font-weight:600;font-variant-numeric:tabular-nums;text-align:center;font-family:var(--mono);color:#a89070;border-right:1px solid rgba(0,0,0,0.06);align-self:stretch;display:flex;align-items:center;justify-content:center;}
+.next-case__content{padding:var(--s5) var(--s6);}
+.next-case__eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:#a89070;margin-bottom:var(--s1);}
+.next-case__title{font-size:20px;font-weight:500;letter-spacing:-0.12px;line-height:1.25;color:#2a2520;margin-bottom:var(--s2);}
+.next-case__tags{display:flex;gap:var(--s2);flex-wrap:wrap;}
+.next-case__tag{font-size:11px;color:#7a6650;border:1px solid rgba(168,144,112,0.3);background:rgba(168,144,112,0.1);border-radius:var(--rf);padding:2px 10px;}
+.next-case__arrow{padding:0 var(--s6);color:#a89070;flex-shrink:0;transition:transform var(--tn) var(--ease);}
 .next-case__link:hover .next-case__arrow{transform:translateX(4px);}
 
-
-/* ════════════════════════════════════════════════════════════════
-   MODULE: Zoom Overlay
-   ════════════════════════════════════════════════════════════════ */
-.vis-ov{position:fixed;inset:0;background:rgba(14,18,27,0.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 220ms var(--ease);}
-.vis-ov.is-open{opacity:1;pointer-events:all;}
-.vis-ov-card{width:min(80vw,1000px);background:var(--white);border-radius:var(--rl);box-shadow:0 0 0 1px rgba(14,18,27,0.05),0 24px 64px -8px rgba(14,18,27,0.25);overflow:hidden;transform:scale(0.94) translateY(8px);transition:transform 240ms var(--ease);}
-.vis-ov.is-open .vis-ov-card{transform:scale(1) translateY(0);}
-.vis-ov-svg{width:100%;display:block;background:var(--bg);}
-.vis-ov-ft{display:flex;align-items:center;justify-content:space-between;padding:var(--s3) var(--s5);border-top:1px solid var(--brs);background:var(--white);}
-.vis-ov-cap{font-family:var(--mono);font-size:10px;letter-spacing:0.04em;color:var(--fgm);}
-.vis-ov-x{width:28px;height:28px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;color:var(--fgm);transition:background var(--tf),color var(--tf);}.vis-ov-x:hover{background:var(--n100);color:var(--fg);}
+/* ═══════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════ */
+.ft{padding:var(--s6) 0;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--brs);margin-top:var(--s16);}
+.ftc{font-size:12px;color:var(--fgm);}
+.ftl{font-size:12px;color:var(--fg2);transition:color var(--tf);}
+.ftl:hover{color:var(--fg);}
 </style>
 </head>
 <body>
 
-<!-- ══════════════════════════════════════════════════════════════
-     REQUIRED: Nav
-     ══════════════════════════════════════════════════════════════ -->
-<div class="shell"><nav class="nav">
-  <a href="index.html" class="back"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M10 7H4M4 7L7 4M4 7L7 10"/></svg>Back</a>
-  <a href="mailto:chardrizard@gmail.com" class="mail"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
-</nav></div>
-
-
-<!-- ══════════════════════════════════════════════════════════════
-     REQUIRED: Hero
-     ══════════════════════════════════════════════════════════════ -->
-<div class="hero"><div class="shell"><div class="hero-inner">
-  <div class="kick"><span class="kick-dot"></span>Insurtech · B2B2C · 2019</div>
-  <h1 class="h1">Futuready Motor Insurance<br><em>Tripling conversions by redesigning what users see first</em></h1>
-  <div class="hero-rule"></div>
-  <p class="sub">Redesigned a B2B2C motor insurance product page embedded in e-wallet apps. Heatmap data revealed where users abandoned — three targeted interventions drove +230% conversion.</p>
-  <div class="meta">
-    <div class="mi"><span class="ml">Role</span><span class="mv">Product Designer (Lead)</span></div>
-    <div class="mi"><span class="ml">Team</span><span class="mv">2 Front-end Devs, 1 Growth Marketer</span></div>
-    <div class="mi"><span class="ml">Timeline</span><span class="mv">~3 months</span></div>
-    <div class="mi"><span class="ml">Platform</span><span class="mv">Mobile web (B2B2C embedded)</span></div>
-  </div>
-</div></div></div>
-
+<!-- ══════════════════════════════════════
+     NAV
+     ══════════════════════════════════════ -->
 <div class="shell">
-
-  <!-- ══════════════════════════════════════════════════════════════
-       REQUIRED: Outcomes
-       ══════════════════════════════════════════════════════════════ -->
-  <section class="sec">
-    <div class="dl">Outcomes</div>
-    <div class="outcomes">
-      <div><div class="out-kicker">Conversion rate</div><div class="out-num" style="color:var(--green);">+230%</div><div class="out-label">Policies sold vs. previous version</div></div>
-      <div><div class="out-kicker">User engagement</div><div class="out-num" style="color:var(--amber);">+60%</div><div class="out-label">Avg. time on page → 60s</div></div>
-      <div><div class="out-kicker">Scale</div><div class="out-num" style="color:var(--amber);">3 countries</div><div class="out-label">Template adopted across Indonesia, Romania, Thailand</div></div>
-    </div>
-  </section>
-
-
-  <!-- ══════════════════════════════════════════════════════════════
-       MODULE: Story Arc — Problem / Key Decisions / Impact
-       Compact variant: Problem has evidence cards (no tabs).
-       Key Decisions has dec-grid in a tab. Impact is narrative-only.
-       ══════════════════════════════════════════════════════════════ -->
-  <section class="sec">
-    <div class="dl">Story arc</div>
-
-    <!-- ── 01 PROBLEM (red, full-width visual) — lean narrative only ── -->
-    <div class="arc-sec arc-sec--p">
-      <div class="arc-vis">
-        <div class="arc-vis-inner" data-caption="First version — key product info hidden in accordions. Form required 5+ fields including photo uploads.">
-          <svg viewBox="0 0 1100 480" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-            <rect width="1100" height="480" fill="#fff5f5"/>
-            <text x="550" y="220" font-family="Inter" font-size="14" fill="#fb3748" opacity="0.4" text-anchor="middle">Replace: Before-state — 3-panel showing landing banner,</text>
-            <text x="550" y="245" font-family="Inter" font-size="14" fill="#fb3748" opacity="0.4" text-anchor="middle">accordion content, form fields (TJN7xfpmAQpTo2Hk6B6pKBnxQA.png)</text>
-          </svg>
-        </div>
-        <div class="arc-vis-cap">First version — key product info hidden in accordions. Form required 5+ fields including photo uploads.</div>
-      </div>
-      <div class="arc-narr">
-        <div class="arc-circle">01</div>
-        <div>
-          <div class="arc-lbl">Problem</div>
-          <div class="arc-ttl">A product page that lost half its audience before they read a word</div>
-          <div class="arc-one">Futuready sold motor insurance through B2B2C partnerships — embedded inside e-wallet apps like LinkAja. Users got push notifications after paying for fuel at gas stations. Traffic existed. Conversions didn't. 50% of users left before scrolling, the IMEI field cost ~2 minutes of friction, and key product info was buried in accordions.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── 02 PROCESS (blue, compact sidebar) ── -->
-    <div class="arc-sec arc-sec--i arc-sec--compact">
-      <div class="arc-compact-text">
-        <div class="arc-narr" style="margin-bottom:var(--s3);">
-          <div class="arc-circle">02</div>
-          <div>
-            <div class="arc-lbl">Process</div>
-            <div class="arc-ttl">Heatmaps and session recordings showed exactly where the page failed</div>
-            <div class="arc-one">I ran heatmap analysis and session recordings, then split the data into two segments: users who converted vs. users who didn't. Layered in time-on-page data for granular patterns. Peak traffic was 4PM–9PM weekdays — users checked push notifications later from home, not at the gas station.</div>
-          </div>
-        </div>
-      </div>
-      <div class="arc-compact-vis">
-        <div class="arc-vis-inner" data-caption="Coverage benefits surfaced with green checks. Exceptions displayed openly — transparency drove trust.">
-          <svg viewBox="0 0 220 165" width="220" height="165" xmlns="http://www.w3.org/2000/svg">
-            <rect width="220" height="165" fill="#f0f4ff" rx="12"/>
-            <text x="110" y="75" font-family="Inter" font-size="9" fill="#335cff" opacity="0.5" text-anchor="middle">Replace: Benefits &amp; exceptions</text>
-            <text x="110" y="92" font-family="Inter" font-size="9" fill="#335cff" opacity="0.5" text-anchor="middle">(lhFIOTFS8bFPjvZyYtGn7fDj0k.png)</text>
-          </svg>
-        </div>
-        <div class="arc-vis-cap">Heatmap segmentation — converters vs. non-converters</div>
-      </div>
-    </div>
-
-    <!-- ── 03 KEY DECISIONS (green, full-width visual, 3 tabs) ── -->
-    <div class="arc-sec arc-sec--a">
-      <div class="arc-vis">
-        <div class="arc-vis-inner" data-caption="Final design — product page, benefits detail, and insurance certificate. Template scaled to 5+ product categories.">
-          <svg viewBox="0 0 1100 480" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-            <rect width="1100" height="480" fill="#f0fdf5"/>
-            <text x="550" y="220" font-family="Inter" font-size="14" fill="#1fc16b" opacity="0.4" text-anchor="middle">Replace: Final design — 3-phone mockup with product page,</text>
-            <text x="550" y="245" font-family="Inter" font-size="14" fill="#1fc16b" opacity="0.4" text-anchor="middle">benefits detail, certificate (XIcndgnwbp1hpMVbDvzO4pqrpk.png)</text>
-          </svg>
-        </div>
-        <div class="arc-vis-cap">Final design — product page, benefits detail, and insurance certificate. Template scaled to 5+ product categories.</div>
-      </div>
-      <div class="arc-narr">
-        <div class="arc-circle">03</div>
-        <div>
-          <div class="arc-lbl">Key Decisions</div>
-          <div class="arc-ttl">Three changes that fixed the funnel</div>
-          <div class="arc-one">Full redesign wasn't an option — too slow, too risky. I picked the three highest-impact interventions based on what the data showed. The redesigned page became the base template across 3 countries and 5+ product categories.</div>
-        </div>
-      </div>
-      <div class="arc-tw">
-        <div class="arc-tabs">
-          <button class="arc-tab active" onclick="aTab(this,'d-shipped')">Shipped</button>
-          <button class="arc-tab" onclick="aTab(this,'d-killed')">Killed</button>
-          <button class="arc-tab" onclick="aTab(this,'d-deferred')">Deferred</button>
-        </div>
-        <div class="arc-pan active" id="d-shipped">
-          <div class="dec-grid">
-            <div class="dec-card dec-card--g"><div class="dec-status"><span class="dec-dot"></span>Shipped</div><div class="dec-ttl">Front-loaded product info in first fold</div><div class="dec-desc">Price, coverage, USPs visible without scrolling.</div><div class="dec-trade"><strong>Tradeoff:</strong> Lost standalone promo banner — marketing compromise</div></div>
-            <div class="dec-card dec-card--g"><div class="dec-status"><span class="dec-dot"></span>Shipped</div><div class="dec-ttl">Surfaced benefits & exceptions</div><div class="dec-desc">Pulled coverage out of accordions. T&C and Claims stayed collapsed.</div><div class="dec-trade"><strong>Tradeoff:</strong> Longer page, but data showed length wasn't the problem</div></div>
-            <div class="dec-card dec-card--g"><div class="dec-status"><span class="dec-dot"></span>Shipped</div><div class="dec-ttl">Reduced form to 3 fields via partner negotiation</div><div class="dec-desc">Used session recording data to convince the insurance partner.</div><div class="dec-trade"><strong>Tradeoff:</strong> Post-payment data collection adds a second touchpoint</div></div>
-          </div>
-        </div>
-        <div class="arc-pan" id="d-killed">
-          <div class="dec-grid" style="grid-template-columns:1fr;">
-            <div class="dec-card dec-card--r"><div class="dec-status"><span class="dec-dot"></span>Killed</div><div class="dec-ttl">Full page rebuild with custom illustrations</div><div class="dec-desc">Too slow for the timeline.</div><div class="dec-trade"><strong>Why killed:</strong> Incremental changes shipped faster</div></div>
-          </div>
-        </div>
-        <div class="arc-pan" id="d-deferred">
-          <div class="dec-grid" style="grid-template-columns:1fr;">
-            <div class="dec-card dec-card--a"><div class="dec-status"><span class="dec-dot"></span>Deferred</div><div class="dec-ttl">IMEI lookup automation (API integration)</div><div class="dec-desc">Engineering capacity wasn't there.</div><div class="dec-trade"><strong>Deferred:</strong> Flagged for Phase 2</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </section>
-
-
-  <!-- ══════════════════════════════════════════════════════════════
-       MODULE: Before/After Slider
-       ══════════════════════════════════════════════════════════════ -->
-  <section class="sec">
-    <div class="dl">Artifact — Before vs After</div>
-    <div class="slw" id="sl">
-      <div class="slb" style="background:#f0f0ee;">
-        <svg viewBox="0 0 1100 310" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-          <rect width="1100" height="310" fill="#fff5f5"/>
-          <text x="550" y="145" font-family="Inter" font-size="13" fill="#fb3748" opacity="0.35" text-anchor="middle">Replace: Before — first fold with banner,</text>
-          <text x="550" y="168" font-family="Inter" font-size="13" fill="#fb3748" opacity="0.35" text-anchor="middle">no product info (crop TJN7xfpmAQpTo2Hk6B6pKBnxQA.png panel 1)</text>
-        </svg>
-      </div>
-      <div class="sla" id="sla">
-        <svg viewBox="0 0 1100 310" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-          <rect width="1100" height="310" fill="#f0fdf5"/>
-          <text x="550" y="145" font-family="Inter" font-size="13" fill="#1fc16b" opacity="0.35" text-anchor="middle">Replace: After — price, coverage, USPs above the fold</text>
-          <text x="550" y="168" font-family="Inter" font-size="13" fill="#1fc16b" opacity="0.35" text-anchor="middle">(tqmnkZNVDagz7mDH4Rj611hLw.png)</text>
-        </svg>
-      </div>
-      <span class="sll sll-b">Before</span><span class="sll sll-a">After</span>
-      <div class="sld" id="sld"></div>
-      <div class="slh" id="slh"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 4l-3 4 3 4M11 4l3 4-3 4"/></svg></div>
-    </div>
-  </section>
-
-
-  <!-- ══════════════════════════════════════════════════════════════
-       REQUIRED: NextCase
-       ══════════════════════════════════════════════════════════════ -->
-  <div class="next-case">
-    <div class="next-case__label">Next case study</div>
-    <a href="case-study-helian.html" class="next-case__link">
-      <div>
-        <div class="next-case__eyebrow">Healthcare · Indonesia · 2018</div>
-        <div class="next-case__title">Helian Care Logbook</div>
-      </div>
-      <svg class="next-case__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  <nav class="nav">
+    <a href="index.html" class="back">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M10 7H4M4 7L7 4M4 7L7 10"/></svg>
+      Back
     </a>
-  </div>
-
+    <a href="mailto:chardrizard@gmail.com" class="mail">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+    </a>
+  </nav>
 </div>
 
-<!-- ══════════════════════════════════════════════════════════════
-     REQUIRED: Footer
-     ══════════════════════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════
+     HERO
+     ══════════════════════════════════════ -->
+<div class="shell">
+  <header class="hero">
+    <div class="hero__eyebrow">Insurtech · B2B2C · 2019</div>
+    <h1 class="hero__title">Futuready Motor Insurance<br><em>Tripling conversions by redesigning what users see first</em></h1>
+    <p class="hero__body">B2B2C motor insurance embedded in e-wallet apps. Heatmap data showed exactly where users dropped. Three targeted interventions delivered +230% conversion.</p>
+    <div class="hero__meta">
+      <div class="mi"><span class="ml">Role</span><span class="mv">Product Designer (Lead)</span></div>
+      <div class="mi"><span class="ml">Team</span><span class="mv">2 FE devs, 1 growth marketer</span></div>
+      <div class="mi"><span class="ml">Duration</span><span class="mv">~3 months</span></div>
+      <div class="mi"><span class="ml">Platform</span><span class="mv">Mobile web (embedded)</span></div>
+    </div>
+  </header>
+</div>
+
+<!-- ══════════════════════════════════════
+     HERO IMAGE
+     ══════════════════════════════════════ -->
+<div class="shell">
+  <div class="sec">
+    <div class="shot" style="margin-bottom:0;">
+      <div class="shot__frame">
+        <div class="shot__placeholder">
+          <span>Replace: Final design overview — 3-phone mockup showing product page (price + coverage above fold), benefits detail, insurance certificate</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     OUTCOMES
+     ══════════════════════════════════════ -->
+<div class="shell">
+  <section class="sec">
+    <div class="outcomes">
+      <div class="outcome">
+        <div class="outcome__kicker">Conversion rate</div>
+        <div class="outcome__value" style="color:var(--green);">+230%</div>
+        <div class="outcome__label">Policies sold vs. previous version of the page.</div>
+      </div>
+      <div class="outcome">
+        <div class="outcome__kicker">Engagement</div>
+        <div class="outcome__value" style="color:var(--amber);">+60%</div>
+        <div class="outcome__label">Avg. time on page, up to 60 seconds from baseline.</div>
+      </div>
+      <div class="outcome">
+        <div class="outcome__kicker">Scale</div>
+        <div class="outcome__value" style="color:var(--blue);">3</div>
+        <div class="outcome__label">Countries adopted the redesign as the base template (Indonesia, Romania, Thailand).</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════
+     CONTEXT
+     ══════════════════════════════════════ -->
+<div class="shell">
+  <section class="sec">
+    <div class="ctx">
+      <div class="ctx__label-col">Context</div>
+      <div class="ctx__col">
+        <p>Futuready sold motor insurance through <strong>B2B2C partnerships</strong> embedded in e-wallet apps like LinkAja. Users received push notifications after paying for fuel. Traffic existed. Conversions didn't.</p>
+        <p><strong>50%</strong> of users left before scrolling. The IMEI field cost ~2 minutes of friction. Key product info was buried in accordions. The page was designed as a brochure, not a decision tool.</p>
+      </div>
+      <div class="ctx__col">
+        <p>No full rebuild. Timeline was 3 months, engineering capacity was limited. The brief: find the highest-impact interventions from behavioral data and ship them fast.</p>
+        <p>I owned research (heatmaps, session recordings), all UX and interaction design, and stakeholder negotiation with the insurance partner to reduce form fields from <strong>5+ to 3</strong>. <a href="#process-deck" class="ctx__link">See the process walkthrough below.</a></p>
+      </div>
+      <div class="ctx__owned-label">What I owned</div>
+      <div class="ctx__owned-tags">
+        <div class="tag-group">
+          <span class="tag-item"><span class="tag-item__dot" style="background:var(--blue);"></span>Heatmap and session analysis</span>
+          <span class="tag-item"><span class="tag-item__dot" style="background:var(--blue);"></span>Stakeholder negotiation (form fields)</span>
+          <span class="tag-item"><span class="tag-item__dot" style="background:var(--green);"></span>UX and interaction design</span>
+          <span class="tag-item"><span class="tag-item__dot" style="background:var(--green);"></span>Mobile web (with FE)</span>
+          <span class="tag-item"><span class="tag-item__dot" style="background:var(--amber);"></span>Template system (3 countries)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════
+     SCREENSHOTS — What we shipped
+     ══════════════════════════════════════ -->
+<div class="shell">
+  <section class="sec">
+    <div class="dl">What we shipped</div>
+
+    <div class="shot">
+      <div class="shot__frame">
+        <div class="shot__placeholder">
+          <span>Replace: Product page — price, coverage summary, and USPs all visible above the fold without scrolling</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="shot-grid">
+      <div class="shot">
+        <div class="shot__frame">
+          <div class="shot__placeholder" style="min-height:300px;">
+            <span>Replace: Benefits and exceptions surfaced — coverage pulled out of accordions with green checkmarks, exceptions shown openly below</span>
+          </div>
+        </div>
+        <div class="shot__caption">
+          <span class="shot__caption-text">Benefits surfaced. Exceptions shown openly, not hidden.</span>
+          <span class="shot__caption-label">Fig 1</span>
+        </div>
+      </div>
+      <div class="shot">
+        <div class="shot__frame">
+          <div class="shot__placeholder" style="min-height:300px;">
+            <span>Replace: Reduced form — 3 fields only (down from 5+). IMEI field removed from initial purchase flow</span>
+          </div>
+        </div>
+        <div class="shot__caption">
+          <span class="shot__caption-text">Form reduced to 3 fields. IMEI moved to post-payment.</span>
+          <span class="shot__caption-label">Fig 2</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="shot">
+      <div class="shot__frame">
+        <div class="shot__placeholder" style="min-height:300px;">
+          <span>Replace: Insurance certificate screen — confirmation state after purchase, policy details and coverage summary visible immediately</span>
+        </div>
+      </div>
+      <div class="shot__caption">
+        <span class="shot__caption-text">Certificate issued on purchase. Template reused across 3 countries.</span>
+        <span class="shot__caption-label">Fig 3</span>
+      </div>
+    </div>
+
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════
+     SLIDEDECK — Process and reflection
+     ══════════════════════════════════════ -->
+<div class="shell" id="process-deck">
+  <section class="sec">
+    <div class="dl">Process and reflection</div>
+    <div class="deck" data-deck="process">
+      <div class="deck__viewport">
+
+        <!-- Slide 1: Problem -->
+        <div class="deck__slide active">
+          <div class="deck__slide-inner">
+            <span>Replace: Problem slide — before-state screenshots. 50% drop before scroll. IMEI field friction (~2 min). Product info buried in accordions. Data from heatmap analysis.</span>
+          </div>
+        </div>
+
+        <!-- Slide 2: Research -->
+        <div class="deck__slide">
+          <div class="deck__slide-inner">
+            <span>Replace: Research slide — heatmap segmentation, converters vs. non-converters. Peak traffic 4PM-9PM weekdays (users at home, not at the pump). Drop-off concentrated at first fold.</span>
+          </div>
+        </div>
+
+        <!-- Slide 3: Direction -->
+        <div class="deck__slide">
+          <div class="deck__slide-inner">
+            <span>Replace: Direction slide — 3 highest-impact interventions identified from data: front-load product info, surface benefits, reduce form fields. Full rebuild killed (too slow for the timeline).</span>
+          </div>
+        </div>
+
+        <!-- Slide 4: Negotiation -->
+        <div class="deck__slide">
+          <div class="deck__slide-inner">
+            <span>Replace: Negotiation slide — session recording data used to convince insurance partner to cut form from 5+ fields to 3. Post-payment data collection as the accepted compromise.</span>
+          </div>
+        </div>
+
+        <!-- Slide 5: Outcomes -->
+        <div class="deck__slide">
+          <div class="deck__slide-inner">
+            <span>Replace: Outcomes slide — +230% conversion, +60% time on page. Template adopted across Indonesia, Romania, Thailand. 5+ product categories using the same base.</span>
+          </div>
+        </div>
+
+        <!-- Slide 6: Reflection (two-col, green/amber) -->
+        <div class="deck__slide">
+          <div class="deck__slide-inner">
+            <span>Replace: Reflection slide — two-col layout. Left (green dash): used behavioral data to win the partner negotiation, targeted interventions over full rebuild, template thinking from day one. Right (amber dash): no A/B test on individual changes so impact per intervention is unknown, IMEI automation deferred without a committed Phase 2 date.</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="deck__controls">
+        <div class="deck__dots"></div>
+        <div style="display:flex;align-items:center;gap:var(--s3);">
+          <span class="deck__counter"></span>
+          <div class="deck__nav">
+            <button class="deck__btn" data-dir="prev">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M10 4l-4 4 4 4"/></svg>
+            </button>
+            <button class="deck__btn" data-dir="next">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 4l4 4-4 4"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════
+     NEXT CASE
+     ══════════════════════════════════════ -->
+<div class="shell">
+  <section class="sec">
+    <div class="next-case__label">Next case study</div>
+    <a href="case-study-helian.html" class="next-case__link">
+      <div class="next-case__num">02</div>
+      <div class="next-case__content">
+        <div class="next-case__eyebrow">Healthcare · Passion project · Indonesia · 2018</div>
+        <div class="next-case__title">Helian Care Logbook</div>
+        <div class="next-case__tags">
+          <span class="next-case__tag">Healthcare</span>
+          <span class="next-case__tag">Research pivot</span>
+          <span class="next-case__tag">iOS</span>
+        </div>
+      </div>
+      <svg class="next-case__arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════
+     FOOTER
+     ══════════════════════════════════════ -->
 <footer class="shell ft">
   <span class="ftc">&copy; 2026 — Richard</span>
   <a href="mailto:chardrizard@gmail.com" class="ftl">Let's chat &rarr;</a>
 </footer>
 
-
-<!-- ══════════════════════════════════════════════════════════════
-     SCRIPTS
-     ══════════════════════════════════════════════════════════════ -->
 <script>
-/* ── Tab switching (Story Arc module) ── */
-function aTab(btn,id){const w=btn.closest('.arc-tw');if(!w)return;w.querySelectorAll('.arc-tab').forEach(t=>t.classList.remove('active'));w.querySelectorAll('.arc-pan').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById(id).classList.add('active');}
+/* SlideDeck */
+document.querySelectorAll('[data-deck]').forEach(deck => {
+  const slides = deck.querySelectorAll('.deck__slide');
+  const dotsWrap = deck.querySelector('.deck__dots');
+  const counter = deck.querySelector('.deck__counter');
+  const n = slides.length;
+  let cur = 0;
 
-/* ── Before/After Slider ── */
-(function(){const w=document.getElementById('sl');if(!w)return;const a=document.getElementById('sla'),d=document.getElementById('sld'),h=document.getElementById('slh');let dr=false;const set=p=>{p=Math.max(4,Math.min(96,p));a.style.clipPath=`inset(0 ${(100-p).toFixed(1)}% 0 0)`;d.style.left=h.style.left=`${p}%`;};set(50);const gx=e=>e.touches?e.touches[0].clientX:e.clientX;const mv=e=>{if(!dr)return;e.preventDefault();const r=w.getBoundingClientRect();set(((gx(e)-r.left)/r.width)*100);};w.addEventListener('mousedown',e=>{dr=true;mv(e);});w.addEventListener('touchstart',e=>{dr=true;mv(e);},{passive:false});document.addEventListener('mousemove',mv);document.addEventListener('touchmove',mv,{passive:false});document.addEventListener('mouseup',()=>dr=false);document.addEventListener('touchend',()=>dr=false);})();
+  for (let i = 0; i < n; i++) {
+    const dot = document.createElement('span');
+    dot.className = 'deck__dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => go(i));
+    dotsWrap.appendChild(dot);
+  }
+  const dots = dotsWrap.querySelectorAll('.deck__dot');
 
-/* ── Zoom overlay (Story Arc visuals) ── */
-(function(){const els=document.querySelectorAll('.arc-vis-inner');if(!els.length)return;const ov=document.createElement('div');ov.className='vis-ov';ov.innerHTML=`<div class="vis-ov-card"><div id="vc"></div><div class="vis-ov-ft"><span class="vis-ov-cap" id="vcp"></span><button class="vis-ov-x" id="vx"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 3l10 10M13 3L3 13"/></svg></button></div></div>`;document.body.appendChild(ov);const vc=document.getElementById('vc'),vcp=document.getElementById('vcp'),vx=document.getElementById('vx');function open(el){const svg=el.querySelector('svg');if(!svg)return;const c=svg.cloneNode(true);c.removeAttribute('width');c.removeAttribute('height');c.classList.add('vis-ov-svg');vc.innerHTML='';vc.appendChild(c);vcp.textContent=el.getAttribute('data-caption')||'';ov.classList.add('is-open');document.body.style.overflow='hidden';}function close(){ov.classList.remove('is-open');document.body.style.overflow='';}els.forEach(el=>{el.setAttribute('role','button');el.setAttribute('tabindex','0');el.addEventListener('click',()=>open(el));el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')open(el);});});vx.addEventListener('click',close);ov.addEventListener('click',e=>{if(e.target===ov)close();});document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});})();
+  function go(idx) {
+    if (idx === cur || idx < 0 || idx >= n) return;
+    const dir = idx > cur ? 1 : -1;
+    slides[cur].classList.remove('active');
+    slides[cur].style.transform = `translateX(${-40 * dir}px)`;
+    dots[cur].classList.remove('active');
+    setTimeout(() => { slides[cur].style.transform = ''; }, 400);
+    cur = idx;
+    slides[cur].classList.add('active');
+    dots[cur].classList.add('active');
+    if (counter) counter.textContent = (cur + 1) + ' / ' + n;
+  }
+
+  deck.querySelectorAll('.deck__btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      go(btn.dataset.dir === 'next' ? (cur + 1) % n : (cur - 1 + n) % n);
+    });
+  });
+
+  deck.setAttribute('tabindex', '0');
+  deck.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') go((cur + 1) % n);
+    if (e.key === 'ArrowLeft') go((cur - 1 + n) % n);
+  });
+
+  let sx = 0;
+  deck.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
+  deck.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - sx;
+    if (Math.abs(dx) > 50) go(dx < 0 ? (cur + 1) % n : (cur - 1 + n) % n);
+  });
+
+  if (counter) counter.textContent = '1 / ' + n;
+});
+
+/* Smooth scroll */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
 </script>
+</body>
+</html>
