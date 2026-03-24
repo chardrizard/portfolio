@@ -410,8 +410,13 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /* ═══════════════════════════════════════════
    FOOTER
    ═══════════════════════════════════════════ */
-.footer { padding: var(--space-6) 0; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-subtle); margin-top: var(--space-10); }
+.footer { padding: var(--space-6) 0; display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); border-top: 1px solid var(--border-subtle); margin-top: var(--space-10); }
 .footer__copy { font-size: var(--para-xs); color: var(--fg-muted); }
+.footer__meta { display: flex; align-items: center; gap: var(--space-3); }
+.footer__status { display: flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 11px; color: var(--fg-muted); }
+.footer__dot { width: 5px; height: 5px; border-radius: 50%; background: var(--success-500); flex-shrink: 0; }
+.footer__divider { font-size: var(--para-xs); color: var(--fg-muted); opacity: 0.3; }
+.footer__loc { font-family: var(--font-mono); font-size: 11px; color: var(--fg-muted); }
 .footer__link { font-size: var(--para-xs); color: var(--fg-secondary); transition: color var(--duration-fast); }
 .footer__link:hover { color: var(--fg-primary); }
 
@@ -731,8 +736,15 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 <!-- FOOTER -->
 <footer class="shell footer">
-  <span class="footer__copy">© 2026 — Richard</span>
-  <a href="mailto:chardrizard@gmail.com" class="footer__link">Let's chat →</a>
+  <span class="footer__copy">© 2026 — Richard. Designed in <strong style="color:var(--fg-secondary);font-weight:500;">Utrecht</strong>, overthought everywhere.</span>
+  <div class="footer__meta">
+    <span class="footer__status">
+      <span class="footer__dot"></span>
+      Open to work
+    </span>
+    <span class="footer__divider">·</span>
+    <span class="footer__loc">Utrecht, NL</span>
+  </div>
 </footer>
 
 <!-- DROPDOWN SCRIPT -->
