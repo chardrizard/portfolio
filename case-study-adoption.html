@@ -137,11 +137,14 @@ img{display:block;max-width:100%;}
 .ctx__col p{font-size:14px;color:var(--fg2);line-height:22px;margin-bottom:var(--s3);}
 .ctx__col p:last-child{margin-bottom:0;}
 .ctx__col strong{color:var(--fg);font-weight:500;}
+.ctx__owned-label{font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fgm);padding-top:var(--s2);}
+.ctx__owned-tags{grid-column:2 / -1;padding-top:var(--s6);}
 .ctx__link{color:var(--blue);font-weight:500;text-decoration:none;border-bottom:1px solid rgba(51,92,255,0.3);transition:border-color var(--tf);padding-bottom:1px;}
 .ctx__link:hover{border-color:var(--blue);}
 @media(max-width:768px){
   .ctx{grid-template-columns:1fr;gap:var(--s5);}
-  .ctx__label-col{display:none;}
+  .ctx__label-col,.ctx__owned-label{display:none;}
+  .ctx__owned-tags{grid-column:1;}
 }
 
 /* ═══════════════════════════════════════
@@ -150,9 +153,7 @@ img{display:block;max-width:100%;}
 .outcomes{
   display:grid;grid-template-columns:repeat(3,1fr);
   gap:0;
-  border-top:1px solid var(--brs);
-  border-bottom:1px solid var(--brs);
-  padding:var(--s10) 0;
+  padding-top:var(--s6);
 }
 .outcome{padding-right:var(--s8);}
 .outcome + .outcome{
@@ -330,32 +331,48 @@ img{display:block;max-width:100%;}
 @media(max-width:768px){.dd-grid{grid-template-columns:1fr;}}
 
 /* ═══════════════════════════════════════
-   NEXTCASE
+   NEXTCASE — style C, warm sand
    ═══════════════════════════════════════ */
-.next-case{}
 .next-case__label{
   font-family:var(--mono);font-size:9px;letter-spacing:0.06em;
   text-transform:uppercase;color:var(--fgm);margin-bottom:var(--s3);
 }
 .next-case__link{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:var(--s6);border:1px solid var(--brs);border-radius:var(--rl);
-  box-shadow:var(--sh);background:var(--white);
-  transition:box-shadow var(--tn) var(--ease);
+  display:grid;grid-template-columns:80px 1fr auto;align-items:center;
+  border-radius:var(--rl);overflow:hidden;
+  background:#f5f0e8;
   text-decoration:none;color:inherit;
+  transition:filter var(--tn) var(--ease);
 }
-.next-case__link:hover{box-shadow:var(--sh-h);}
+.next-case__link:hover{filter:brightness(0.97);}
+.next-case__num{
+  padding:var(--s6);
+  font-size:28px;font-weight:600;font-variant-numeric:tabular-nums;
+  text-align:center;font-family:var(--mono);
+  color:#a89070;
+  border-right:1px solid rgba(0,0,0,0.06);
+  align-self:stretch;display:flex;align-items:center;justify-content:center;
+}
+.next-case__content{padding:var(--s5) var(--s6);}
 .next-case__eyebrow{
   font-family:var(--mono);font-size:10px;letter-spacing:0.06em;
-  text-transform:uppercase;color:var(--fgm);margin-bottom:var(--s1);
+  text-transform:uppercase;color:#a89070;margin-bottom:var(--s1);
 }
 .next-case__title{
-  font-size:24px;font-weight:500;letter-spacing:-0.12px;
-  line-height:32px;color:var(--n950);
+  font-size:20px;font-weight:500;letter-spacing:-0.12px;
+  line-height:1.25;color:#2a2520;margin-bottom:var(--s2);
+}
+.next-case__tags{display:flex;gap:var(--s2);flex-wrap:wrap;}
+.next-case__tag{
+  font-size:11px;color:#7a6650;
+  border:1px solid rgba(168,144,112,0.3);
+  background:rgba(168,144,112,0.1);
+  border-radius:var(--rf);padding:2px 10px;
 }
 .next-case__arrow{
-  width:24px;height:24px;color:var(--fgm);
-  transition:transform var(--tn) var(--ease);flex-shrink:0;
+  padding:0 var(--s6);
+  color:#a89070;flex-shrink:0;
+  transition:transform var(--tn) var(--ease);
 }
 .next-case__link:hover .next-case__arrow{transform:translateX(4px);}
 
@@ -408,12 +425,14 @@ img{display:block;max-width:100%;}
      HERO IMAGE — component library overview
      ═══════════════════════════════════════ -->
 <div class="shell">
-  <div class="shot sec">
+  <div class="sec">
+  <div class="shot" style="margin-bottom:0;">
     <div class="shot__frame">
       <div class="shot__placeholder">
         <span>Replace: Component library overview — full component sheet showing Fields, Dropdowns, Badges, Step Indicators, and Graphs across all states. The "before and after" of the system in one view.</span>
       </div>
     </div>
+  </div>
   </div>
 </div>
 
@@ -457,25 +476,19 @@ img{display:block;max-width:100%;}
         <p>My brief was to take an existing but under-adopted system and turn it into something teams would actually use. That meant the work wasn't just design — it was architecture, documentation, and change management in equal parts.</p>
         <p>I owned the audit, redesigned the component architecture with conditional logic instead of platform forks, wrote all documentation myself, and built the adoption pipeline that brought the first three teams onboard within [X months]. <a href="#process-deck" class="ctx__link">Skip to the full process walkthrough ↓</a></p>
       </div>
-    </div>
-  </section>
-</div>
-
-<!-- ═══════════════════════════════════════
-     WHAT I OWNED
-     ═══════════════════════════════════════ -->
-<div class="shell">
-  <section class="sec">
-    <div class="dl">What I owned</div>
-    <div class="tag-group">
-      <span class="tag-item"><span class="tag-item__dot" style="background:var(--green);"></span>Component audit</span>
-      <span class="tag-item"><span class="tag-item__dot" style="background:var(--green);"></span>Component architecture</span>
-      <span class="tag-item"><span class="tag-item__dot" style="background:var(--green);"></span>Auto-layout + conditional logic</span>
-      <span class="tag-item"><span class="tag-item__dot" style="background:var(--blue);"></span>Stakeholder alignment</span>
-      <span class="tag-item"><span class="tag-item__dot" style="background:var(--blue);"></span>Component brief template</span>
-      <span class="tag-item"><span class="tag-item__dot" style="background:var(--blue);"></span>Adoption strategy</span>
-      <span class="tag-item"><span class="tag-item__dot" style="background:var(--amber);"></span>Documentation guidelines</span>
-      <span class="tag-item"><span class="tag-item__dot" style="background:var(--amber);"></span>Semantic color tokens</span>
+      <div class="ctx__owned-label">What I owned</div>
+      <div class="ctx__owned-tags">
+        <div class="tag-group">
+          <span class="tag-item"><span class="tag-item__dot" style="background:var(--green);"></span>Component audit</span>
+          <span class="tag-item"><span class="tag-item__dot" style="background:var(--green);"></span>Component architecture</span>
+          <span class="tag-item"><span class="tag-item__dot" style="background:var(--green);"></span>Auto-layout + conditional logic</span>
+          <span class="tag-item"><span class="tag-item__dot" style="background:var(--blue);"></span>Stakeholder alignment</span>
+          <span class="tag-item"><span class="tag-item__dot" style="background:var(--blue);"></span>Component brief template</span>
+          <span class="tag-item"><span class="tag-item__dot" style="background:var(--blue);"></span>Adoption strategy</span>
+          <span class="tag-item"><span class="tag-item__dot" style="background:var(--amber);"></span>Documentation guidelines</span>
+          <span class="tag-item"><span class="tag-item__dot" style="background:var(--amber);"></span>Semantic color tokens</span>
+        </div>
+      </div>
     </div>
   </section>
 </div>
@@ -734,11 +747,17 @@ img{display:block;max-width:100%;}
   <section class="sec">
     <div class="next-case__label">Next case study</div>
     <a href="case-study-futuready.html" class="next-case__link">
-      <div>
+      <div class="next-case__num">02</div>
+      <div class="next-case__content">
         <div class="next-case__eyebrow">Insurtech · B2B2C · 2019</div>
         <div class="next-case__title">Futuready Motor Insurance</div>
+        <div class="next-case__tags">
+          <span class="next-case__tag">B2B2C</span>
+          <span class="next-case__tag">Insurtech</span>
+          <span class="next-case__tag">Mobile</span>
+        </div>
       </div>
-      <svg class="next-case__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      <svg class="next-case__arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
     </a>
   </section>
 </div>
