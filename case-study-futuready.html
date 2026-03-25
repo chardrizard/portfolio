@@ -61,19 +61,37 @@ img{display:block;max-width:100%;}
 /* ═══════════════════════════════════════
    NAV
    ═══════════════════════════════════════ */
-.nav{
-  padding:var(--s3) 0;
-  display:flex;align-items:center;justify-content:space-between;
-  border-bottom:1px solid var(--brs);
-  position:sticky;top:0;
-  background:rgba(245,245,247,0.88);
-  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  z-index:100;
-}
-.back{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:var(--fg2);transition:color var(--tf);}
+/* replace with */
+.nav{padding:var(--s3) 0;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;border-bottom:1px solid rgba(23,23,23,0.05);position:sticky;top:0;background:rgba(245,245,247,0.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);z-index:100;}
+.back{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:var(--fg2);transition:color var(--tf);justify-self:start;}
 .back:hover{color:var(--fg);}
-.mail{width:32px;height:32px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;color:var(--fgm);transition:color var(--tf);}
-.mail:hover{color:var(--fg);}
+.nav__select{position:relative;justify-self:center;}
+.nav__trigger{display:flex;align-items:center;gap:8px;padding:5px 10px 5px 12px;border:1px solid rgba(23,23,23,0.08);border-radius:9999px;font-size:14px;font-weight:500;color:var(--fg2);background:var(--white);transition:all 150ms;cursor:pointer;user-select:none;}
+.nav__trigger:hover,.nav__trigger[aria-expanded="true"]{border-color:rgba(23,23,23,0.14);color:var(--fg);}
+.nav__trigger-icon{width:14px;height:14px;opacity:0.4;transition:transform 250ms var(--ease);}
+.nav__trigger[aria-expanded="true"] .nav__trigger-icon{transform:rotate(180deg);}
+.nav__trigger-dot{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;}
+.nav__dropdown{position:absolute;top:calc(100% + 6px);left:50%;transform:translateX(-50%) translateY(-6px) scale(0.97);width:280px;background:var(--white);border-radius:var(--rl);box-shadow:0 4px 12px rgba(23,23,23,0.08),0 16px 40px rgba(23,23,23,0.12),0 0 0 1px rgba(23,23,23,0.06);padding:8px;opacity:0;visibility:hidden;transition:all 250ms var(--ease);z-index:300;}
+.nav__dropdown.open{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0) scale(1);}
+.nav__dropdown-label{font-family:var(--mono);font-size:10px;letter-spacing:0.048em;text-transform:uppercase;color:var(--fgm);padding:8px 12px 4px;}
+.nav__dropdown-item{display:flex;align-items:center;gap:12px;padding:8px 12px;border-radius:var(--r);transition:background 150ms;cursor:pointer;text-decoration:none;}
+.nav__dropdown-item:hover,.nav__dropdown-item--active{background:var(--n50);}
+.nav__dropdown-swatch{width:32px;height:32px;border-radius:var(--r);flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.nav__dropdown-text{flex:1;min-width:0;}
+.nav__dropdown-title{font-size:14px;font-weight:500;line-height:20px;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.nav__dropdown-meta{font-size:11px;color:var(--fgm);}
+.nav__dropdown-arrow{width:16px;height:16px;color:var(--fgm);opacity:0;transition:opacity 150ms;}
+.nav__dropdown-item:hover .nav__dropdown-arrow{opacity:1;}
+.nav__mail{justify-self:end;height:34px;border-radius:var(--r);border:1px solid rgba(23,23,23,0.08);display:flex;align-items:center;padding:0 9px;color:var(--fg2);background:var(--white);overflow:hidden;white-space:nowrap;flex-direction:row-reverse;transition:border-color 150ms,color 150ms;text-decoration:none;}
+.nav__mail svg{width:15px;height:15px;flex-shrink:0;display:block;}
+.nav__mail .mail-label{font-size:12px;font-weight:500;max-width:0;overflow:hidden;opacity:0;margin-right:0;display:flex;align-items:center;gap:5px;transition:max-width 0.3s var(--ease),opacity 0.2s,margin-right 0.3s var(--ease);}
+.nav__mail .mail-wave{display:inline-block;font-style:normal;font-size:13px;transform-origin:70% 80%;}
+.nav__mail:hover{border-color:rgba(23,23,23,0.14);color:var(--fg);}
+.nav__mail:hover .mail-label{max-width:110px;opacity:1;margin-right:8px;}
+.nav__mail:hover .mail-wave{animation:mailWave 0.6s ease-in-out;}
+@keyframes mailWave{0%{transform:rotate(0deg);}15%{transform:rotate(14deg);}30%{transform:rotate(-8deg);}45%{transform:rotate(12deg);}60%{transform:rotate(-4deg);}75%{transform:rotate(8deg);}100%{transform:rotate(0deg);}}
+.nav__backdrop{position:fixed;inset:0;z-index:199;display:none;}
+.nav__backdrop.open{display:block;}
 
 /* ═══════════════════════════════════════
    HERO
@@ -234,7 +252,7 @@ img{display:block;max-width:100%;}
           </div>
           <svg class="nav__dropdown-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 12l4-4-4-4"/></svg>
         </a>
-        <a href="case-study-futuready.html" class="nav__dropdown-item" role="menuitem">
+        <a href="case-study-futuready.html" class="nav__dropdown-item nav__dropdown-item--active" role="menuitem">
           <div class="nav__dropdown-swatch" style="background:rgba(51,92,255,0.08);">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5" fill="none" stroke="#335cff" stroke-opacity="0.5" stroke-width="1.5"/><path d="M8 5v3l2 1.5" stroke="#335cff" stroke-opacity="0.4" stroke-width="1" stroke-linecap="round"/></svg>
           </div>
@@ -517,7 +535,22 @@ img{display:block;max-width:100%;}
   </div>
 </footer>
 
+     
+
 <script>
+const trigger = document.getElementById('navTrigger');
+const dropdown = document.getElementById('navDropdown');
+const backdrop = document.getElementById('navBackdrop');
+function toggleNav(open) {
+  const isOpen = open ?? !dropdown.classList.contains('open');
+  dropdown.classList.toggle('open', isOpen);
+  backdrop.classList.toggle('open', isOpen);
+  trigger.setAttribute('aria-expanded', isOpen);
+}
+trigger.addEventListener('click', () => toggleNav());
+backdrop.addEventListener('click', () => toggleNav(false));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') toggleNav(false); });
+     
 /* SlideDeck */
 document.querySelectorAll('[data-deck]').forEach(deck => {
   const slides = deck.querySelectorAll('.deck__slide');
