@@ -9,7 +9,8 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23171717'/><text x='16' y='22' text-anchor='middle' font-size='18' fill='white' font-family='system-ui' font-weight='600'>R</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Fraunces added to match index -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,200;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
 <style>
 :root {
   --n950:#0e1218;--n900:#171717;--n700:#2e2e2e;--n600:#525252;
@@ -21,6 +22,7 @@
   --sh:0 0 0 1px rgba(23,23,23,0.04),0 1px 2px rgba(23,23,23,0.03),0 4px 8px -2px rgba(23,23,23,0.03);
   --sans:'Inter',-apple-system,sans-serif;
   --mono:'DM Mono',monospace;
+  --display:'Fraunces',Georgia,serif;
   --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:20px;--s6:24px;
   --s8:32px;--s10:40px;--s12:48px;--s16:64px;--s20:80px;
   --r:8px;--rm:12px;--rl:16px;--rf:9999px;
@@ -42,18 +44,40 @@ a{color:inherit;text-decoration:none;}
 .nav__mail{width:34px;height:34px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;color:var(--fgm);border:1px solid var(--br);background:var(--white);transition:all var(--tf);}
 .nav__mail:hover{border-color:var(--brm);color:var(--fg);}
 
-/* Hero */
+/* ── Hero — Fraunces italic for display line ── */
 .hero{padding:var(--s20) 0 var(--s16);}
-.hero__title{font-size:clamp(38px,5.5vw,72px);font-weight:500;letter-spacing:-0.72px;line-height:1.02;color:var(--n950);max-width:820px;margin-bottom:var(--s6);}
-.hero__title em{font-style:normal;color:var(--n400);font-weight:300;}
-.hero__sub{font-size:16px;line-height:26px;letter-spacing:-0.176px;color:var(--fg2);max-width:480px;}
+
+.hero__title{
+  font-family:var(--display);
+  font-style:italic;
+  font-weight:300;
+  font-size:clamp(42px,6vw,80px);
+  letter-spacing:-2.5px;
+  line-height:0.97;
+  color:var(--n950);
+  max-width:860px;
+  margin-bottom:var(--s6);
+}
+
+/* The "Stayed on purpose." line — lighter weight, slightly more muted */
+.hero__title em{
+  font-style:italic;
+  font-weight:200;
+  color:var(--n400);
+}
+
+.hero__sub{
+  font-family:var(--sans);
+  font-weight:300;
+  font-size:16px;
+  line-height:26px;
+  letter-spacing:-0.176px;
+  color:var(--fg2);
+  max-width:480px;
+}
 .hero__sub strong{color:var(--fg);font-weight:500;}
 
-/* ─────────────────────────────────
-   STICKY SCROLL SECTIONS
-   Left col = photos (scrolls)
-   Right col = text (sticky)
-───────────────────────────────── */
+/* ── Sections ── */
 .sections{padding:var(--s16) 0 var(--s20);}
 
 .section{
@@ -65,15 +89,13 @@ a{color:inherit;text-decoration:none;}
 }
 .section:last-child{margin-bottom:0;}
 
-/* Photos column — just stacks vertically */
 .section__photos{
   display:flex;flex-direction:column;gap:var(--s3);
 }
 
-/* Sticky text column */
 .section__sticky{
   position:sticky;
-  top:72px; /* nav ~52px + 20px breathing room */
+  top:72px;
 }
 
 /* Photo tiles */
@@ -87,10 +109,10 @@ a{color:inherit;text-decoration:none;}
   transition:transform 0.7s var(--ease);
 }
 .photo:hover img{transform:scale(1.03);}
-.photo--tall    {aspect-ratio:3/4;}
-.photo--wide    {aspect-ratio:16/9;}
-.photo--sq      {aspect-ratio:1/1;}
-.photo--cinema  {aspect-ratio:21/9;}
+.photo--tall   {aspect-ratio:3/4;}
+.photo--wide   {aspect-ratio:16/9;}
+.photo--sq     {aspect-ratio:1/1;}
+.photo--cinema {aspect-ratio:21/9;}
 
 .photo__cap{
   position:absolute;bottom:0;left:0;right:0;
@@ -110,14 +132,26 @@ a{color:inherit;text-decoration:none;}
 }
 .section__eyebrow::after{content:'';flex:1;height:1px;background:var(--brs);}
 
+/* Section titles — Fraunces, lighter than hero, non-italic for contrast */
 .section__title{
-  font-size:clamp(22px,2.5vw,34px);font-weight:500;
-  letter-spacing:-0.34px;line-height:1.12;
-  color:var(--n950);margin-bottom:var(--s5);
+  font-family:var(--display);
+  font-style:italic;
+  font-weight:300;
+  font-size:clamp(20px,2.2vw,30px);
+  letter-spacing:-1px;
+  line-height:1.15;
+  color:var(--n950);
+  margin-bottom:var(--s5);
 }
 
+/* Body — Inter 300 to match index register */
 .section__body{
-  font-size:15px;line-height:26px;letter-spacing:-0.1px;color:var(--fg2);
+  font-family:var(--sans);
+  font-weight:300;
+  font-size:15px;
+  line-height:26px;
+  letter-spacing:-0.1px;
+  color:var(--fg2);
 }
 .section__body p{margin-bottom:var(--s4);}
 .section__body p:last-child{margin-bottom:0;}
@@ -135,7 +169,7 @@ a{color:inherit;text-decoration:none;}
 .connect__card:hover{box-shadow:0 0 0 1px rgba(23,23,23,0.06),0 4px 8px rgba(23,23,23,0.05),0 16px 32px -4px rgba(23,23,23,0.09);transform:translateY(-2px);}
 .connect__icon{width:36px;height:36px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;}
 .connect__name{font-size:14px;font-weight:500;color:var(--fg);}
-.connect__handle{font-size:12px;color:var(--fgm);}
+.connect__handle{font-size:12px;font-weight:300;color:var(--fgm);}
 
 /* Footer */
 .footer{padding:var(--s6) 0;display:flex;align-items:center;justify-content:space-between;gap:var(--s4);border-top:1px solid var(--brs);}
@@ -150,13 +184,12 @@ a{color:inherit;text-decoration:none;}
 @media(max-width:900px){
   .shell{width:90%;}
   .section{grid-template-columns:1fr;gap:var(--s8);}
-  /* On mobile, text comes first, then photos */
   .section__sticky{position:relative;top:auto;order:-1;}
   .connect__grid{grid-template-columns:1fr 1fr;}
 }
 @media(max-width:600px){
   .shell{width:94%;}
-  .hero__title{font-size:32px;}
+  .hero__title{font-size:36px;letter-spacing:-1.5px;}
   .hero{padding:var(--s12) 0 var(--s10);}
   .connect__grid{grid-template-columns:1fr 1fr;}
   .footer{flex-direction:column;align-items:flex-start;gap:var(--s3);}
@@ -182,7 +215,7 @@ a{color:inherit;text-decoration:none;}
 
   <header class="hero">
     <h1 class="hero__title">Ended up in Utrecht<br>by accident.<br><em>Stayed on purpose.</em></h1>
-    <p class="hero__sub">Senior UX Designer & design systems specialist. <strong>But you probably already knew that.</strong></p>
+    <p class="hero__sub">Senior UX Designer &amp; design systems specialist. <strong>But you probably already knew that.</strong></p>
   </header>
 
   <div class="sections">
@@ -229,7 +262,6 @@ a{color:inherit;text-decoration:none;}
           <div class="photo__cap">Non-negotiable</div>
         </div>
         <div class="photo photo--sq">
-          <!-- Swap for actual PWA screenshot -->
           <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Data dashboard" loading="lazy">
           <div class="photo__cap">Gym tracker PWA — nobody asked</div>
         </div>
@@ -286,7 +318,6 @@ a{color:inherit;text-decoration:none;}
     <div class="section">
       <div class="section__photos">
         <div class="photo photo--wide">
-          <!-- Swap for Figma workspace or portfolio screenshot -->
           <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Building" loading="lazy">
           <div class="photo__cap">This portfolio. Hand-coded. Weekends gone.</div>
         </div>
@@ -341,7 +372,7 @@ a{color:inherit;text-decoration:none;}
         </div>
         <div>
           <div class="connect__name">Instagram</div>
-          <div class="connect__handle">Photos & life</div>
+          <div class="connect__handle">Photos &amp; life</div>
         </div>
       </a>
       <a href="mailto:chardrizard@gmail.com" class="connect__card">
