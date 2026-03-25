@@ -210,15 +210,72 @@ img{display:block;max-width:100%;}
      ══════════════════════════════════════ -->
 <div class="shell">
   <nav class="nav">
+
     <a href="index.html" class="back">
       <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M10 7H4M4 7L7 4M4 7L7 10"/></svg>
       Back
     </a>
-    <a href="mailto:chardrizard@gmail.com" class="mail">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+
+    <div class="nav__select">
+      <button class="nav__trigger" id="navTrigger" aria-expanded="false" aria-haspopup="true">
+        <span class="nav__trigger-dot"></span>
+        Selected work
+        <svg class="nav__trigger-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 6l4 4 4-4"/></svg>
+      </button>
+      <div class="nav__dropdown" id="navDropdown" role="menu">
+        <div class="nav__dropdown-label">Case studies</div>
+        <a href="case-study-adoption.html" class="nav__dropdown-item" role="menuitem">
+          <div class="nav__dropdown-swatch" style="background:rgba(139,92,246,0.08);">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="5" height="5" rx="1" fill="#8b5cf6" opacity="0.5"/><rect x="9" y="2" width="5" height="5" rx="1" fill="#8b5cf6" opacity="0.3"/><rect x="2" y="9" width="5" height="5" rx="1" fill="#8b5cf6" opacity="0.3"/><rect x="9" y="9" width="5" height="5" rx="1" fill="#8b5cf6" opacity="0.15"/></svg>
+          </div>
+          <div class="nav__dropdown-text">
+            <div class="nav__dropdown-title">Aegon Design System</div>
+            <div class="nav__dropdown-meta">Design Systems · 2022–2023</div>
+          </div>
+          <svg class="nav__dropdown-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 12l4-4-4-4"/></svg>
+        </a>
+        <a href="case-study-aip.html" class="nav__dropdown-item" role="menuitem">
+          <div class="nav__dropdown-swatch" style="background:rgba(31,193,107,0.08);">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="4" width="3" height="3" rx="0.5" fill="#1fc16b" opacity="0.5"/><rect x="7" y="4" width="7" height="1" rx="0.5" fill="#1fc16b" opacity="0.2"/><rect x="2" y="9" width="3" height="3" rx="0.5" fill="#1fc16b" opacity="0.3"/><rect x="7" y="9" width="7" height="1" rx="0.5" fill="#1fc16b" opacity="0.2"/></svg>
+          </div>
+          <div class="nav__dropdown-text">
+            <div class="nav__dropdown-title">Aegon Intermediair Portaal</div>
+            <div class="nav__dropdown-meta">Enterprise B2B · 2021–2022</div>
+          </div>
+          <svg class="nav__dropdown-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 12l4-4-4-4"/></svg>
+        </a>
+        <a href="case-study-futuready.html" class="nav__dropdown-item" role="menuitem">
+          <div class="nav__dropdown-swatch" style="background:rgba(51,92,255,0.08);">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5" fill="none" stroke="#335cff" stroke-opacity="0.5" stroke-width="1.5"/><path d="M8 5v3l2 1.5" stroke="#335cff" stroke-opacity="0.4" stroke-width="1" stroke-linecap="round"/></svg>
+          </div>
+          <div class="nav__dropdown-text">
+            <div class="nav__dropdown-title">Futuready Motor Insurance</div>
+            <div class="nav__dropdown-meta">Insurtech · B2B2C · 2019</div>
+          </div>
+          <svg class="nav__dropdown-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 12l4-4-4-4"/></svg>
+        </a>
+        <a href="case-study-helian.html" class="nav__dropdown-item" role="menuitem">
+          <div class="nav__dropdown-swatch" style="background:rgba(245,158,11,0.08);">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6" cy="7" r="2" fill="#f59e0b" opacity="0.4"/><circle cx="11" cy="5" r="2" fill="#f59e0b" opacity="0.3"/><circle cx="8" cy="11" r="2" fill="#f59e0b" opacity="0.2"/><line x1="6" y1="7" x2="11" y2="5" stroke="#f59e0b" stroke-opacity="0.15" stroke-width="0.75"/></svg>
+          </div>
+          <div class="nav__dropdown-text">
+            <div class="nav__dropdown-title">Helian Care Logbook</div>
+            <div class="nav__dropdown-meta">Healthcare · 2018</div>
+          </div>
+          <svg class="nav__dropdown-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 12l4-4-4-4"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <a href="mailto:chardrizard@gmail.com" class="nav__mail" aria-label="Email">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+      <span class="mail-label"><i class="mail-wave">👋</i> Hit me up!</span>
     </a>
+
   </nav>
 </div>
+
+<div class="nav__backdrop" id="navBackdrop"></div>
 
 <!-- ══════════════════════════════════════
      HERO
@@ -471,8 +528,17 @@ img{display:block;max-width:100%;}
      FOOTER
      ══════════════════════════════════════ -->
 <footer class="shell ft">
-  <span class="ftc">&copy; 2026 — Richard</span>
-  <a href="mailto:chardrizard@gmail.com" class="ftl">Let's chat &rarr;</a>
+  <span class="ftc">&copy; 2026 — Richard. Designed in <strong style="color:var(--n600);font-weight:500;">Utrecht</strong>, overthought everywhere.</span>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span style="display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:11px;color:var(--fgm);">
+      <span style="width:5px;height:5px;border-radius:50%;background:var(--green);flex-shrink:0;display:inline-block;"></span>
+      Open to work
+    </span>
+    <span style="font-size:12px;color:var(--fgm);opacity:0.3;">·</span>
+    <span style="font-family:var(--mono);font-size:11px;color:var(--fgm);">Utrecht, NL</span>
+    <span style="font-size:12px;color:var(--fgm);opacity:0.3;">·</span>
+    <a href="mailto:chardrizard@gmail.com" class="ftl">Let's chat &rarr;</a>
+  </div>
 </footer>
 
 <script>
