@@ -9,7 +9,8 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text x='2' y='28' font-size='28' font-weight='700' font-family='system-ui' fill='%231c1917'>R</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- CHANGE 1: Added Fraunces italic for bio name -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@1,9..144,300&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════
    DESIGN TOKENS — AlignUI
@@ -59,6 +60,7 @@
   /* ── Typography ── */
   --font-sans: 'Inter', -apple-system, sans-serif;
   --font-mono: 'DM Mono', monospace;
+  --font-display: 'Fraunces', Georgia, serif; /* CHANGE 1: display font token */
 
   --h5-size: 24px; --h5-lh: 32px; --h5-ls: -0.12px; --h5-weight: 500;
   --h6-size: 20px; --h6-lh: 28px; --h6-ls: -0.12px;
@@ -286,10 +288,34 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .c__in--tight { padding: var(--space-4); }
 
 /* ═══════════════════════════════════════════
-   BIO CARD
+   BIO CARD — CHANGE 1 + 2
    ═══════════════════════════════════════════ */
-.bio__name { font-size: var(--h5-size); line-height: var(--h5-lh); letter-spacing: var(--h5-ls); font-weight: 500; margin-bottom: var(--space-5); }
-.bio__name span { color: var(--fg-secondary); font-weight: 400; }
+
+/* CHANGE 1: Fraunces italic for the name */
+.bio__name {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 40px;
+  line-height: 1.0;
+  letter-spacing: -2px;
+  margin-bottom: var(--space-5);
+  color: var(--fg-primary);
+}
+
+/* The role subtitle reverts to Inter */
+.bio__name span {
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-weight: 400;
+  font-size: var(--h6-size);
+  line-height: var(--h6-lh);
+  letter-spacing: var(--h6-ls);
+  color: var(--fg-secondary);
+  display: block;
+  margin-top: 6px;
+}
+
 .bio__text { font-size: var(--para-md); line-height: 26px; letter-spacing: var(--para-md-ls); color: var(--fg-secondary); margin-bottom: var(--space-3); }
 .bio__text:last-of-type { margin-bottom: 0; }
 .bio__text strong { color: var(--fg-primary); font-weight: 600; }
@@ -375,7 +401,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .tile:hover .sw:nth-child(even) { transform: scale(0.94) rotate(1.5deg); }
 
 /* ═══════════════════════════════════════════
-   SOCIAL CARD — updated with icon row
+   SOCIAL CARD — CHANGE 3
    ═══════════════════════════════════════════ */
 .social__av {
   width: 36px; height: 36px; background: var(--neutral-900); border-radius: var(--radius-full);
@@ -386,10 +412,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   content:''; position:absolute; bottom:-1px; right:-1px; width:12px; height:12px;
   background:var(--primary-500); border-radius:50%; border:2px solid var(--white);
 }
-.social__handle { font-size: var(--para-xs); color: var(--fg-muted); margin-bottom: var(--space-2); }
+
+/* CHANGE 3: removed @richard.design handle, new bio line */
 .social__bio { font-size: var(--para-xs); line-height: 16px; color: var(--fg-secondary); margin-bottom: var(--space-3); }
 
-/* Social icons row */
 .social__icons {
   display: flex; gap: var(--space-2); margin-top: auto;
 }
@@ -419,16 +445,14 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   margin-bottom: var(--space-3); flex-shrink: 0;
 }
 
-/* Scrollable list */
 .sproj__list {
   flex: 1;
   overflow-y: scroll;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   display: flex;
   flex-direction: column;
   gap: 0;
-  /* mask out bottom 28px to hint more content */
   mask-image: linear-gradient(to bottom, black calc(100% - 28px), transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, black calc(100% - 28px), transparent 100%);
 }
@@ -470,7 +494,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .sproj__item:hover .sproj__arr { opacity: 1; }
 
-/* Disabled / coming soon items */
 .sproj__item--soon {
   cursor: default; opacity: 0.45;
 }
@@ -508,7 +531,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .c--bio-m { grid-column: span 4; }
   .tile__info { opacity: 1; transform: translateY(0); }
   .tile__arr { transform: scale(1) rotate(0); opacity: 1; }
-  .bio__name { font-size: var(--h6-size); line-height: var(--h6-lh); }
+  .bio__name { font-size: 32px; letter-spacing: -1.5px; }
+  .bio__name span { font-size: var(--h6-size); }
   .c--hide-m { display: none; }
 }
 
@@ -518,6 +542,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .c--1x1 { grid-column: span 1; }
   .tile.c--1x2 { min-height: 220px; }
   .bio__text { font-size: var(--para-sm); line-height: var(--para-sm-lh); }
+  .bio__name { font-size: 28px; letter-spacing: -1px; }
 }
 </style>
 </head>
@@ -603,18 +628,19 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 <main class="shell bento">
 <div class="grid">
 
-  <!-- Bio — COPY UPDATED -->
+  <!-- Bio — CHANGES 1 + 2 applied -->
   <div class="c c--2x1 c--bio-m">
     <div class="c__in">
-      <h1 class="bio__name">Richard — <span>Senior UX Designer & design systems specialist</span></h1>
-      <!-- COPY FIX: removed "move metrics" consultant-speak, consolidated fragmented thoughts -->
-      <p class="bio__text">I fix the workflows nobody wants to touch — <a href="case-study-futuready.html" class="l--b">insurtech</a>, <a href="case-study-helian.html" class="l--g">healthcare</a>, <a href="case-study-aip.html" class="l--a">enterprise B2B</a>.</p>
+      <!-- CHANGE 1: Fraunces italic for full name, Inter for role subtitle -->
+      <!-- CHANGE 2: Updated tagline copy -->
+      <h1 class="bio__name">Richard Andhika<span>Senior UX Designer &amp; design systems specialist</span></h1>
+      <p class="bio__text">I spend more time on the problem than the solution.</p>
       <p class="bio__text"><span class="s">Passion</span> Obsession for niche problem spaces. <a href="about.html" style="font-weight:500;text-decoration:underline;text-underline-offset:2px;text-decoration-color:var(--neutral-300);transition:text-decoration-color var(--duration-fast);">More about me →</a></p>
       <span class="bio__emoji">🌞</span>
     </div>
   </div>
 
-  <!-- Design System Adoption (1x2 tall) — SUBTITLE UPDATED -->
+  <!-- Design System Adoption (1x2 tall) -->
   <a class="c c--1x2 tile tile--sys" href="case-study-adoption.html"
      style="--h1:translateY(-14px) scale(1.02); --h2:translate(20px,-8px) rotate(-1.5deg) scale(1.01); --h3:translate(-8px,6px) rotate(2deg);">
     <div class="tile__s">
@@ -659,31 +685,25 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
         <div class="fr"><div style="padding:8px;"><svg viewBox="0 0 100 60"><rect width="100" height="24" rx="5" fill="#8b5cf6" opacity="0.14"/><rect y="30" width="100" height="24" rx="5" fill="#171717" opacity="0.06"/></svg></div></div>
       </div>
     </div>
-    <!-- COPY FIX: "actually used" is the real signal -->
     <div class="tile__info"><div><div class="tile__dom">Design Systems · 2022–2023</div><div class="tile__ttl">Aeon Design System — 60+ products, one system. Actually used.</div></div><div class="tile__arr"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 10L10 4M10 4H5M10 4v5"/></svg></div></div>
   </a>
 
-  <!-- Social card — ICONS ADDED -->
+  <!-- Social card — CHANGE 3 applied -->
   <div class="c c--1x1">
     <div class="c__in c__in--tight">
       <div class="social__av">R</div>
-      <div class="social__handle">@richard.design</div>
-      <div class="social__bio">design systems / complex workflows / measurable UX</div>
-      <!-- Social icon row: LinkedIn, GitHub, Instagram, Email -->
+      <!-- CHANGE 3: removed @richard.design, replaced bio with personality line -->
+      <div class="social__bio">will work for good cheese.</div>
       <div class="social__icons">
-        <!-- LinkedIn -->
         <a href="https://www.linkedin.com/in/richard-andhika-936344129/" target="_blank" rel="noopener" class="social__icon" aria-label="LinkedIn">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z" opacity="0.7"/><rect x="2" y="9" width="4" height="12" opacity="0.7"/><circle cx="4" cy="4" r="2" opacity="0.7"/></svg>
         </a>
-        <!-- GitHub -->
         <a href="https://github.com/chardrizard" target="_blank" rel="noopener" class="social__icon" aria-label="GitHub">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" opacity="0.7"/></svg>
         </a>
-        <!-- Instagram -->
         <a href="https://www.instagram.com/lichatandhika/" target="_blank" rel="noopener" class="social__icon" aria-label="Instagram">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
         </a>
-        <!-- Medium -->
         <a href="https://medium.com/@chardrizard" target="_blank" rel="noopener" class="social__icon" aria-label="Medium">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z" opacity="0.7"/></svg>
         </a>
@@ -695,17 +715,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   <div class="c c--1x1" id="sprojCard">
     <div class="sproj">
       <div class="sproj__eyebrow">Side projects</div>
-      <div class="sproj__list" id="sprojList">
-        <!-- Injected by JS -->
-      </div>
+      <div class="sproj__list" id="sprojList"></div>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════
-       ROW 3–4: AIP (1x2 tall) + Futuready (2x1) + Helian (2x1)
-       ═══════════════════════════════════════ -->
-
-  <!-- AIP (1x2 tall) — SUBTITLE UPDATED -->
+  <!-- AIP (1x2 tall) -->
   <a class="c c--1x2 tile tile--hnd" href="case-study-aip.html"
      style="--h1:translateY(-8px) scale(1.02); --h2:translate(8px,6px) rotate(1.5deg);">
     <div class="tile__s">
@@ -730,7 +744,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
         <div class="fr"><div style="padding:8px;"><svg viewBox="0 0 120 50"><rect width="60" height="6" rx="2" fill="#22c55e" opacity="0.14"/><text y="26" font-family="Inter" font-size="20" fill="#22c55e" opacity="0.35" font-weight="600">−71%</text><rect y="38" width="90" height="4" rx="1" fill="#171717" opacity="0.04"/><rect y="46" width="60" height="4" rx="1" fill="#171717" opacity="0.03"/></svg></div></div>
       </div>
     </div>
-    <!-- COPY FIX: concrete numbers, no abstract description -->
     <div class="tile__info"><div><div class="tile__dom">Enterprise B2B · Insurance · 2021–2022</div><div class="tile__ttl">Aegon Intermediair Portaal — 22,000 advisors. One portal that used to be six.</div></div><div class="tile__arr"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 10L10 4M10 4H5M10 4v5"/></svg></div></div>
   </a>
 
@@ -792,7 +805,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     <div class="tile__info"><div><div class="tile__dom">Insurtech · B2B2C · 2019</div><div class="tile__ttl">Futuready Motor Insurance — +230% conversion</div></div><div class="tile__arr"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 10L10 4M10 4H5M10 4v5"/></svg></div></div>
   </a>
 
-  <!-- Helian (2x1) — SUBTITLE UPDATED -->
+  <!-- Helian (2x1) -->
   <a class="c c--2x1 tile tile--log" href="case-study-helian.html"
      style="--h1:translateY(-10px) rotate(-1deg); --h2:translate(-4px,8px) rotate(2deg);">
     <div class="tile__s">
@@ -821,7 +834,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
         <div class="fr"><div style="padding:8px;"><svg viewBox="0 0 120 50"><rect width="50" height="5" rx="1" fill="#f59e0b" opacity="0.14"/><text y="24" font-family="Inter" font-size="18" fill="#f59e0b" opacity="0.35" font-weight="600">42%</text><text x="50" y="24" font-family="Inter" font-size="8" fill="#22c55e" opacity="0.4" font-weight="500">faster</text><rect y="36" width="80" height="4" rx="1" fill="#171717" opacity="0.04"/><rect y="44" width="56" height="4" rx="1" fill="#171717" opacity="0.03"/></svg></div></div>
       </div>
     </div>
-    <!-- COPY FIX: cuts startup-speak, keeps the hook -->
     <div class="tile__info"><div><div class="tile__dom">Healthcare · Indonesia · 2018</div><div class="tile__ttl">Helian — dementia care logbook. Started as something else entirely.</div></div><div class="tile__arr"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 10L10 4M10 4H5M10 4v5"/></svg></div></div>
   </a>
 
